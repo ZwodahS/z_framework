@@ -54,3 +54,4 @@ Grid operator-(Grid lhs, const Grid &rhs)
 {
     return lhs -= rhs;
 }
+

@@ -19,8 +19,7 @@ struct Grid
 
     Grid& operator+=(const Grid &rhs);
     Grid& operator-=(const Grid &rhs);
-
-
+    
 };
 
 bool operator==(const Grid &lhs, const Grid &rhs);

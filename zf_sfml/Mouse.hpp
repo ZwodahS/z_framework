@@ -7,19 +7,20 @@
 namespace zf
 {
     // There is no need to keep track of the position , since you can get it directly.
-    struct Mouse
+    class Mouse
     {
-        InputState _left;
-        InputState _right;
-        InputState _middle;
-        int _wheelDelta;
-        void update(sf::Time delta);
-        void update(sf::Time delta, int wheelDelta);
-        sf::Vector2i getPosition();
-        sf::Vector2i getPosition(sf::Window &window);
-        sf::Vector2f getWorldPosition(sf::RenderWindow &window);
-        Mouse();
-        ~Mouse();
+        public:
+            InputState _left;
+            InputState _right;
+            InputState _middle;
+            int _wheelDelta;
+            void update(sf::Time delta);
+            void update(sf::Time delta, int wheelDelta);
+            sf::Vector2i getPosition();
+            sf::Vector2i getPosition(sf::Window &window);
+            sf::Vector2f getWorldPosition(sf::RenderWindow &window);
+            Mouse();
+            ~Mouse();
     };
 }
 #endif
