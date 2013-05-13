@@ -1,6 +1,7 @@
 #include "SimpleAnimator.hpp"
 #include "AnimationObject.hpp"
 #include "SpriteAnimationObject.hpp"
+#include "TextAnimationObject.hpp"
 SimpleAnimator::SimpleAnimator()
 {
 }
@@ -41,13 +42,22 @@ void SimpleAnimator::fade(sf::Sprite sprite, int targetAlpha, float time)
     objects.push_back(obj);
 }
 
-void SimpleAnimator::move(sf::Sprite sprite, sf::Vector2f target , float time)
+void SimpleAnimator::moveTo(sf::Sprite sprite, sf::Vector2f target , float time)
 {
     SpriteAnimationObject* obj = new SpriteAnimationObject(sprite);
-    MoveInstruction* mi = new MoveInstruction(sprite.getPosition(),target,time);
+    MoveToInstruction* mi = new MoveToInstruction(sprite.getPosition(),target,time);
     obj->setInstruction(mi);
     objects.push_back(obj);
 }
+
+void SimpleAnimator::move(sf::Sprite sprite, sf::Vector2f moveVec, float duration)
+{
+    SpriteAnimationObject* obj = new SpriteAnimationObject(sprite);
+    MoveInstruction* mi = new MoveInstruction(moveVec, duration);
+    obj->setInstruction(mi);
+    objects.push_back(obj);
+}
+
 
 CompositeInstruction* SimpleAnimator::composite(bool ordered)
 {
@@ -60,4 +70,11 @@ void SimpleAnimator::composite(sf::Sprite sprite, CompositeInstruction* instruct
     obj->setInstruction(instruction);
     objects.push_back(obj);
     
+}
+
+void SimpleAnimator::composite(sf::Text text, CompositeInstruction* instruction)
+{
+    TextAnimationObject* obj = new TextAnimationObject(text);
+    obj->setInstruction(instruction);
+    objects.push_back(obj);
 }
