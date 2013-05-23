@@ -9,14 +9,13 @@ struct Grid
     ~Grid();
 
 
-    static Grid toGrid(int x, int y, int gridSize, int gridSpacing)
+    static Grid toGrid(float x, float y, int gridSize, int gridSpacing)
     {
         Grid g;
         g.col = x / (gridSize + gridSpacing);
         g.row = y / (gridSize + gridSpacing);
         return g;
     }
-
     Grid& operator+=(const Grid &rhs);
     Grid& operator-=(const Grid &rhs);
     
