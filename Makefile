@@ -1,5 +1,6 @@
 vpath %.cpp zf_common
 vpath %.cpp zf_sfml
+vpath %.cpp zf_platformer
 
 CXX=g++
 

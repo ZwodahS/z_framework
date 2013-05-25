@@ -1,6 +1,7 @@
 #ifndef _ZF_SFML_FUNCTIONS_RECT_H_
 #define _ZF_SFML_FUNCTIONS_RECT_H_
 #include "../zf_common/Grid.hpp"
+#include <SFML/Graphics.hpp>
 namespace zf
 {
     class Rect

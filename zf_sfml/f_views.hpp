@@ -5,7 +5,7 @@
 
 namespace zf
 {
-    class
+    class View
     {
         public:
             static sf::Vector2f topLeft(sf::View view)
@@ -23,8 +23,8 @@ namespace zf
             // return the start row / col and the number of tiles in this view.
             static sf::IntRect viewToTileBounds(sf::View view, int rowSize, int colSize, int maxRow, int maxCol)
             {
-                sf::Vector2f topLeft = zfviews::topLeft(view);
-                sf::Vector2f bottomRight = zfviews::bottomRight(view);
+                sf::Vector2f topLeft = zf::View::topLeft(view);
+                sf::Vector2f bottomRight = zf::View::bottomRight(view);
                 sf::IntRect rect = sf::IntRect(0,0,0,0);
                 rect.left = (int)(topLeft.x / colSize);
                 rect.top = (int)(topLeft.y / rowSize);
