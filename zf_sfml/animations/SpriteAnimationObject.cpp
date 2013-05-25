@@ -20,26 +20,37 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#define _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#include <SFML/Graphics.hpp>
-
-struct ObjectPhysics
+#include "SpriteAnimationObject.hpp"
+#include <iostream>
+SpriteAnimationObject::SpriteAnimationObject(sf::Sprite sprite)
 {
-    ObjectPhysics();
-    ~ObjectPhysics();
+    this->_sprite = sprite;
+}
 
-    float maxHorizontalVelocity;
-    float maxDropVelocity;
-    float maxUpwardVelocity;
+SpriteAnimationObject::~SpriteAnimationObject()
+{
+}
 
-    ObjectPhysics& operator+=(const ObjectPhysics &rhs);
-    ObjectPhysics& operator-=(const ObjectPhysics &rhs);
-    // reduce the velocity using the object physics as a constraint
-    sf::Vector2f reduce(sf::Vector2f velocity);
-};
+void SpriteAnimationObject::setAlpha(float alpha)
+{
+    sf::Color color = this->_sprite.getColor();
+    color.a = alpha;
+    this->_sprite.setColor(color);
+}
 
-ObjectPhysics operator-(ObjectPhysics lhs, const ObjectPhysics& rhs);
-ObjectPhysics operator+(ObjectPhysics lhs, const ObjectPhysics& rhs);
+void SpriteAnimationObject::setPosition(sf::Vector2f position)
+{
+    this->_sprite.setPosition(position);
+}
 
-#endif
+void SpriteAnimationObject::movePosition(sf::Vector2f moves)
+{
+    sf::Vector2f position = this->_sprite.getPosition();
+    this->_sprite.setPosition(position + moves);
+}
+
+void SpriteAnimationObject::draw(sf::RenderWindow* window, sf::Time delta)
+{
+    window->draw(this->_sprite);
+}
+

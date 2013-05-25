@@ -20,26 +20,35 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#define _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#include <SFML/Graphics.hpp>
+#include "TextAnimationObject.hpp"
 
-struct ObjectPhysics
+TextAnimationObject::TextAnimationObject(sf::Text text)
 {
-    ObjectPhysics();
-    ~ObjectPhysics();
+    this->_text = text;
+}
+TextAnimationObject::~TextAnimationObject()
+{
+}
 
-    float maxHorizontalVelocity;
-    float maxDropVelocity;
-    float maxUpwardVelocity;
+void TextAnimationObject::draw(sf::RenderWindow* window, sf::Time delta)
+{
+    window->draw(this->_text);
+}
 
-    ObjectPhysics& operator+=(const ObjectPhysics &rhs);
-    ObjectPhysics& operator-=(const ObjectPhysics &rhs);
-    // reduce the velocity using the object physics as a constraint
-    sf::Vector2f reduce(sf::Vector2f velocity);
-};
+void TextAnimationObject::setAlpha(float alpha)
+{
+    sf::Color color = this->_text.getColor();
+    color.a = alpha;
+    this->_text.setColor(color);
+}
 
-ObjectPhysics operator-(ObjectPhysics lhs, const ObjectPhysics& rhs);
-ObjectPhysics operator+(ObjectPhysics lhs, const ObjectPhysics& rhs);
+void TextAnimationObject::setPosition(sf::Vector2f position)
+{
+    this->_text.setPosition(position);
+}
 
-#endif
+void TextAnimationObject::movePosition(sf::Vector2f move)
+{
+    sf::Vector2f position = this->_text.getPosition();
+    this->_text.setPosition(position+move);
+}

@@ -1,19 +1,24 @@
 vpath %.cpp zf_common
 vpath %.cpp zf_sfml
 vpath %.cpp zf_platformer
+vpath %.cpp zf_sfml/animations
 
 CXX=g++
-
-SDL=`sdl-config --libs --cflags`
-LINKLIB=-l SDL_image -l SDL_ttf -l SDL_mixer
 OBJDIR=obj
 
+common = $(shell (cd zf_common ; ls *.cpp ))
+commonobjs = $(patsubst %, $(OBJDIR)/% , $(common:.cpp=.o))
 
-# search frameworks files for all the cpp files
-framework = $(shell for F in `ls -d zf_*/` ; do cd $$F ;  ls *.cpp ; cd ..; done)
-frameworkobjs = $(patsubst %,$(OBJDIR)/%,$(framework:.cpp=.o))
+sfml = $(shell cd zf_sfml ; ls *.cpp )
+sfmlobjs = $(patsubst %, $(OBJDIR)/% , $(sfml:.cpp=.o))
 
-all: $(frameworkobjs)
+sfmlsubdir = $(shell cd zf_sfml ; for F in `ls -d */` ; do cd $$F ; ls *.cpp ; cd .. ; done )
+sfmlsubdirobjs = $(patsubst %, $(OBJDIR)/%, $(sfmlsubdir:.cpp=.o))
+
+platformer = $(shell cd zf_platformer ; ls *.cpp )
+platformerobjs = $(patsubst %, $(OBJDIR)/%, $(platformer:.cpp=.o))
+
+all: $(commonobjs) $(sfmlobjs) $(sfmlsubdirobjs) $(platformerobjs)
 
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) -c -o $@ $^

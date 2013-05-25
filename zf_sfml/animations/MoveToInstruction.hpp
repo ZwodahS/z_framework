@@ -20,26 +20,24 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#define _ZF_PLATFORMER_OBJECTPHYSICS_H_
-#include <SFML/Graphics.hpp>
-
-struct ObjectPhysics
+#ifndef _ZF_SFML_ANIMATIONS_MOVETOINSTRUCTION_H_
+#define _ZF_SFML_ANIMATIONS_MOVETOINSTRUCTION_H_
+#include "AnimationInstruction.hpp"
+class MoveToInstruction : public AnimationInstruction
 {
-    ObjectPhysics();
-    ~ObjectPhysics();
+    public:
+        MoveToInstruction(sf::Vector2f source, sf::Vector2f target, float delta);
+        MoveToInstruction(const MoveToInstruction &mi);
+        ~MoveToInstruction();
+        bool update(sf::RenderWindow* window, sf::Time delta, AnimationObject* object);
+        bool isDone(AnimationObject* object);
+    
+    private:
+        sf::Vector2f _position;
+        sf::Vector2f _move;
+        sf::Vector2f _target;
+        bool _done;
 
-    float maxHorizontalVelocity;
-    float maxDropVelocity;
-    float maxUpwardVelocity;
-
-    ObjectPhysics& operator+=(const ObjectPhysics &rhs);
-    ObjectPhysics& operator-=(const ObjectPhysics &rhs);
-    // reduce the velocity using the object physics as a constraint
-    sf::Vector2f reduce(sf::Vector2f velocity);
+        bool overShootDestination();
 };
-
-ObjectPhysics operator-(ObjectPhysics lhs, const ObjectPhysics& rhs);
-ObjectPhysics operator+(ObjectPhysics lhs, const ObjectPhysics& rhs);
-
 #endif
