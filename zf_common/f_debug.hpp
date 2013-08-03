@@ -31,5 +31,6 @@ namespace zf
     void debug(std::string prefix, std::string msg);
     void debug(std::string prefix, Grid grid);
     void debug(std::string prefix, float f);
+
 }
 #endif

@@ -29,6 +29,9 @@ class World;
 class WorldObject
 {
     public:
+        // default position is (0,0), a null world and managedByWorld defaulted to false
+        WorldObject();
+        // default position is (0,0), world = world and managedByWorld = true.
         WorldObject(World* world);
         ~WorldObject();
 
@@ -56,8 +59,13 @@ class WorldObject
         // get the current collision bound if the unit is in a specific position
         virtual sf::FloatRect getCollisionBound(sf::Vector2f position) = 0;
         const sf::Vector2f &position;
-        bool markedForRemoval;
-        sf::Vector2f oldPosition; // a temporary variable to know where this object was in the previous frame
+        // a variable used to determine if this object is to be removed in this frame.
+        bool markedForRemoval; 
+        // a variable to determine if this object is tied to the world. if true, whenever the world is destroyed, this object is also freed
+        bool managedByWorld;
+        // a temporary variable to know where this object was in the previous frame
+        sf::Vector2f oldPosition; 
+        virtual void setCurrentWorld(World* world);
     protected:
         World* _world;        
         sf::Vector2f _position;

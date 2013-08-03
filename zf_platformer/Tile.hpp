@@ -29,13 +29,20 @@ class Tile
     public:
         Tile();
         ~Tile();
-
-        virtual std::string getTileType() = 0;
-        virtual void draw(sf::RenderWindow* window, sf::Time delta) = 0;
-        virtual void update(sf::RenderWindow* window, sf::Time delta) = 0;
+        
+        // set the location of this tile. 
         virtual void setLocation(Grid grid);
+        // useful to identify the type of tile.
+        // requires if there is a need to do type casting.
+        virtual std::string getTileType() = 0;
+        // abstract draw.
+        virtual void draw(sf::RenderWindow* window, sf::Time delta) = 0;
+        // update tile. 
+        virtual void update(sf::RenderWindow* window, sf::Time delta) = 0;
+        // collision bound, requires for collision bound
         virtual sf::FloatRect getCollisionBound() = 0;
-        Grid getLocation();
+        // get location of this object
+        const Grid &location;
     protected:
         Grid _location;
         virtual void positionUpdated();

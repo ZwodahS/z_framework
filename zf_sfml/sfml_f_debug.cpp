@@ -28,7 +28,19 @@ namespace zf
         std::cout << prefix << ":" << rect.left << " " << rect.top << " " << rect.width << " " << rect.height << std::endl;
     }
 
+    void debug(std::string prefix, sf::IntRect rect)
+    {
+        std::cout << prefix << ":" << rect.left << " " << rect.top << " " << rect.width << " " << rect.height << std::endl;
+    }
     void debug(std::string prefix, sf::Vector2f vect)
+    {
+        std::cout << prefix << ":" << vect.x << " " << vect.y << std::endl;
+    }
+    void debug(std::string prefix, sf::Vector2i vect)
+    {
+        std::cout << prefix << ":" << vect.x << " " << vect.y << std::endl;
+    }
+    void debug(std::string prefix, sf::Vector2u vect)
     {
         std::cout << prefix << ":" << vect.x << " " << vect.y << std::endl;
     }

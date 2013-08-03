@@ -177,6 +177,14 @@ class TwoDSpace
         {
             init(row, col, defaultValue);
         }
+
+        TwoDSpace(const TwoDSpace& copy)
+            :row(_row), col(_col), 
+            _row(copy._row), _col(copy._col), 
+            _2dspace(copy._2dspace)
+        {
+        }
+
         // get the value at row col. 
         // If the row/col is in range, return value.
         // if out of range, return the default value.

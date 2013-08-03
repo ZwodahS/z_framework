@@ -20,19 +20,38 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_TEXTUREREGION_H_
-#define _ZF_SFML_TEXTUREREGION_H_
 
+/** Button is a simple struct to store 2 sprite, selected / unselected
+ *
+ */
+#ifndef _ZF_SFML_BUTTON_H_
+#define _ZF_SFML_BUTTON_H_
 #include <SFML/Graphics.hpp>
-#include <iostream>
-struct TextureRegion
+namespace zf
 {
-    sf::Texture* texture;
-    sf::IntRect srcClip;
-    sf::Color defaultColor;
-    TextureRegion(sf::Texture* t, sf::IntRect srcClip, sf::Color defaultColor = sf::Color::White);
-    TextureRegion();
-    
-    sf::Sprite createSprite();
-};
+    struct Button
+    {
+        public:
+            sf::Sprite selectedSprite;
+            sf::Sprite unselectedSprite;
+            void setPosition(sf::Vector2f position);
+
+            void setSelected(bool selection);
+            void updateSelection(sf::Vector2f mousePos);
+            Button(const Button &button);
+            Button(sf::Sprite selectedSprite, sf::Sprite unselectedSprite, sf::FloatRect size);
+            Button();
+            ~Button();
+
+
+            void draw(sf::RenderWindow *window, sf::Time delta);
+            const sf::FloatRect &clickBound;
+            const bool& selected;
+
+            Button& operator=(const Button &rhs);
+        private:
+            sf::FloatRect _clickBound;
+            bool _selected;
+    };
+}
 #endif

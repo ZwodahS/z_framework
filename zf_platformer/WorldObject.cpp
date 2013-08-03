@@ -24,16 +24,30 @@
 #include "World.hpp"
 #include "Tile.hpp"
 #include "../zf_sfml/f_rect.hpp"
+WorldObject::WorldObject()
+    :position(_position)
+{
+    setCurrentWorld(0);
+    setPosition(sf::Vector2f(0,0), true);
+    markedForRemoval = false;
+    managedByWorld = false;
+}
 WorldObject::WorldObject(World* world)
     :position(_position)
 {
-    this->_world = world;
+    setCurrentWorld(world);
     setPosition(sf::Vector2f(0,0), true);
     markedForRemoval = false;
+    managedByWorld = true;
 }
 
 WorldObject::~WorldObject()
 {
+}
+
+void WorldObject::setCurrentWorld(World* world)
+{
+    this->_world = world;
 }
 
 void WorldObject::setPosition(sf::Vector2f position, bool hardmove) // if hardmove is set, then move the old position to this position as well.

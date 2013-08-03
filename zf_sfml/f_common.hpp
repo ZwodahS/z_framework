@@ -20,23 +20,21 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "TextureRegion.hpp"
-#include <iostream>
-TextureRegion::TextureRegion(sf::Texture* t, sf::IntRect s, sf::Color d)
-    :texture(t), srcClip(s), defaultColor(d)
+#ifndef _ZF_SFML_FUNCTIONCOMMON_H_
+#define _ZF_SFML_FUNCTIONCOMMON_H_
+namespace zf
 {
-}
-TextureRegion::TextureRegion()
-    :texture(0), srcClip(0,0,0,0), defaultColor(255,255,255,255)
-{
-}
-sf::Sprite TextureRegion::createSprite()
-{
-    if(texture == 0)
+    static void setAlpha(sf::Sprite& sprite, sf::Uint8 alpha)
     {
-        return sf::Sprite();
+        sf::Color c = sprite.getColor();
+        c.a = alpha;
+        sprite.setColor(c);
     }
-    sf::Sprite sprite(*texture, srcClip);
-    sprite.setColor(defaultColor);
-    return sprite;
+    static void setAlpha(sf::Text& text, sf::Uint8 alpha)
+    {
+        sf::Color c = text.getColor();
+        c.a = alpha;
+        text.setColor(c);
+    }
 }
+#endif

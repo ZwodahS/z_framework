@@ -24,6 +24,7 @@
 #include "Tile.hpp"
 
 Tile::Tile()
+    :location(_location)
 {
 }
 

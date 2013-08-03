@@ -25,43 +25,54 @@
 #include "WorldObject.hpp"
 #include "../zf_sfml/f_views.hpp"
 #include "../zf_sfml/f_rect.hpp"
+World::World()
+{
+    this->_space = 0;
+}
 World::World(TwoDSpace<Tile*>* space)
 {
     this->_space = space;
-    this->_defaultFriction = Friction(0,0,0,0);
 }
-
 World::~World()
 {
-    for(TwoDSpace<Tile*>::Iterator it ; !it.end() ; ++it)
+    if(_space != 0 )
     {
-        if(it.get() != 0)
+        for(TwoDSpace<Tile*>::Iterator it = _space->iteratesColRow() ; !it.end() ; ++it)
         {
-            delete it.get();
+            if(it.get() != 0)
+            {
+                delete it.get();
+            }
+        }
+    }
+    for(int i = 0 ; i < _freeObjects.size() ; i++)
+    {
+        if(_freeObjects[i]->managedByWorld)
+        {
+            delete _freeObjects[i];
         }
     }
 }
-
-void World::setTileSize(int width, int height)
+// set the size of each tile
+void World::setTileSize(int size)
 {
-    _tileSize.width = width;
-    _tileSize.height = height;
+    _tileSize.width = size;
+    _tileSize.height = size;
 }
-
-
+// update
 void World::update(sf::RenderWindow* window, sf::Time delta)
 {
     for(int i = 0 ; i < _freeObjects.size() ; i++)
     {
         // update all free objects actions.
         _freeObjects[i]->updateAction(window,delta);
-        // apply gravity
-        _freeObjects[i]->applyMomentum(sf::Vector2f(0,1300) * delta.asSeconds());
+        // apply gravity 
+        _freeObjects[i]->applyMomentum(getMomentum(_freeObjects[i]) * delta.asSeconds());
     }
     // update all free objects position (collision check with the world's static object(impassable) )
     for(int i = 0 ; i < _freeObjects.size() ; i++)
     {
-        _freeObjects[i]->updatePosition(delta,_defaultFriction); 
+        _freeObjects[i]->updatePosition(delta,getFriction(_freeObjects[i])); 
     }
     // for each object, check collision with each other objects
     for(int i = 0 ; i < _freeObjects.size() ; i++)
@@ -83,14 +94,19 @@ void World::update(sf::RenderWindow* window, sf::Time delta)
     {
         if(_freeObjects[i]->markedForRemoval)
         {
+            if(_freeObjects[i]->managedByWorld)
+            {
+                delete _freeObjects[i];
+            }
             _freeObjects.erase(_freeObjects.begin() + i);
         }
     }
 }
-
+// add a free object to this world.
 void World::addFreeObject(WorldObject* object)
 {
     _freeObjects.push_back(object);
+    object->setCurrentWorld(this);
 }
 
 void World::draw(sf::RenderWindow* window, sf::Time delta)
@@ -120,4 +136,14 @@ TwoDSpace<Tile*> World::getTiles(sf::FloatRect range)
     Grid topLeftGrid = Grid::toGrid(topLeft.x,topLeft.y,_tileSize.width,0);
     Grid bottomRightGrid = Grid::toGrid(bottomRight.x,bottomRight.y,_tileSize.width,0);
     return _space->subspace(topLeftGrid, bottomRightGrid);    
+}
+
+Friction World::getFriction(WorldObject* object)
+{
+    return Friction(0,0,0,0);
+}
+
+sf::Vector2f World::getMomentum(WorldObject* object)
+{
+    return sf::Vector2f(0,1000);
 }

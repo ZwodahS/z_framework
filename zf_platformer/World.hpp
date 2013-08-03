@@ -33,20 +33,32 @@ class WorldObject;
 class World
 {
     public:
+        World();
+        // note that this world object take ownership of all the tile that is given to it.
+        // it will free the memory when the world is freed.
+        // all objects will also be deleted when the world is freed.
+        // 
         World(TwoDSpace<Tile*>* space);
+        
         ~World();
-        void setTileSize(int width, int height);
+        void setTileSize(int size);
         void draw(sf::RenderWindow* window, sf::Time delta);
         void update(sf::RenderWindow* window, sf::Time delta);
 
         TwoDSpace<Tile*> getTiles(sf::FloatRect range);
         void addFreeObject(WorldObject* object);
+        // free all the tiles in this world object. 
+        void freeAllTiles();
+        
     protected:
         TwoDSpace<Tile*>* _space;
         Friction _defaultFriction;
         std::vector<WorldObject*> _freeObjects; 
-    
-
+        // default friction is 0 0 0 0. override this function to define different region with different friction
+        virtual Friction getFriction(WorldObject* object); 
+        // default the "momentum" for the object. override this function to define the momentum.
+        // default momentum is sf::Vector2f(0,1000), which is a gravity downwards.
+        virtual sf::Vector2f getMomentum(WorldObject* object);
         sf::IntRect _tileSize;
 };
 #endif

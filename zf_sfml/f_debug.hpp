@@ -27,8 +27,11 @@
 namespace zf
 {
     void debug(std::string prefix, sf::FloatRect rect);
+    void debug(std::string prefix, sf::IntRect rect);
 
     void debug(std::string prefix, sf::Vector2f vect);
+    void debug(std::string prefix, sf::Vector2i vect);
+    void debug(std::string prefix, sf::Vector2u vect);
 
 }
 #endif

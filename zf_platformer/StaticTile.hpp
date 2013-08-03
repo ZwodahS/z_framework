@@ -25,17 +25,25 @@
 #include "Tile.hpp"
 #include "../zf_sfml/f_rect.hpp"
 #include <SFML/Graphics.hpp>
+/*
+ * Static tiles are tile that only have on image and do not change.
+ * This requires a sprite for it to draw.
+ */ 
 class StaticTile : public Tile
 {
     public:
         StaticTile();
         ~StaticTile();
-
+            
+        // draw the tile.
         virtual void draw(sf::RenderWindow* window, sf::Time delta);
     protected:
+        // allow the child to set the sprite to be drawn.
         void setSprite(sf::Sprite sprite);
+        // this function is called when the position is set.
         virtual void positionUpdated();
-        sf::Sprite _drawSprite;
+        // override this function to define your own bound.
         virtual sf::FloatRect getCollisionBound(int gridSize);
+        sf::Sprite _drawSprite;
 };
 #endif

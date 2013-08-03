@@ -24,6 +24,10 @@
 #define _ZF_PLATFORMER_OBJECTPHYSICS_H_
 #include <SFML/Graphics.hpp>
 
+
+/*
+ * define some basic object physics
+ */
 struct ObjectPhysics
 {
     ObjectPhysics();
