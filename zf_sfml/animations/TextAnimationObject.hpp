@@ -35,5 +35,6 @@ class TextAnimationObject : public AnimationObject
         void setAlpha(float alpha);
         void setPosition(sf::Vector2f position);
         void movePosition(sf::Vector2f move);
+        void setColor(sf::Color color);
 };
 #endif

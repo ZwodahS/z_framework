@@ -21,10 +21,9 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "SpriteAnimationObject.hpp"
-#include <iostream>
 SpriteAnimationObject::SpriteAnimationObject(sf::Sprite sprite)
+    :_sprite(sprite)
 {
-    this->_sprite = sprite;
 }
 
 SpriteAnimationObject::~SpriteAnimationObject()
@@ -54,3 +53,7 @@ void SpriteAnimationObject::draw(sf::RenderWindow* window, sf::Time delta)
     window->draw(this->_sprite);
 }
 
+void SpriteAnimationObject::setColor(sf::Color color)
+{
+    this->_sprite.setColor(color);
+}
