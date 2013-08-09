@@ -20,21 +20,35 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_COMMON_F_CONVERSION_H_
-#define _ZF_COMMON_F_CONVERSION_H_
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <string>
-namespace zf
+#ifndef _ZF_SFML_ANIMATIONS_COLORSHIFTINSTRUCTION_H_
+#define _ZF_SFML_ANIMATIONS_COLORSHIFTINSTRUCTION_H_
+#include "AnimationInstruction.hpp"
+class ColorShiftInstruction : public AnimationInstruction
 {
-    // convert string to int.
-    bool toInt(std::string str, int &value);
-    // convert int to string.
-    std::string toString(int i);
-    // convert int to string with sign (automatically comes with a + or a -)
-    std::string toStringSigned(int i);
+public:
+    ColorShiftInstruction(sf::Color& startingColor, sf::Color& endingColor, float time);
+    ~ColorShiftInstruction();
 
-    std::vector<std::string> tokenize(std::string);
-}
+    bool update(sf::RenderWindow* window, sf::Time delta, AnimationObject* object);
+    bool isDone(AnimationObject* object);
+
+    // the current value 
+    float _red;
+    float _green;
+    float _blue;
+    float _alpha;
+    // the change value
+    float _changeRed;
+    float _changeGreen;
+    float _changeBlue;
+    float _changeAlpha; 
+    // time elapsed.
+    float _time;
+    float _totalTime;
+    sf::Color _startingColor;
+    sf::Color _endingColor;
+
+    bool _done;
+};
+
 #endif

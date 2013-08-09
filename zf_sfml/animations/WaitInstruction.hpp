@@ -20,21 +20,18 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_COMMON_F_CONVERSION_H_
-#define _ZF_COMMON_F_CONVERSION_H_
-#include <iostream>
-#include <sstream>
-#include <vector>
-#include <string>
-namespace zf
+#ifndef _ZF_SFML_ANIMATIONS_WAITINSTRUCTION_H_
+#define _ZF_SFML_ANIMATIONS_WAITINSTRUCTION_H_
+#include "AnimationInstruction.hpp"
+class WaitInstruction : public AnimationInstruction
 {
-    // convert string to int.
-    bool toInt(std::string str, int &value);
-    // convert int to string.
-    std::string toString(int i);
-    // convert int to string with sign (automatically comes with a + or a -)
-    std::string toStringSigned(int i);
+    public:
+        WaitInstruction(float waitTime);
+        ~WaitInstruction();
 
-    std::vector<std::string> tokenize(std::string);
-}
+        bool update(sf::RenderWindow* window, sf::Time delta, AnimationObject* object);
+        bool isDone(AnimationObject* object);
+    private:
+        float waitTimeLeft;
+};
 #endif

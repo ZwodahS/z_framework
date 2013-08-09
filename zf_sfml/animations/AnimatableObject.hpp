@@ -20,37 +20,25 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
+#ifndef _ZF_SFML_ANIMATIONS_ANIMATABLEOBJECT_H_
+#define _ZF_SFML_ANIMATIONS_ANIMATABLEOBJECT_H_
 
-/** Button is a simple struct to store 2 sprite, selected / unselected
- *
- */
-#ifndef _ZF_SFML_BUTTON_H_
-#define _ZF_SFML_BUTTON_H_
+#include "AnimationObject.hpp"
+#include "iAnimatable.hpp"
 #include <SFML/Graphics.hpp>
-namespace zf
+class AnimatableObject : public AnimationObject
 {
-    struct Button
-    {
-        public:
-            sf::Sprite selectedSprite;
-            sf::Sprite unselectedSprite;
-            void setPosition(sf::Vector2f position);
-            void updateSelection(sf::Vector2f mousePos);
-            Button(const Button &button);
-            Button(sf::Sprite selectedSprite, sf::Sprite unselectedSprite, sf::FloatRect size);
-            Button();
-            ~Button();
-
-
-            void draw(sf::RenderWindow *window, sf::Time delta);
-            const sf::FloatRect &clickBound;
-            const bool& selected;
-
-            Button& operator=(const Button &rhs);
-        private:
-            sf::FloatRect _clickBound;
-            bool _selected;
-            void setSelected(bool selection);
-    };
-}
+    public:
+        AnimatableObject(iAnimatable* animatable);
+        AnimatableObject(iAnimatable& animatable);
+        ~AnimatableObject();
+        void setAlpha(float alpha);
+        void setPosition(sf::Vector2f position);
+        void movePosition(sf::Vector2f position);
+        void setColor(sf::Color color);
+        void draw(sf::RenderWindow* window, sf::Time delta);
+    private:
+        iAnimatable& _animatable;
+        bool _isPtr;
+};
 #endif

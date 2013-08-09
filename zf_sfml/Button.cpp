@@ -37,14 +37,14 @@ namespace zf
         setSelected(clickBound.contains(mousePos));
     }
 
-    void Button::setSelected(bool selection)
+    void Button::setSelected(bool s)
     {
-        this->_selected = selection;
+        this->_selected = s;
     }
 
     void Button::draw(sf::RenderWindow* window, sf::Time delta)
     {
-        if(selected)
+        if(_selected)
         {
             window->draw(selectedSprite);
         }

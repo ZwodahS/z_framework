@@ -1,3 +1,5 @@
+#ifndef _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
+#define _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
 /*
  *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
  *                   Version 2, December 2004
@@ -20,37 +22,20 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-
-/** Button is a simple struct to store 2 sprite, selected / unselected
+/**
+ * The idea behind iAnimatable is to provide a way to move things that are not part of sfml.
+ * When using iAnimatable, Simple Animator will not draw it.
  *
  */
-#ifndef _ZF_SFML_BUTTON_H_
-#define _ZF_SFML_BUTTON_H_
 #include <SFML/Graphics.hpp>
-namespace zf
+class iAnimatable
 {
-    struct Button
-    {
-        public:
-            sf::Sprite selectedSprite;
-            sf::Sprite unselectedSprite;
-            void setPosition(sf::Vector2f position);
-            void updateSelection(sf::Vector2f mousePos);
-            Button(const Button &button);
-            Button(sf::Sprite selectedSprite, sf::Sprite unselectedSprite, sf::FloatRect size);
-            Button();
-            ~Button();
-
-
-            void draw(sf::RenderWindow *window, sf::Time delta);
-            const sf::FloatRect &clickBound;
-            const bool& selected;
-
-            Button& operator=(const Button &rhs);
-        private:
-            sf::FloatRect _clickBound;
-            bool _selected;
-            void setSelected(bool selection);
-    };
-}
+    public:
+        virtual void setPosition(sf::Vector2f position);
+        virtual void setAlpha(float alpha);
+        virtual void move(sf::Vector2f move);
+        virtual void setColor(sf::Color color);
+        virtual sf::Vector2f getPosition();
+        virtual void draw(sf::RenderWindow& window, const sf::Time& delta);
+};
 #endif
