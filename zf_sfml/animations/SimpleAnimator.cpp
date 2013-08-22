@@ -38,7 +38,7 @@ SimpleAnimator::~SimpleAnimator()
     }
 }
 
-void SimpleAnimator::draw(sf::RenderWindow* window, sf::Time delta)
+void SimpleAnimator::draw(sf::RenderWindow& window, sf::Time delta)
 {
     for(int i = 0 ; i < objects.size() ; i++)
     {
@@ -46,7 +46,7 @@ void SimpleAnimator::draw(sf::RenderWindow* window, sf::Time delta)
     }
 }
 
-void SimpleAnimator::update(sf::RenderWindow* window, sf::Time delta)
+void SimpleAnimator::update(sf::RenderWindow& window, sf::Time delta)
 {
     for(int i = objects.size() - 1 ; i >= 0 ; i--)
     {
@@ -116,6 +116,14 @@ void SimpleAnimator::move(sf::Sprite sprite, sf::Vector2f moveVec, float duratio
 void SimpleAnimator::move(sf::Text text, sf::Vector2f moveVec, float duration)
 {
     TextAnimationObject* obj = new TextAnimationObject(text);
+    MoveInstruction* mi = new MoveInstruction(moveVec, duration);
+    obj->setInstruction(mi);
+    objects.push_back(obj);
+}
+
+void SimpleAnimator::moveReference(iAnimatable& animatable, sf::Vector2f moveVec, float duration)
+{
+    AnimatableObject* obj = new AnimatableObject(animatable);
     MoveInstruction* mi = new MoveInstruction(moveVec, duration);
     obj->setInstruction(mi);
     objects.push_back(obj);

@@ -20,40 +20,30 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "TextAnimationObject.hpp"
+#include "Connection.hpp"
+namespace zf
+{
+    Connection::Connection(bool m)
+        :_managed(m), name(""), socket(0), verified(false)
+    {
+    }
 
-TextAnimationObject::TextAnimationObject(sf::Text text)
-{
-    this->_text = text;
-}
-TextAnimationObject::~TextAnimationObject()
-{
-}
+    Connection::~Connection()
+    {
+        if(_managed && socket != 0)
+        {
+            socket->disconnect();
+            delete socket;
+            socket = 0;
+        }
+    }
 
-void TextAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
-{
-    window.draw(this->_text);
-}
-
-void TextAnimationObject::setAlpha(float alpha)
-{
-    sf::Color color = this->_text.getColor();
-    color.a = alpha;
-    this->_text.setColor(color);
-}
-
-void TextAnimationObject::setPosition(sf::Vector2f position)
-{
-    this->_text.setPosition(position);
-}
-
-void TextAnimationObject::movePosition(sf::Vector2f move)
-{
-    sf::Vector2f position = this->_text.getPosition();
-    this->_text.setPosition(position+move);
-}
-
-void TextAnimationObject::setColor(sf::Color color)
-{
-    this->_text.setColor(color);
+    sf::Socket::Status Connection::sendPacket(sf::Packet& packet)
+    {
+        if(socket != 0)
+        {
+            return socket->send(packet);
+        }
+        return sf::Socket::Disconnected;
+    }
 }

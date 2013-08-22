@@ -1,6 +1,7 @@
 vpath %.cpp zf_common
 vpath %.cpp zf_sfml
 vpath %.cpp zf_platformer
+vpath %.cpp zf_network
 vpath %.cpp zf_sfml/animations
 
 CXX=g++
@@ -18,7 +19,9 @@ sfmlsubdirobjs = $(patsubst %, $(OBJDIR)/%, $(sfmlsubdir:.cpp=.o))
 platformer = $(shell cd zf_platformer ; ls *.cpp )
 platformerobjs = $(patsubst %, $(OBJDIR)/%, $(platformer:.cpp=.o))
 
-all: $(commonobjs) $(sfmlobjs) $(sfmlsubdirobjs) $(platformerobjs)
+network = $(shell cd zf_network ; ls *.cpp)
+networkobjs = $(patsubst %, $(OBJDIR)/%, $(network:.cpp=.o))
+all: $(commonobjs) $(sfmlobjs) $(sfmlsubdirobjs) $(platformerobjs) $(networkobjs)
 
 $(OBJDIR)/%.o : %.cpp
 	$(CXX) -c -o $@ $^

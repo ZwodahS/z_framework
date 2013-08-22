@@ -20,40 +20,32 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "TextAnimationObject.hpp"
-
-TextAnimationObject::TextAnimationObject(sf::Text text)
+#ifndef _ZF_NETWORK_PACKETDOWNSTREAM_H_
+#define _ZF_NETWORK_PACKETDOWNSTREAM_H_
+#include <SFML/Network.hpp>
+namespace zf
 {
-    this->_text = text;
+    /**
+     * Defines the abstract interface class where packets is sent to after they are received.
+     * Every downstream must belong to one upstream.
+     */
+    class Connection;
+    class PacketDownStream
+    {
+    public:
+        /**
+         * Get the header data for this downstream.
+         */
+        virtual sf::Int32 getHeader() = 0;
+        /**
+         * Packet is received from this connection.
+         */
+        virtual void packetReceived(sf::Packet& packet, Connection& connection) = 0;
+        /**
+         * Packet is received from server.
+         */
+        virtual void packetReceivedFromServer(sf::Packet& packet) = 0;
+    protected:
+    };
 }
-TextAnimationObject::~TextAnimationObject()
-{
-}
-
-void TextAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
-{
-    window.draw(this->_text);
-}
-
-void TextAnimationObject::setAlpha(float alpha)
-{
-    sf::Color color = this->_text.getColor();
-    color.a = alpha;
-    this->_text.setColor(color);
-}
-
-void TextAnimationObject::setPosition(sf::Vector2f position)
-{
-    this->_text.setPosition(position);
-}
-
-void TextAnimationObject::movePosition(sf::Vector2f move)
-{
-    sf::Vector2f position = this->_text.getPosition();
-    this->_text.setPosition(position+move);
-}
-
-void TextAnimationObject::setColor(sf::Color color)
-{
-    this->_text.setColor(color);
-}
+#endif

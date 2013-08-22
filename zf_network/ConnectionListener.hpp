@@ -20,40 +20,28 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "TextAnimationObject.hpp"
+#ifndef _ZF_NETWORK_CONNECTIONLISTENER_H_
+#define _ZF_NETWORK_CONNECTIONLISTENER_H_
+#include <string>
+namespace zf
+{
+    class Connection;
+    /**
+     * Connection Listener define the interface to listen to changes in connection
+     */
+    class ConnectionListener
+    {
+    public:
+        virtual void clientConnected(Connection* connection) = 0;
+        virtual void clientDisconnected(Connection* connection) = 0;
+        virtual void serverStarted() = 0;
+        virtual void serverStopped() = 0;
+        virtual void serverConnected() = 0;
+        virtual void serverDisconnected() = 0;
 
-TextAnimationObject::TextAnimationObject(sf::Text text)
-{
-    this->_text = text;
+        virtual void nameInUsed() = 0;
+        virtual void nameVerified(std::string name) = 0;
+        virtual void clientVerified(Connection* connection) = 0;
+    };
 }
-TextAnimationObject::~TextAnimationObject()
-{
-}
-
-void TextAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
-{
-    window.draw(this->_text);
-}
-
-void TextAnimationObject::setAlpha(float alpha)
-{
-    sf::Color color = this->_text.getColor();
-    color.a = alpha;
-    this->_text.setColor(color);
-}
-
-void TextAnimationObject::setPosition(sf::Vector2f position)
-{
-    this->_text.setPosition(position);
-}
-
-void TextAnimationObject::movePosition(sf::Vector2f move)
-{
-    sf::Vector2f position = this->_text.getPosition();
-    this->_text.setPosition(position+move);
-}
-
-void TextAnimationObject::setColor(sf::Color color)
-{
-    this->_text.setColor(color);
-}
+#endif
