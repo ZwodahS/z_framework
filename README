@@ -4,7 +4,7 @@ zf_common : provide stuffs that I commonly used.
 zf_sfml : provide the stuffs that make use of sfml.
     |_ animations : some simple animations code.
 zf_platformer : some platformer code.
-zf_network : some basic networking code for managing tcpsocket.
+zf_network : some basic networking code for managing tcpsocket. (Might still be buggy)
     |_ zf_gamesetup : some basic code for joining/hosting a game.
         - This only provide a simple lobby system.
 
