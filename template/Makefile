@@ -6,6 +6,10 @@ vpath %.cpp z_framework/zf_sfml/
 vpath %.cpp z_framework/zf_sfml/animations
 # framework platformer code. If not used then remove it.
 vpath %.cpp z_framework/zf_platformer/
+# framework for network
+vpath %.cpp z_framework/zf_network/
+# framework for network gamesetup
+vpath %.cpp z_framework/zf_network/zf_gamesetup/
 # game code.
 vpath %.cpp game/
 # game screen code
@@ -15,8 +19,8 @@ vpath %.o obj/
 WARNING= -Wall -Wextra -Wno-switch -Wno-sign-compare -Wno-missing-braces -Wno-unused-parameter
 OPTIMIZE= -fno-exceptions
 BIN=binaryname
-CXX=g++ ${WARNING}
-SFML=-framework sfml-graphics -framework sfml-window -framework sfml-system
+CXX=g++ #${WARNING}
+SFML=-framework sfml-graphics -framework sfml-window -framework sfml-system -framework sfml-network
 OBJDIR=obj
 
 #zf framework 
@@ -32,16 +36,20 @@ zf_sfmlsubobjs = $(patsubst %, $(OBJDIR)/%, $(zf_sfmlsub:.cpp=.o))
 zf_platformer = $(shell cd z_framework/zf_platformer ; ls *.cpp)
 zf_platformerobjs = $(patsubst %, $(OBJDIR)/%, $(zf_platformer:.cpp=.o))
 
+zf_network = $(shell cd z_framework/zf_network ; ls *.cpp)
+zf_networkobjs = $(patsubst %, $(OBJDIR)/%, $(zf_network:.cpp=.o))
+
+zf_networksub = $(shell cd z_framework/zf_network ; for F in `ls -d */`; do cd $$F ; ls *.cpp ; cd .. ; done)
+zf_networksubobjs = $(patsubst %, $(OBJDIR)/%, $(zf_networksub:.cpp=.o))
 # game code
 game = $(shell cd game; ls *.cpp ; for F in `ls -d */` ; do cd $$F; ls *.cpp ;cd ..; done)
 gameobjs = $(patsubst %,$(OBJDIR)/%,$(game:.cpp=.o))
-
 
 main=obj/main.o
 
 all: $(BIN)
 
-$(BIN) : $(main) $(zf_commonobjs) $(zf_sfmlobjs) $(zf_sfmlsubobjs) $(zf_platformerobjs) $(gameobjs)
+$(BIN) : $(main) $(zf_commonobjs) $(zf_sfmlobjs) $(zf_sfmlsubobjs) $(zf_platformerobjs) $(zf_networkobjs) $(zf_networksubobjs) $(gameobjs)
 	$(CXX) -o $(BIN) $(OBJDIR)/* $(SFML)
 
 $(OBJDIR)/%.o : %.cpp

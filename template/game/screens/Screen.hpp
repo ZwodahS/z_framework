@@ -1,15 +1,24 @@
 #ifndef _GAME_SCREENS_SCREEN_H_
 #define _GAME_SCREENS_SCREEN_H_
+#include "../../z_framework/zf_network/ConnectionListener.hpp"
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 class Game;
-class Screen 
+class Screen : public zf::ConnectionListener
 {
 public:
     Screen(Game& game);
     ~Screen();
+    
+    virtual void draw(sf::RenderWindow& window, const sf::Time& delta) = 0;
+    virtual void update(sf::RenderWindow& window, const sf::Time& delta) = 0;
+    virtual void textInput(char c) = 0;
+    virtual void screenEnter();
+    virtual void screenExit();
+    
     /**
      * Defines the state of the screen. Currently only Exited is used. THe others are states
-     * that can be used by child.
+     * that can be used by child
      */
     enum ScreenState
     {

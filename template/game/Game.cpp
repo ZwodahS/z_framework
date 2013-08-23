@@ -45,7 +45,7 @@ void Game::run()
             }
             else if(event.type == sf::Event::MouseWheelMoved)
             {
-                _mouse._wheelDelta = event.mouseWheel.delta;
+                _mouse.wheelDelta = event.mouseWheel.delta;
             }
         }
 
