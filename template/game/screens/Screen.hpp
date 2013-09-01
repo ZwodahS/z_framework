@@ -1,10 +1,9 @@
 #ifndef _GAME_SCREENS_SCREEN_H_
 #define _GAME_SCREENS_SCREEN_H_
-#include "../../z_framework/zf_network/ConnectionListener.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 class Game;
-class Screen : public zf::ConnectionListener
+class Screen
 {
 public:
     Screen(Game& game);
