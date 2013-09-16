@@ -39,7 +39,7 @@ Grid::~Grid()
 {
 }
 
-bool operator==(const Grid &lhs, const Grid &rhs)
+bool operator==(const Grid &lhs, const Grid& rhs)
 {
     if(lhs.row == rhs.row && lhs.col == rhs.col)
     {
@@ -48,7 +48,7 @@ bool operator==(const Grid &lhs, const Grid &rhs)
     return false;
 }
 
-bool operator!=(const Grid &lhs, const Grid &rhs)
+bool operator!=(const Grid &lhs, const Grid& rhs)
 {
     return !(operator==(lhs,rhs));
 }
@@ -68,12 +68,12 @@ Grid& Grid::operator-=(const Grid& rhs)
     return *this;
 }
 
-Grid operator+(Grid lhs, const Grid &rhs)
+Grid operator+(Grid lhs, const Grid& rhs)
 {
     return lhs += rhs;
 }
 
-Grid operator-(Grid lhs, const Grid &rhs)
+Grid operator-(Grid lhs, const Grid& rhs)
 {
     return lhs -= rhs;
 }

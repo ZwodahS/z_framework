@@ -48,13 +48,13 @@ struct Grid
         return g;
     }
     // operator overloaded.
-    Grid& operator+=(const Grid &rhs);
-    Grid& operator-=(const Grid &rhs);
+    Grid& operator+=(const Grid& rhs);
+    Grid& operator-=(const Grid& rhs);
     
 };
 // operator overloaded.
-bool operator==(const Grid &lhs, const Grid &rhs);
-bool operator!=(const Grid &lhs, const Grid &rhs);
+bool operator==(const Grid &lhs, const Grid& rhs);
+bool operator!=(const Grid &lhs, const Grid& rhs);
 Grid operator-(Grid lhs, const Grid& rhs);
 Grid operator+(Grid lhs, const Grid& rhs);
 
