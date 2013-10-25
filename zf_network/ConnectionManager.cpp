@@ -471,6 +471,7 @@ namespace zf
         {
             return sendPacket(*connection, packet);
         }
+        return false;
     }
 
     bool ConnectionManager::sendNameVerifiedMessage(Connection* connection, std::string name)
@@ -481,6 +482,7 @@ namespace zf
         {
             return sendPacket(*connection, packet);
         }
+        return false;
     }
 
     // send to the server to verify this client's name
@@ -505,6 +507,7 @@ namespace zf
                 return sendPacket(*conn, packet);
             }
         }
+        return false;
     }
 
     bool ConnectionManager::sendPacket(Connection& connection, sf::Packet& packet)
@@ -529,6 +532,7 @@ namespace zf
             processClientDisconnected(&connection);
             return false;
         }
+        return false;
     }
 
     bool ConnectionManager::sendPacketToServer(sf::Packet& packet)
@@ -556,6 +560,7 @@ namespace zf
                 return false;
             }
         } 
+        return false;
     }
 
     std::string ConnectionManager::getUniqueId()

@@ -32,7 +32,7 @@ Tile::~Tile()
 {
 }
 
-void Tile::setLocation(Grid grid)
+void Tile::setLocation(zf::Grid grid)
 {
     this->_location = grid;
     positionUpdated();

@@ -24,10 +24,12 @@
 #include <iostream>
 TextureRegion::TextureRegion(sf::Texture* t, sf::IntRect s, sf::Color d)
     :texture(t), srcClip(s), defaultColor(d)
+    , defaultScaleX(1), defaultScaleY(1)
 {
 }
 TextureRegion::TextureRegion()
     :texture(0), srcClip(0,0,0,0), defaultColor(255,255,255,255)
+    , defaultScaleX(1), defaultScaleY(1)
 {
 }
 sf::Sprite TextureRegion::createSprite()
@@ -38,5 +40,6 @@ sf::Sprite TextureRegion::createSprite()
     }
     sf::Sprite sprite(*texture, srcClip);
     sprite.setColor(defaultColor);
+    sprite.setScale(defaultScaleX, defaultScaleY);
     return sprite;
 }

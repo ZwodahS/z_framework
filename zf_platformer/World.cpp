@@ -29,7 +29,7 @@ World::World()
 {
     this->_space = 0;
 }
-World::World(TwoDSpace<Tile*>* space)
+World::World(zf::TwoDSpace<Tile*>* space)
 {
     this->_space = space;
 }
@@ -37,7 +37,7 @@ World::~World()
 {
     if(_space != 0 )
     {
-        for(TwoDSpace<Tile*>::Iterator it = _space->iteratesColRow() ; !it.end() ; ++it)
+        for(zf::TwoDSpace<Tile*>::Iterator it = _space->iteratesColRow() ; !it.end() ; ++it)
         {
             if(it.get() != 0)
             {
@@ -112,9 +112,9 @@ void World::addFreeObject(WorldObject* object)
 void World::draw(sf::RenderWindow* window, sf::Time delta)
 {
     sf::IntRect rect = zf::View::viewToTileBounds(window->getView(),_tileSize.height, _tileSize.width, _space->row, _space->col);
-    Grid start = Grid(rect.top,rect.left);
-    Grid end = Grid(rect.height,rect.width);
-    for(TwoDSpace<Tile*>::Iterator it = _space->iteratesColRow(start,end) ; !(it.end()) ; ++it)
+    zf::Grid start = zf::Grid(rect.top,rect.left);
+    zf::Grid end = zf::Grid(rect.height,rect.width);
+    for(zf::TwoDSpace<Tile*>::Iterator it = _space->iteratesColRow(start,end) ; !(it.end()) ; ++it)
     {
         Tile* tile = it.get();
         if(tile != 0)
@@ -129,12 +129,12 @@ void World::draw(sf::RenderWindow* window, sf::Time delta)
     }
 }
 
-TwoDSpace<Tile*> World::getTiles(sf::FloatRect range)
+zf::TwoDSpace<Tile*> World::getTiles(sf::FloatRect range)
 {
     sf::Vector2f topLeft = zf::Rect::topLeft(range);
     sf::Vector2f bottomRight = zf::Rect::bottomRight(range);
-    Grid topLeftGrid = Grid::toGrid(topLeft.x,topLeft.y,_tileSize.width,0);
-    Grid bottomRightGrid = Grid::toGrid(bottomRight.x,bottomRight.y,_tileSize.width,0);
+    zf::Grid topLeftGrid = zf::Grid::toGrid(topLeft.x,topLeft.y,_tileSize.width,0);
+    zf::Grid bottomRightGrid = zf::Grid::toGrid(bottomRight.x,bottomRight.y,_tileSize.width,0);
     return _space->subspace(topLeftGrid, bottomRightGrid);    
 }
 

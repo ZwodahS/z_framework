@@ -34,9 +34,9 @@ namespace zf
     bool toUShort(std::string str, unsigned short& value);
     // convert int to string.
     std::string toString(int i);
+    std::string floatToString(float f);
     // convert int to string with sign (automatically comes with a + or a -)
     std::string toStringSigned(int i);
-
     std::vector<std::string> tokenize(std::string);
 }
 #endif

@@ -38,10 +38,10 @@ namespace zf
             sf::Int32 wheelDelta;
             void update(sf::Time delta);
             void update(sf::Time delta, sf::Int32 wheelDelta);
-            sf::Vector2i getPosition();
-            sf::Vector2i getPosition(sf::Window& window);
-            sf::Vector2f getPositionF(sf::Window& window);
-            sf::Vector2f getWorldPosition(sf::RenderWindow& window);
+            sf::Vector2i getPosition() const;
+            sf::Vector2i getPosition(sf::Window& window) const;
+            sf::Vector2f getPositionF(sf::Window& window) const;
+            sf::Vector2f getWorldPosition(sf::RenderWindow& window) const;
             Mouse();
             ~Mouse();
     };

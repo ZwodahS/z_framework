@@ -45,6 +45,7 @@ class SpriteSheet
         TextureRegion createRegion(sf::Image image);
         
         TextureRegion createRegion(sf::Image image, int x , int y);
+        TextureRegion createRegion(int x, int y, int w, int h);
         TextureRegion createRegion(sf::IntRect region);
         // Note that the region that the sprite is created is always relative to the origin bound that is specified.
         // i.e. if this sprite sheet is created with bound = (100,100,500,500),

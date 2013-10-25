@@ -97,6 +97,11 @@ TextureRegion SpriteSheet::createRegion(sf::Image image, int x , int y)
     return returnRegion;
 }
 
+TextureRegion SpriteSheet::createRegion(int x, int y, int w, int h)
+{
+    return internal_createRegion(sf::IntRect(x,y,w,h));
+}
+
 TextureRegion SpriteSheet::createRegion(sf::IntRect region)
 {
     return internal_createRegion(region);

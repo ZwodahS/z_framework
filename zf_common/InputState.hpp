@@ -29,8 +29,10 @@ struct InputState
     bool thisPressed; // bool representing if this key is pressed this frame.
     bool thisHeld; // bool representing if this key is pressed this frame and last frame.
     bool thisReleased; // bool representing if this key is released this frame.
+    float timeHeld; // the time between thisDown and thisReleased. // if thisDown is false and lastDown is false then this will be 0
     //thisPressed = Keystates[keycode]  && !lastDown
     //thisHeld = Keystates[keycode] && lastDown
     //thisReleased = !Keystates[keycode] && lastDown
+    InputState();
 };
 #endif

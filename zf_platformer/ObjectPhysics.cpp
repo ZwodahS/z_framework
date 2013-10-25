@@ -37,6 +37,7 @@ ObjectPhysics& ObjectPhysics::operator+=(const ObjectPhysics& rhs)
     this->maxHorizontalVelocity += rhs.maxHorizontalVelocity;
     this->maxDropVelocity += rhs.maxDropVelocity;
     this->maxUpwardVelocity += rhs.maxUpwardVelocity;
+    return *this;
 }
 
 ObjectPhysics& ObjectPhysics::operator-=(const ObjectPhysics& rhs)
@@ -44,6 +45,7 @@ ObjectPhysics& ObjectPhysics::operator-=(const ObjectPhysics& rhs)
     this->maxHorizontalVelocity -= rhs.maxHorizontalVelocity;
     this->maxDropVelocity -= rhs.maxDropVelocity;
     this->maxUpwardVelocity -= rhs.maxUpwardVelocity;
+    return *this;
 }
 
 sf::Vector2f ObjectPhysics::reduce(sf::Vector2f velocity)

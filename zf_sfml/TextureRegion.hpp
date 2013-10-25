@@ -30,6 +30,8 @@ struct TextureRegion
     sf::Texture* texture;
     sf::IntRect srcClip;
     sf::Color defaultColor;
+    float defaultScaleX;
+    float defaultScaleY;
     TextureRegion(sf::Texture* t, sf::IntRect srcClip, sf::Color defaultColor = sf::Color::White);
     TextureRegion();
     

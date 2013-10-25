@@ -54,6 +54,13 @@ namespace zf
         std::string str1 = sstr.str();
         return str1;
     }
+    std::string floatToString(float f)
+    {
+        std::stringstream sstr;
+        sstr << f;
+        std::string str1 = sstr.str();
+        return str1;
+    }
     std::string toStringSigned(int i)
     {
         std::stringstream sstr;

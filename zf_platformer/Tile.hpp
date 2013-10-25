@@ -31,7 +31,7 @@ class Tile
         ~Tile();
         
         // set the location of this tile. 
-        virtual void setLocation(Grid grid);
+        virtual void setLocation(zf::Grid grid);
         // useful to identify the type of tile.
         // requires if there is a need to do type casting.
         virtual std::string getTileType() = 0;
@@ -42,9 +42,9 @@ class Tile
         // collision bound, requires for collision bound
         virtual sf::FloatRect getCollisionBound() = 0;
         // get location of this object
-        const Grid &location;
+        const zf::Grid &location;
     protected:
-        Grid _location;
+        zf::Grid _location;
         virtual void positionUpdated();
 };
 #endif

@@ -122,6 +122,7 @@ namespace zf
         _currentShift = rhs._currentShift;
         _shiftMax = rhs._shiftMax;
         _bound = rhs._bound;
+        return *this;
     }
     void ShiftButton::updateShift()
     {

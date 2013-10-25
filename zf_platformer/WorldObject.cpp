@@ -115,8 +115,8 @@ void WorldObject::updatePosition(sf::Time delta, Friction friction)
     sf::FloatRect selfCollisionBound = getCollisionBound(newPosition);
     sf::FloatRect expandedBound = expandRect(selfCollisionBound,8);
     // check for collision
-    TwoDSpace<Tile*> tiles = _world->getTiles(expandedBound);
-    for(TwoDSpace<Tile*>::Iterator it = tiles.iteratesRowCol(reversedCol,reversedRow); !it.end() ; ++it)
+    zf::TwoDSpace<Tile*> tiles = _world->getTiles(expandedBound);
+    for(zf::TwoDSpace<Tile*>::Iterator it = tiles.iteratesRowCol(reversedCol,reversedRow); !it.end() ; ++it)
     {
         if(it.get() != 0)
         {
@@ -151,8 +151,8 @@ void WorldObject::updatePosition(sf::Time delta, Friction friction)
     newPosition = newPosition + sf::Vector2f(0,applyMove.y);
     selfCollisionBound = getCollisionBound(newPosition);
     expandedBound = expandRect(selfCollisionBound,8);
-    TwoDSpace<Tile*> tiles2 = _world->getTiles(expandedBound);
-    for(TwoDSpace<Tile*>::Iterator it = tiles2.iteratesRowCol(reversedCol,reversedRow); !it.end() ; ++it)
+    zf::TwoDSpace<Tile*> tiles2 = _world->getTiles(expandedBound);
+    for(zf::TwoDSpace<Tile*>::Iterator it = tiles2.iteratesRowCol(reversedCol,reversedRow); !it.end() ; ++it)
     {
         if(it.get()!=0)
         {

@@ -22,59 +22,85 @@
  */
 
 #include "Grid.hpp"
-
-Grid::Grid()
+namespace zf
 {
-    this->row = 0;
-    this->col = 0;
+    Grid::Grid()
+    {
+        this->row = 0;
+        this->col = 0;
+    }
+
+    Grid::Grid(int row, int col)
+    {
+        this->row = row;
+        this->col = col;
+    }
+
+    Grid::~Grid()
+    {
+    }
+
+    int Grid::distanceFrom(const Grid& rhs) const
+    {
+        return abs(rhs.row - row) + abs(rhs.col - col);
+    }
+    int distanceBetween(const Grid& lhs, const Grid& rhs)
+    {
+        return lhs.distanceFrom(rhs);
+    }
 }
 
-Grid::Grid(int row, int col)
+bool zf::Grid::operator==(const zf::Grid& rhs) const
 {
-    this->row = row;
-    this->col = col;
-}
-
-Grid::~Grid()
-{
-}
-
-bool operator==(const Grid &lhs, const Grid& rhs)
-{
-    if(lhs.row == rhs.row && lhs.col == rhs.col)
+    if(row == rhs.row && col == rhs.col)
     {
         return true;
     }    
     return false;
 }
 
-bool operator!=(const Grid &lhs, const Grid& rhs)
+bool zf::Grid::operator!=(const zf::Grid& rhs) const
 {
-    return !(operator==(lhs,rhs));
+    return !operator==(rhs);
 }
 
+// bool operator==(const zf::Grid &lhs, const zf::Grid &rhs)
+// {
+//     return lhs.operator==(rhs);
+// }
+// 
+// bool operator!=(const zf::Grid &lhs, const zf::Grid &rhs)
+// {
+//     return !(operator==(lhs,rhs));
+// }
 
-Grid& Grid::operator+=(const Grid& rhs)
+
+zf::Grid& zf::Grid::operator+=(const zf::Grid& rhs)
 {
     this->row += rhs.row;
     this->col += rhs.col;
     return *this;
 }
 
-Grid& Grid::operator-=(const Grid& rhs)
+zf::Grid& zf::Grid::operator-=(const zf::Grid& rhs)
 {
     this->row -= rhs.row;
     this->col -= rhs.col;
     return *this;
 }
 
-Grid operator+(Grid lhs, const Grid& rhs)
+zf::Grid operator+(zf::Grid lhs, const zf::Grid &rhs)
 {
     return lhs += rhs;
 }
 
-Grid operator-(Grid lhs, const Grid& rhs)
+zf::Grid operator-(zf::Grid lhs, const zf::Grid &rhs)
 {
     return lhs -= rhs;
 }
 
+std::ostream& operator<<(std::ostream& stream, const zf::Grid& rhs)
+{
+    stream << "(" << rhs.row << "," << rhs.col << ")";
+    return stream;
+}

@@ -22,18 +22,41 @@
  */
 #include "Probability.hpp"
 #include <stdlib.h>
-
-Probability::Probability(int chance,int max)
+#include <math.h>
+namespace zf
 {
-    this->chance = chance;
-    this->maxRoll = max;
-}
-
-bool Probability::roll()
-{
-    if(chance < 0)
+    Probability::Probability(int c,int m)
+        :chance(c), maxRoll(m), _alwaysTrue(false)
     {
-        return false;
     }
-    return (rand() % maxRoll < chance);
+
+    bool Probability::roll(int bonusChance) const
+    {
+        if(_alwaysTrue)
+        {
+            return _alwaysTrue;
+        }
+        if(chance + bonusChance< 0)
+        {
+            return false;
+        }
+        return (rand() % maxRoll < (chance + bonusChance));
+    }
+
+    Probability Probability::makeProbability(float amount, int precision)
+    {
+        int max = 100;
+        if(precision > 0)
+        {
+            max = 100 * (pow(10,precision));
+        }
+        return zf::Probability(amount * max, max);
+    }
+
+    Probability Probability::makeProbabilityAlwaysTrue()
+    {
+        Probability prob;
+        prob._alwaysTrue = true;
+        return prob;
+    }
 }

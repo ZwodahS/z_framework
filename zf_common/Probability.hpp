@@ -23,14 +23,24 @@
 #ifndef _ZF_COMMON_PROBABILITY_H_
 #define _ZF_COMMON_PROBABILITY_H_
 // the idea of the this probability class is to define a chance in maxRow to return true or false.
-struct Probability
+namespace zf
 {
-    int chance;
-    int maxRoll;
-    
-    Probability(int chance = 0, int max = 100);
-    // roll using the default system rand() function. 
-    // TODO: create a RNG ? 
-    bool roll();
-};
+    struct Probability
+    {
+        int chance;
+        int maxRoll;
+        
+        Probability(int chance = 0, int max = 100);
+        // roll using the default system rand() function. 
+        // TODO: create a RNG ? 
+        bool roll(int bonusChance = 0) const;
+        /**
+         * precision is the number of decimal place to consider.
+         */
+        static Probability makeProbability(float amount, int precision=0);
+        static Probability makeProbabilityAlwaysTrue();
+    private:
+        bool _alwaysTrue;
+    };
+}
 #endif

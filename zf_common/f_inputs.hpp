@@ -29,13 +29,17 @@ namespace zf
     class Input
     {
     public:
-        static void processKey(InputState &inputState, bool newState)
+        static void processKey(InputState &inputState, bool newState, float delta)
         {
             inputState.lastDown = inputState.thisDown;
             inputState.thisDown = newState;
             inputState.thisPressed = inputState.thisDown && !(inputState.lastDown);
             inputState.thisHeld = inputState.thisDown && inputState.lastDown;
             inputState.thisReleased = !inputState.thisDown && inputState.lastDown;
+            // if last down is false , meaning last frame is not a down then set the time to 0
+            // else add the time as held
+            // timeHeld measured the time between first time it was down and the current frame
+            inputState.timeHeld = inputState.lastDown == false ? 0 : inputState.timeHeld + delta;
         }
     };
 }

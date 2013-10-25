@@ -38,20 +38,20 @@ class World
         // it will free the memory when the world is freed.
         // all objects will also be deleted when the world is freed.
         // 
-        World(TwoDSpace<Tile*>* space);
+        World(zf::TwoDSpace<Tile*>* space);
         
         ~World();
         void setTileSize(int size);
         void draw(sf::RenderWindow* window, sf::Time delta);
         void update(sf::RenderWindow* window, sf::Time delta);
 
-        TwoDSpace<Tile*> getTiles(sf::FloatRect range);
+        zf::TwoDSpace<Tile*> getTiles(sf::FloatRect range);
         void addFreeObject(WorldObject* object);
         // free all the tiles in this world object. 
         void freeAllTiles();
         
     protected:
-        TwoDSpace<Tile*>* _space;
+        zf::TwoDSpace<Tile*>* _space;
         Friction _defaultFriction;
         std::vector<WorldObject*> _freeObjects; 
         // default friction is 0 0 0 0. override this function to define different region with different friction

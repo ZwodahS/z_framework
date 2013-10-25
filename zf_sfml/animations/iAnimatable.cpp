@@ -21,32 +21,3 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "iAnimatable.hpp"
-
-void iAnimatable::draw(sf::RenderWindow& window, const sf::Time& delta)
-{
-}
-
-void iAnimatable::setPosition(sf::Vector2f position)
-{
-
-}
-
-void iAnimatable::setAlpha(float alpha)
-{
-
-}
-
-void iAnimatable::move(sf::Vector2f move)
-{
-
-}
-
-void iAnimatable::setColor(sf::Color color)
-{
-
-}
-
-sf::Vector2f iAnimatable::getPosition()
-{
-
-}

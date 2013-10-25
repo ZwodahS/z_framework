@@ -39,28 +39,28 @@ void zf::Mouse::update(sf::Time delta)
 
 void zf::Mouse::update(sf::Time delta, sf::Int32 wheelDelta)
 {
-    zf::Input::processKey(left, sf::Mouse::isButtonPressed(sf::Mouse::Left));
-    zf::Input::processKey(right, sf::Mouse::isButtonPressed(sf::Mouse::Right));
-    zf::Input::processKey(middle, sf::Mouse::isButtonPressed(sf::Mouse::Middle));
+    zf::Input::processKey(left, sf::Mouse::isButtonPressed(sf::Mouse::Left), delta.asSeconds());
+    zf::Input::processKey(right, sf::Mouse::isButtonPressed(sf::Mouse::Right), delta.asSeconds());
+    zf::Input::processKey(middle, sf::Mouse::isButtonPressed(sf::Mouse::Middle), delta.asSeconds());
 }
 
-sf::Vector2i zf::Mouse::getPosition()
+sf::Vector2i zf::Mouse::getPosition() const
 {
     return sf::Mouse::getPosition();
 }
 
-sf::Vector2i zf::Mouse::getPosition(sf::Window &window)
+sf::Vector2i zf::Mouse::getPosition(sf::Window &window) const
 {
     return sf::Mouse::getPosition(window);
 }
 
-sf::Vector2f zf::Mouse::getPositionF(sf::Window& window)
+sf::Vector2f zf::Mouse::getPositionF(sf::Window& window) const
 {
     sf::Vector2i pos = getPosition(window);
     return sf::Vector2f(pos.x, pos.y);
 }
 
-sf::Vector2f zf::Mouse::getWorldPosition(sf::RenderWindow &window)
+sf::Vector2f zf::Mouse::getWorldPosition(sf::RenderWindow &window) const
 {
     return window.mapPixelToCoords(getPosition(window));
 }
