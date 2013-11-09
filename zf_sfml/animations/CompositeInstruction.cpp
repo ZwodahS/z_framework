@@ -22,104 +22,107 @@
  */
 #include "CompositeInstruction.hpp"
 #include "AnimationObject.hpp"
-CompositeInstruction::CompositeInstruction(bool ordered)
+namespace zf
 {
-    this->_instructions = std::vector<AnimationInstruction*>(0);
-    this->_done = false;
-    this->_ordered = ordered;
-    this->currIn = 0;
-}
-
-CompositeInstruction::~CompositeInstruction()
-{
-    for(int i = 0 ; i < _instructions.size() ; i++)
+    CompositeInstruction::CompositeInstruction(bool ordered)
     {
-        delete _instructions[i]; 
+        this->_instructions = std::vector<AnimationInstruction*>(0);
+        this->_done = false;
+        this->_ordered = ordered;
+        this->currIn = 0;
     }
-}
 
-CompositeInstruction* CompositeInstruction::addInstruction(FadeInstruction fi)
-{
-    FadeInstruction* f = new FadeInstruction(fi);
-    this->_instructions.push_back(f);
-    return this;
-}
-
-CompositeInstruction* CompositeInstruction::addInstruction(MoveToInstruction mi)
-{
-    MoveToInstruction* m = new MoveToInstruction(mi);
-    this->_instructions.push_back(m);
-    return this;
-}
-
-bool CompositeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
-{
-    if(!_done)
+    CompositeInstruction::~CompositeInstruction()
     {
-        if(!_ordered)
+        for(int i = 0 ; i < _instructions.size() ; i++)
         {
-            _done = true;
-            for(int i = 0 ; i < _instructions.size() ; i++)
-            {
-                if(!_instructions[i]->isDone(object) && !_instructions[i]->update(window,delta,object))
-                {
-                    _done = false;
-                }
-            }
+            delete _instructions[i]; 
         }
-        else
+    }
+
+    CompositeInstruction* CompositeInstruction::addInstruction(FadeInstruction fi)
+    {
+        FadeInstruction* f = new FadeInstruction(fi);
+        this->_instructions.push_back(f);
+        return this;
+    }
+
+    CompositeInstruction* CompositeInstruction::addInstruction(MoveToInstruction mi)
+    {
+        MoveToInstruction* m = new MoveToInstruction(mi);
+        this->_instructions.push_back(m);
+        return this;
+    }
+
+    bool CompositeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    {
+        if(!_done)
         {
-            if(currIn == _instructions.size())
+            if(!_ordered)
             {
-                _done = true; // just in case
+                _done = true;
+                for(int i = 0 ; i < _instructions.size() ; i++)
+                {
+                    if(!_instructions[i]->isDone(object) && !_instructions[i]->update(window,delta,object))
+                    {
+                        _done = false;
+                    }
+                }
             }
             else
             {
-                if(!_instructions[currIn]->isDone(object))
+                if(currIn == _instructions.size())
                 {
-                    if(_instructions[currIn]->update(window,delta,object))
-                    {
-                        currIn++;
-                    }
+                    _done = true; // just in case
                 }
                 else
                 {
-                    currIn ++; // shouldn't even get here.
+                    if(!_instructions[currIn]->isDone(object))
+                    {
+                        if(_instructions[currIn]->update(window,delta,object))
+                        {
+                            currIn++;
+                        }
+                    }
+                    else
+                    {
+                        currIn ++; // shouldn't even get here.
+                    }
                 }
             }
         }
+        return _done;
     }
-    return _done;
-}
 
-bool CompositeInstruction::isDone(AnimationObject& object)
-{
-    return _done;
-}
+    bool CompositeInstruction::isDone(AnimationObject& object)
+    {
+        return _done;
+    }
 
-CompositeInstruction* CompositeInstruction::fade(int startingAlpha, int endingAlpha, float time)
-{
-    FadeInstruction* fi = new FadeInstruction(startingAlpha, endingAlpha, time);
-    this->_instructions.push_back(fi);
-    return this;
-}
+    CompositeInstruction* CompositeInstruction::fade(int startingAlpha, int endingAlpha, float time)
+    {
+        FadeInstruction* fi = new FadeInstruction(startingAlpha, endingAlpha, time);
+        this->_instructions.push_back(fi);
+        return this;
+    }
 
-CompositeInstruction* CompositeInstruction::moveTo(sf::Vector2f source, sf::Vector2f target, float delta)
-{
-    MoveToInstruction* mi = new MoveToInstruction(source,target,delta);
-    this->_instructions.push_back(mi);
-    return this;
-}
+    CompositeInstruction* CompositeInstruction::moveTo(sf::Vector2f source, sf::Vector2f target, float delta)
+    {
+        MoveToInstruction* mi = new MoveToInstruction(source,target,delta);
+        this->_instructions.push_back(mi);
+        return this;
+    }
 
-CompositeInstruction* CompositeInstruction::move(sf::Vector2f moveVec, float duration)
-{
-    MoveInstruction* mi = new MoveInstruction(moveVec,duration);
-    this->_instructions.push_back(mi);
-    return this;
-}
+    CompositeInstruction* CompositeInstruction::move(sf::Vector2f moveVec, float duration)
+    {
+        MoveInstruction* mi = new MoveInstruction(moveVec,duration);
+        this->_instructions.push_back(mi);
+        return this;
+    }
 
-CompositeInstruction* CompositeInstruction::wait(float waitTime)
-{
-    this->_instructions.push_back(new WaitInstruction(waitTime));
-    return this;
+    CompositeInstruction* CompositeInstruction::wait(float waitTime)
+    {
+        this->_instructions.push_back(new WaitInstruction(waitTime));
+        return this;
+    }
 }

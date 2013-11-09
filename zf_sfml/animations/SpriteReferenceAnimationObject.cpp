@@ -22,39 +22,42 @@
  */
 #include "SpriteReferenceAnimationObject.hpp"
 #include <iostream>
-SpriteReferenceAnimationObject::SpriteReferenceAnimationObject(sf::Sprite &sprite)
-    :_sprite(sprite)
+namespace zf
 {
-}
+    SpriteReferenceAnimationObject::SpriteReferenceAnimationObject(sf::Sprite &sprite)
+        :_sprite(sprite)
+    {
+    }
 
-SpriteReferenceAnimationObject::~SpriteReferenceAnimationObject()
-{
-}
+    SpriteReferenceAnimationObject::~SpriteReferenceAnimationObject()
+    {
+    }
 
-void SpriteReferenceAnimationObject::setAlpha(float alpha)
-{
-    sf::Color color = this->_sprite.getColor();
-    color.a = alpha;
-    this->_sprite.setColor(color);
-}
+    void SpriteReferenceAnimationObject::setAlpha(float alpha)
+    {
+        sf::Color color = this->_sprite.getColor();
+        color.a = alpha;
+        this->_sprite.setColor(color);
+    }
 
-void SpriteReferenceAnimationObject::setPosition(sf::Vector2f position)
-{
-    this->_sprite.setPosition(position);
-}
+    void SpriteReferenceAnimationObject::setPosition(sf::Vector2f position)
+    {
+        this->_sprite.setPosition(position);
+    }
 
-void SpriteReferenceAnimationObject::movePosition(sf::Vector2f moves)
-{
-    sf::Vector2f position = this->_sprite.getPosition();
-    this->_sprite.setPosition(position + moves);
-}
+    void SpriteReferenceAnimationObject::movePosition(sf::Vector2f moves)
+    {
+        sf::Vector2f position = this->_sprite.getPosition();
+        this->_sprite.setPosition(position + moves);
+    }
 
-void SpriteReferenceAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
-{
-    // For Reference object, do not draw. 
-}
+    void SpriteReferenceAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
+    {
+        // For Reference object, do not draw. 
+    }
 
-void SpriteReferenceAnimationObject::setColor(sf::Color color)
-{
-    _sprite.setColor(color);
+    void SpriteReferenceAnimationObject::setColor(sf::Color color)
+    {
+        _sprite.setColor(color);
+    }
 }

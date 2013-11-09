@@ -51,6 +51,21 @@ namespace zf
         c.b = color.b;
         sprite.setColor(c);
     }
+    /**
+     * This is to replace the bug in sf::String which when an empty string is freed, causes a seg fault.
+     *
+     */
+    static void setString(sf::Text& text, std::string value)
+    {
+        if(value == "")
+        {
+            text.setString(" ");
+        }
+        else
+        {
+            text.setString(value);
+        }
+    }
 
     static void alignTextTopRight(sf::Text& text, sf::Vector2f position)
     {

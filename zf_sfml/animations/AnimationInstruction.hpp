@@ -24,14 +24,17 @@
 #define _ZF_SFML_ANIMATIONS_ANIMATIONINSTRUCTION_H_
 
 #include <SFML/Graphics.hpp>
-class AnimationObject;
-class AnimationInstruction
+namespace zf
 {
-    public:
-        AnimationInstruction();
-        ~AnimationInstruction();
-        virtual bool update(sf::RenderWindow& window, sf::Time delta,AnimationObject& object) = 0;
-        virtual bool isDone(AnimationObject& object) = 0;
-};
+    class AnimationObject;
+    class AnimationInstruction
+    {
+        public:
+            AnimationInstruction();
+            virtual ~AnimationInstruction();
+            virtual bool update(sf::RenderWindow& window, sf::Time delta,AnimationObject& object) = 0;
+            virtual bool isDone(AnimationObject& object) = 0;
+    };
+}
 #endif
 

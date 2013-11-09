@@ -28,34 +28,36 @@
 #include "MoveInstruction.hpp"
 #include "WaitInstruction.hpp"
 #include <vector>
-class AnimationObject;
-class CompositeInstruction : public AnimationInstruction
+namespace zf
 {
-    public:
-        // if ordered is true , then the instruction is executed one after another.
-        // if not ordered , the instruction is executed all at the same time.
-        CompositeInstruction(bool ordered = false);
-        ~CompositeInstruction();
-        bool update(sf::RenderWindow& window, sf::Time delta,AnimationObject& object);
-        bool isDone(AnimationObject& object);
-        
-        // all functions here return the pointer to itself to allow for chaining.
-        // add a fade instruction , copying the information from another fade instruction.
-        CompositeInstruction* addInstruction(FadeInstruction fi);
-        // add a fade instruction using parameters.
-        CompositeInstruction* fade(int startingAlpha, int endingAlpha, float time);
-        // add a move to instruction, copying the information  from another move to instruction
-        CompositeInstruction* addInstruction(MoveToInstruction mi);
+    class AnimationObject;
+    class CompositeInstruction : public AnimationInstruction
+    {
+        public:
+            // if ordered is true , then the instruction is executed one after another.
+            // if not ordered , the instruction is executed all at the same time.
+            CompositeInstruction(bool ordered = false);
+            ~CompositeInstruction();
+            bool update(sf::RenderWindow& window, sf::Time delta,AnimationObject& object);
+            bool isDone(AnimationObject& object);
+            
+            // all functions here return the pointer to itself to allow for chaining.
+            // add a fade instruction , copying the information from another fade instruction.
+            CompositeInstruction* addInstruction(FadeInstruction fi);
+            // add a fade instruction using parameters.
+            CompositeInstruction* fade(int startingAlpha, int endingAlpha, float time);
+            // add a move to instruction, copying the information  from another move to instruction
+            CompositeInstruction* addInstruction(MoveToInstruction mi);
 
-        CompositeInstruction* moveTo(sf::Vector2f source, sf::Vector2f target, float delta);
-        CompositeInstruction* move(sf::Vector2f moveVec, float duration);
+            CompositeInstruction* moveTo(sf::Vector2f source, sf::Vector2f target, float delta);
+            CompositeInstruction* move(sf::Vector2f moveVec, float duration);
 
-        CompositeInstruction* wait(float waitTime);
-    private:
-        std::vector<AnimationInstruction*> _instructions;
-        bool _ordered;
-        bool _done;
-        int currIn;
-};
-
+            CompositeInstruction* wait(float waitTime);
+        private:
+            std::vector<AnimationInstruction*> _instructions;
+            bool _ordered;
+            bool _done;
+            int currIn;
+    };
+}
 #endif

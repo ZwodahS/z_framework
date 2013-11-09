@@ -23,32 +23,34 @@
 #ifndef _ZF_SFML_ANIMATIONS_COLORSHIFTINSTRUCTION_H_
 #define _ZF_SFML_ANIMATIONS_COLORSHIFTINSTRUCTION_H_
 #include "AnimationInstruction.hpp"
-class ColorShiftInstruction : public AnimationInstruction
+namespace zf
 {
-public:
-    ColorShiftInstruction(sf::Color& startingColor, sf::Color& endingColor, float time);
-    ~ColorShiftInstruction();
+    class ColorShiftInstruction : public AnimationInstruction
+    {
+    public:
+        ColorShiftInstruction(sf::Color& startingColor, sf::Color& endingColor, float time);
+        ~ColorShiftInstruction();
 
-    bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-    bool isDone(AnimationObject& object);
+        bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
+        bool isDone(AnimationObject& object);
 
-    // the current value 
-    float _red;
-    float _green;
-    float _blue;
-    float _alpha;
-    // the change value
-    float _changeRed;
-    float _changeGreen;
-    float _changeBlue;
-    float _changeAlpha; 
-    // time elapsed.
-    float _time;
-    float _totalTime;
-    sf::Color _startingColor;
-    sf::Color _endingColor;
+        // the current value 
+        float _red;
+        float _green;
+        float _blue;
+        float _alpha;
+        // the change value
+        float _changeRed;
+        float _changeGreen;
+        float _changeBlue;
+        float _changeAlpha; 
+        // time elapsed.
+        float _time;
+        float _totalTime;
+        sf::Color _startingColor;
+        sf::Color _endingColor;
 
-    bool _done;
-};
-
+        bool _done;
+    };
+}
 #endif

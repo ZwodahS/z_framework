@@ -23,49 +23,52 @@
 #include "FadeInstruction.hpp"
 #include "AnimationObject.hpp"
 #include <iostream>
-FadeInstruction::FadeInstruction(int startingAlpha, int endingAlpha, float time)
-    :_done(false), _currentAlpha(startingAlpha), _targetAlpha(endingAlpha), 
-    _changeAlpha((endingAlpha - startingAlpha)/ time), _direction( endingAlpha > startingAlpha ? 1 : -1)
+namespace zf
 {
-}
-FadeInstruction::FadeInstruction(const FadeInstruction &fi)
-{
-    this->_done = fi._done;
-    this->_currentAlpha = fi._currentAlpha;
-    this->_targetAlpha = fi._targetAlpha;
-    this->_changeAlpha = fi._changeAlpha;
-    this->_direction = fi._direction;
-}
-FadeInstruction::~FadeInstruction()
-{
-}
-bool FadeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
-{
-    if(!_done)
+    FadeInstruction::FadeInstruction(int startingAlpha, int endingAlpha, float time)
+        :_done(false), _currentAlpha(startingAlpha), _targetAlpha(endingAlpha), 
+        _changeAlpha((endingAlpha - startingAlpha)/ time), _direction( endingAlpha > startingAlpha ? 1 : -1)
     {
-        _currentAlpha += _changeAlpha * delta.asSeconds();
-        if(_direction > 0) // increasing alpha
-        {
-            if(_currentAlpha >= _targetAlpha) 
-            {
-                _done = true; 
-                _currentAlpha = _targetAlpha;
-            }
-        }
-        else
-        {
-            if(_currentAlpha <= _targetAlpha)
-            {
-                _done = true;
-                _currentAlpha = _targetAlpha;
-            }
-        }
-        object.setAlpha(_currentAlpha);
     }
-    return _done;
-}
+    FadeInstruction::FadeInstruction(const FadeInstruction &fi)
+    {
+        this->_done = fi._done;
+        this->_currentAlpha = fi._currentAlpha;
+        this->_targetAlpha = fi._targetAlpha;
+        this->_changeAlpha = fi._changeAlpha;
+        this->_direction = fi._direction;
+    }
+    FadeInstruction::~FadeInstruction()
+    {
+    }
+    bool FadeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    {
+        if(!_done)
+        {
+            _currentAlpha += _changeAlpha * delta.asSeconds();
+            if(_direction > 0) // increasing alpha
+            {
+                if(_currentAlpha >= _targetAlpha) 
+                {
+                    _done = true; 
+                    _currentAlpha = _targetAlpha;
+                }
+            }
+            else
+            {
+                if(_currentAlpha <= _targetAlpha)
+                {
+                    _done = true;
+                    _currentAlpha = _targetAlpha;
+                }
+            }
+            object.setAlpha(_currentAlpha);
+        }
+        return _done;
+    }
 
-bool FadeInstruction::isDone(AnimationObject& object)
-{
-    return _done;
+    bool FadeInstruction::isDone(AnimationObject& object)
+    {
+        return _done;
+    }
 }

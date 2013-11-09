@@ -24,41 +24,46 @@
 #include "AnimationObject.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
-ColorShiftInstruction::ColorShiftInstruction(sf::Color& startingColor, sf::Color& endingColor, float time)
-    :_red(startingColor.r), _green(startingColor.g), _blue(startingColor.b), _alpha(startingColor.a),
-    _changeRed((endingColor.r - startingColor.r) / time), _changeGreen((endingColor.g - startingColor.g) / time), _changeBlue((endingColor.b - startingColor.b)/time),
-    _changeAlpha((endingColor.a - startingColor.a) / time),
-    _startingColor(startingColor), _endingColor(endingColor), _done(false), _time(0), _totalTime(time)
+namespace zf
 {
-}
-
-
-bool ColorShiftInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
-{
-    if(!_done)
+    ColorShiftInstruction::ColorShiftInstruction(sf::Color& startingColor, sf::Color& endingColor, float time)
+        :_red(startingColor.r), _green(startingColor.g), _blue(startingColor.b), _alpha(startingColor.a),
+        _changeRed((endingColor.r - startingColor.r) / time), _changeGreen((endingColor.g - startingColor.g) / time), _changeBlue((endingColor.b - startingColor.b)/time),
+        _changeAlpha((endingColor.a - startingColor.a) / time),
+        _startingColor(startingColor), _endingColor(endingColor), _done(false), _time(0), _totalTime(time)
     {
-        if(_time >= _totalTime)
-        {
-            _done = true;
-            object.setColor(_endingColor);
-        }
-        else
-        {
-            float deltaFloat = delta.asSeconds();
-            _red += _changeRed * deltaFloat;
-            _blue += _changeBlue * deltaFloat;
-            _green += _changeGreen * deltaFloat;
-            _alpha += _changeAlpha * deltaFloat;
-
-            object.setColor(sf::Color(_red,_green,_blue,_alpha));
-            _time += delta.asSeconds();
-        }
     }
-    return isDone(object);
-}
 
-bool ColorShiftInstruction::isDone(AnimationObject& object)
-{
-    return _done;
+    ColorShiftInstruction::~ColorShiftInstruction()
+    {
+    }
+
+    bool ColorShiftInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    {
+        if(!_done)
+        {
+            if(_time >= _totalTime)
+            {
+                _done = true;
+                object.setColor(_endingColor);
+            }
+            else
+            {
+                float deltaFloat = delta.asSeconds();
+                _red += _changeRed * deltaFloat;
+                _blue += _changeBlue * deltaFloat;
+                _green += _changeGreen * deltaFloat;
+                _alpha += _changeAlpha * deltaFloat;
+
+                object.setColor(sf::Color(_red,_green,_blue,_alpha));
+                _time += delta.asSeconds();
+            }
+        }
+        return isDone(object);
+    }
+
+    bool ColorShiftInstruction::isDone(AnimationObject& object)
+    {
+        return _done;
+    }
 }

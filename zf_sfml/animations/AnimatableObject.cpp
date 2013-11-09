@@ -21,51 +21,55 @@
   * http://sam.zoy.org/wtfpl/COPYING for more details. 
   */
 #include "AnimatableObject.hpp"
-AnimatableObject::AnimatableObject(iAnimatable& a)
-    :_animatable(a), _isPtr(false)
+namespace zf
 {
-}
-
-AnimatableObject::AnimatableObject(iAnimatable* a)
-    :_animatable(*a), _isPtr(true)
-{
-}
-
-AnimatableObject::~AnimatableObject()
-{
-    // Potential memory leak.
-    // Need to make iAnimatable deconstructor virtual
-    //
-    if(_isPtr)
+    AnimatableObject::AnimatableObject(iAnimatable& a)
+        :_animatable(a), _isPtr(false)
     {
-        delete &_animatable;
     }
-}
 
-void AnimatableObject::setAlpha(float alpha)
-{
-    _animatable.setAlpha(alpha);
-}
-
-void AnimatableObject::setPosition(sf::Vector2f position)
-{
-    _animatable.setPosition(position);
-}
-
-void AnimatableObject::setColor(sf::Color color)
-{
-    _animatable.setColor(color);
-}
-
-void AnimatableObject::movePosition(sf::Vector2f move)
-{
-    _animatable.move(move);
-}
-
-void AnimatableObject::draw(sf::RenderWindow& window , sf::Time delta)
-{
-    if(_isPtr)
+    AnimatableObject::AnimatableObject(iAnimatable* a)
+        :_animatable(*a), _isPtr(true)
     {
-        _animatable.draw(window, delta); 
     }
+
+    AnimatableObject::~AnimatableObject()
+    {
+        // Potential memory leak.
+        // Need to make iAnimatable deconstructor virtual
+        //
+        if(_isPtr)
+        {
+            delete &_animatable;
+        }
+    }
+
+    void AnimatableObject::setAlpha(float alpha)
+    {
+        _animatable.setAlpha(alpha);
+    }
+
+    void AnimatableObject::setPosition(sf::Vector2f position)
+    {
+        _animatable.setPosition(position);
+    }
+
+    void AnimatableObject::setColor(sf::Color color)
+    {
+        _animatable.setColor(color);
+    }
+
+    void AnimatableObject::movePosition(sf::Vector2f move)
+    {
+        _animatable.move(move);
+    }
+
+    void AnimatableObject::draw(sf::RenderWindow& window , sf::Time delta)
+    {
+        if(_isPtr)
+        {
+            _animatable.draw(window, delta); 
+        }
+    }
+
 }

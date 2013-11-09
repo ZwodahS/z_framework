@@ -23,15 +23,18 @@
 #ifndef _ZF_SFML_ANIMATIONS_WAITINSTRUCTION_H_
 #define _ZF_SFML_ANIMATIONS_WAITINSTRUCTION_H_
 #include "AnimationInstruction.hpp"
-class WaitInstruction : public AnimationInstruction
+namespace zf
 {
-    public:
-        WaitInstruction(float waitTime);
-        ~WaitInstruction();
+    class WaitInstruction : public AnimationInstruction
+    {
+        public:
+            WaitInstruction(float waitTime);
+            ~WaitInstruction();
 
-        bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-        bool isDone(AnimationObject& object);
-    private:
-        float waitTimeLeft;
-};
+            bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
+            bool isDone(AnimationObject& object);
+        private:
+            float waitTimeLeft;
+    };
+}
 #endif

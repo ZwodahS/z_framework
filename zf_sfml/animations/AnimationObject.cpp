@@ -22,52 +22,55 @@
  */
 #include "AnimationObject.hpp"
 #include "AnimationInstruction.hpp"
-AnimationObject::AnimationObject()
-    :_done(0)
+namespace zf
 {
-    this->_instruction = 0;
-}
+    AnimationObject::AnimationObject()
+        :_done(0)
+    {
+        this->_instruction = 0;
+    }
 
-AnimationObject::~AnimationObject()
-{
-    if(_instruction != 0)
+    AnimationObject::~AnimationObject()
     {
-        delete _instruction;
+        if(_instruction != 0)
+        {
+            delete _instruction;
+        }
     }
-}
 
-bool AnimationObject::update(sf::RenderWindow& window, sf::Time delta)
-{
-    if(done())
+    bool AnimationObject::update(sf::RenderWindow& window, sf::Time delta)
     {
-        return true;
+        if(done())
+        {
+            return true;
+        }
+        bool doneness = _instruction->update(window,delta,*this);
+        if(_done != 0)
+        {
+            *_done = doneness;
+        }
+        return doneness;
     }
-    bool doneness = _instruction->update(window,delta,*this);
-    if(_done != 0)
-    {
-        *_done = doneness;
-    }
-    return doneness;
-}
 
-void AnimationObject::setInstruction(AnimationInstruction* instruction)
-{
-    if(_instruction != 0)
+    void AnimationObject::setInstruction(AnimationInstruction* instruction)
     {
-        delete _instruction;
+        if(_instruction != 0)
+        {
+            delete _instruction;
+        }
+        this->_instruction = instruction;
+        if(_done != 0)
+        {
+            *_done = done();
+        }
     }
-    this->_instruction = instruction;
-    if(_done != 0)
-    {
-        *_done = done();
-    }
-}
 
-void AnimationObject::setDoneVariable(bool* d)
-{
-    this->_done = d;
-}
-bool AnimationObject::done()
-{
-    return _instruction == 0 ? true : _instruction->isDone(*this);
+    void AnimationObject::setDoneVariable(bool* d)
+    {
+        this->_done = d;
+    }
+    bool AnimationObject::done()
+    {
+        return _instruction == 0 ? true : _instruction->isDone(*this);
+    }
 }

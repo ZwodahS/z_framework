@@ -26,17 +26,19 @@
 #include "AnimationObject.hpp"
 
 #include <SFML/Graphics.hpp>
-class SpriteAnimationObject : public AnimationObject
+namespace zf
 {
-    public:
-        SpriteAnimationObject(sf::Sprite sprite);
-        ~SpriteAnimationObject();
-        sf::Sprite _sprite;
-        void setAlpha(float alpha);
-        void setPosition(sf::Vector2f position);
-        void movePosition(sf::Vector2f position);
-        void draw(sf::RenderWindow& window, sf::Time delta);
-        void setColor(sf::Color color);
-};
-
+    class SpriteAnimationObject : public AnimationObject
+    {
+        public:
+            SpriteAnimationObject(sf::Sprite sprite);
+            ~SpriteAnimationObject();
+            sf::Sprite _sprite;
+            void setAlpha(float alpha);
+            void setPosition(sf::Vector2f position);
+            void movePosition(sf::Vector2f position);
+            void draw(sf::RenderWindow& window, sf::Time delta);
+            void setColor(sf::Color color);
+    };
+}
 #endif

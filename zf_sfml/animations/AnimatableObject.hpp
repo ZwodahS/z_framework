@@ -26,19 +26,22 @@
 #include "AnimationObject.hpp"
 #include "iAnimatable.hpp"
 #include <SFML/Graphics.hpp>
-class AnimatableObject : public AnimationObject
+namespace zf
 {
-    public:
-        AnimatableObject(iAnimatable* animatable);
-        AnimatableObject(iAnimatable& animatable);
-        ~AnimatableObject();
-        void setAlpha(float alpha);
-        void setPosition(sf::Vector2f position);
-        void movePosition(sf::Vector2f position);
-        void setColor(sf::Color color);
-        void draw(sf::RenderWindow& window, sf::Time delta);
-    private:
-        iAnimatable& _animatable;
-        bool _isPtr;
-};
+    class AnimatableObject : public AnimationObject
+    {
+        public:
+            AnimatableObject(iAnimatable* animatable);
+            AnimatableObject(iAnimatable& animatable);
+            ~AnimatableObject();
+            void setAlpha(float alpha);
+            void setPosition(sf::Vector2f position);
+            void movePosition(sf::Vector2f position);
+            void setColor(sf::Color color);
+            void draw(sf::RenderWindow& window, sf::Time delta);
+        private:
+            iAnimatable& _animatable;
+            bool _isPtr;
+    };
+}
 #endif

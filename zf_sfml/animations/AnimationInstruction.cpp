@@ -22,11 +22,13 @@
  */
 #include "AnimationInstruction.hpp"
 
-AnimationInstruction::AnimationInstruction()
+namespace zf
 {
-}
+    AnimationInstruction::AnimationInstruction()
+    {
+    }
 
-AnimationInstruction::~AnimationInstruction()
-{
+    AnimationInstruction::~AnimationInstruction()
+    {
+    }
 }
-

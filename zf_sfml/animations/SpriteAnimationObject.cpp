@@ -21,39 +21,42 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "SpriteAnimationObject.hpp"
-SpriteAnimationObject::SpriteAnimationObject(sf::Sprite sprite)
-    :_sprite(sprite)
+namespace zf
 {
-}
+    SpriteAnimationObject::SpriteAnimationObject(sf::Sprite sprite)
+        :_sprite(sprite)
+    {
+    }
 
-SpriteAnimationObject::~SpriteAnimationObject()
-{
-}
+    SpriteAnimationObject::~SpriteAnimationObject()
+    {
+    }
 
-void SpriteAnimationObject::setAlpha(float alpha)
-{
-    sf::Color color = this->_sprite.getColor();
-    color.a = alpha;
-    this->_sprite.setColor(color);
-}
+    void SpriteAnimationObject::setAlpha(float alpha)
+    {
+        sf::Color color = this->_sprite.getColor();
+        color.a = alpha;
+        this->_sprite.setColor(color);
+    }
 
-void SpriteAnimationObject::setPosition(sf::Vector2f position)
-{
-    this->_sprite.setPosition(position);
-}
+    void SpriteAnimationObject::setPosition(sf::Vector2f position)
+    {
+        this->_sprite.setPosition(position);
+    }
 
-void SpriteAnimationObject::movePosition(sf::Vector2f moves)
-{
-    sf::Vector2f position = this->_sprite.getPosition();
-    this->_sprite.setPosition(position + moves);
-}
+    void SpriteAnimationObject::movePosition(sf::Vector2f moves)
+    {
+        sf::Vector2f position = this->_sprite.getPosition();
+        this->_sprite.setPosition(position + moves);
+    }
 
-void SpriteAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
-{
-    window.draw(this->_sprite);
-}
+    void SpriteAnimationObject::draw(sf::RenderWindow& window, sf::Time delta)
+    {
+        window.draw(this->_sprite);
+    }
 
-void SpriteAnimationObject::setColor(sf::Color color)
-{
-    this->_sprite.setColor(color);
+    void SpriteAnimationObject::setColor(sf::Color color)
+    {
+        this->_sprite.setColor(color);
+    }
 }
