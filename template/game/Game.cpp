@@ -31,7 +31,7 @@ void Game::run()
         // update clock 
         sf::Time delta = clock.restart();
         // update mouse.
-        _mouse.update(delta);
+        mouse.update(delta);
         
 
         // check for events, especially mousewheel
@@ -45,7 +45,7 @@ void Game::run()
             }
             else if(event.type == sf::Event::MouseWheelMoved)
             {
-                _mouse.wheelDelta = event.mouseWheel.delta;
+                mouse.wheelDelta = event.mouseWheel.delta;
             }
         }
 

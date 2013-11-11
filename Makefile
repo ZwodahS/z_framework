@@ -4,7 +4,7 @@ vpath %.cpp zf_platformer
 vpath %.cpp zf_network
 vpath %.cpp zf_sfml/animations
 
-CXX=g++
+CXX=clang++
 OBJDIR=obj
 
 common = $(shell (cd zf_common ; ls *.cpp ))
