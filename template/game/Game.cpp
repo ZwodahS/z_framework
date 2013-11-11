@@ -10,8 +10,8 @@
 #define GAME_HEIGHT 640
 
 Game::Game()
-    :_width(GAME_WIDTH), _height(GAME_HEIGHT), _title(GAME_TITLE),
-    _window(sf::VideoMode(_width,_height),_title),_mouse()
+    :width(GAME_WIDTH), height(GAME_HEIGHT), title(GAME_TITLE),mouse(),
+    _window(sf::VideoMode(width,height),title)
 {
 }
 

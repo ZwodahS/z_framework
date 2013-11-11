@@ -18,18 +18,18 @@ class Game
 
 
 
-        const sf::Int32 _width;
-        const sf::Int32 _height;
-        std::string _title;
-        sf::RenderWindow _window; 
-        zf::Mouse _mouse;
-        Assets _assets;
+        const sf::Int32 width;
+        const sf::Int32 height;
+        std::string title;
+        zf::Mouse mouse;
+        Assets assets;
         void loadAssets();
     private:
         void update(sf::Time delta);
         void draw(sf::Time delta);
         
         Screen* _currentScreen;        
+        sf::RenderWindow _window; 
 };
 
 
