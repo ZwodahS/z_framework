@@ -21,7 +21,9 @@ class Game
         const sf::Int32 width;
         const sf::Int32 height;
         std::string title;
+        sf::RenderWindow window; 
         zf::Mouse mouse;
+        bool isFocused;
         Assets assets;
         void loadAssets();
     private:
@@ -29,7 +31,6 @@ class Game
         void draw(sf::Time delta);
         
         Screen* _currentScreen;        
-        sf::RenderWindow _window; 
 };
 
 

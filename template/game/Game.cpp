@@ -1,17 +1,15 @@
 #include "Game.hpp"
-
 #include "screens/Screen.hpp"
 #include <SFML/Graphics.hpp>
 
-
 #define CLEAR_COLOR sf::Color(20,20,20,255)
 #define GAME_TITLE "Game Name"
-#define GAME_WIDTH 640
-#define GAME_HEIGHT 640
+#define GAME_WIDTH 1280
+#define GAME_HEIGHT 960
 
 Game::Game()
-    :width(GAME_WIDTH), height(GAME_HEIGHT), title(GAME_TITLE),mouse(),
-    _window(sf::VideoMode(width,height),title)
+    :width(GAME_WIDTH), height(GAME_HEIGHT), title(GAME_TITLE),
+    window(sf::VideoMode(width,height),title),mouse(), isFocused(true)
 {
 }
 
@@ -22,11 +20,12 @@ Game::~Game()
 
 void Game::run()
 {
+    loadAssets();
     sf::Clock clock; // set up the clock for delta
 
     bool quit = false;
-
-    while(!quit && _window.isOpen())
+    // Default Generator
+    while(!quit && window.isOpen())
     {
         // update clock 
         sf::Time delta = clock.restart();
@@ -36,16 +35,24 @@ void Game::run()
 
         // check for events, especially mousewheel
         sf::Event event;
-        while(_window.pollEvent(event))
+        while(window.pollEvent(event))
         {
             if(event.type == sf::Event::Closed)
             {
-                _window.close();
+                window.close();
                 quit = true;
             }
             else if(event.type == sf::Event::MouseWheelMoved)
             {
                 mouse.wheelDelta = event.mouseWheel.delta;
+            }
+            else if(event.type == sf::Event::LostFocus)
+            {
+                isFocused = false;
+            }
+            else if(event.type == sf::Event::GainedFocus)
+            {
+                isFocused = true;
             }
         }
 
@@ -60,15 +67,22 @@ void Game::run()
 
 void Game::update(sf::Time delta)
 {
-
+    if(_currentScreen != 0)
+    {
+        if(isFocused || true)
+        {
+            _currentScreen->inputs(window, delta);
+        }
+        _currentScreen->update(window, delta);    
+    }
 }
 
 void Game::draw(sf::Time delta)
 {
-    _window.clear(CLEAR_COLOR);
+    window.clear(CLEAR_COLOR);
     if(_currentScreen != 0)
     {
-        _currentScreen->draw(_window,delta);   
+        _currentScreen->draw(window,delta);   
     }
-    _window.display();
+    window.display();
 }
