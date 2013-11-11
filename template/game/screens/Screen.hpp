@@ -11,6 +11,7 @@ public:
     
     virtual void draw(sf::RenderWindow& window, const sf::Time& delta) = 0;
     virtual void update(sf::RenderWindow& window, const sf::Time& delta) = 0;
+    virtual void inputs(sf::RenderWindow& window, const sf::Time& delta) = 0;
     virtual void textInput(char c) = 0;
     virtual void screenEnter();
     virtual void screenExit();
