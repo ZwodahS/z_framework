@@ -42,11 +42,12 @@ class SpriteSheet
          * Create region at the current position. If this spritesheet is managed, then it will be slot at the correct position.
          * If the spritesheet is not managed, then it will be the same as createRegion(image,0,0);
          */
-        TextureRegion createRegion(sf::Image image);
+        TextureRegion createRegion(sf::Image image, sf::Color defaultColor = sf::Color(255,255,255,255));
         
-        TextureRegion createRegion(sf::Image image, int x , int y);
-        TextureRegion createRegion(int x, int y, int w, int h);
-        TextureRegion createRegion(sf::IntRect region);
+        TextureRegion createRegion(sf::Image image, int x , int y, sf::Color defaultColor = sf::Color(255,255,255,255));
+        TextureRegion createRegion(int x, int y, int w, int h, sf::Color defaultColor = sf::Color(255,255,255,255));
+
+        TextureRegion createRegion(sf::IntRect region, sf::Color defaultColor = sf::Color(255,255,255,255));
         // Note that the region that the sprite is created is always relative to the origin bound that is specified.
         // i.e. if this sprite sheet is created with bound = (100,100,500,500),
         // then when createRegion(image) is called, the image will be added to sf::Vector2i(100,100) and the region that is returned will be at (100,100,w,h) where w = width of image, and h = height of image.

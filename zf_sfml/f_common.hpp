@@ -67,17 +67,26 @@ namespace zf
         }
     }
 
+    // deprecated
     static void alignTextTopRight(sf::Text& text, sf::Vector2f position)
     {
         sf::FloatRect rect = text.getGlobalBounds();
         text.setPosition(position.x - rect.width, position.y);
     }
 
+    // deprecated
     static void alignTextTopCenter(sf::Text& text, sf::Vector2f position)
     {
         sf::FloatRect rect = text.getGlobalBounds();
         text.setPosition(position.x - (rect.width/2), position.y);
     }
+
+    static void alignSpriteCenter(sf::Sprite& sprite, sf::Vector2f position)
+    {
+        sf::FloatRect rect = sprite.getGlobalBounds();
+        sprite.setPosition(position.x - (rect.width/2), position.y - (rect.height/2));
+    }
+
     /**
      * Align a text based on some data and a position.
      * How this works ?
@@ -188,5 +197,11 @@ namespace zf
     {
         return sf::Vector2f(grid.col * width + (width/2), grid.row * height + (height / 2));
     }
+    template <typename T>
+    static sf::Rect<T> moveRect(sf::Rect<T> rect, sf::Vector2<T> moveVec)
+    {
+        return sf::Rect<T>(rect.left + moveVec.x, rect.top + moveVec.y, rect.width, rect.height); 
+    }
+
 }
 #endif

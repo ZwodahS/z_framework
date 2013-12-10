@@ -21,27 +21,16 @@
   * http://sam.zoy.org/wtfpl/COPYING for more details. 
   */
 #include "AnimatableObject.hpp"
+#include <iostream>
 namespace zf
 {
     AnimatableObject::AnimatableObject(iAnimatable& a)
-        :_animatable(a), _isPtr(false)
-    {
-    }
-
-    AnimatableObject::AnimatableObject(iAnimatable* a)
-        :_animatable(*a), _isPtr(true)
+        :_animatable(a)
     {
     }
 
     AnimatableObject::~AnimatableObject()
     {
-        // Potential memory leak.
-        // Need to make iAnimatable deconstructor virtual
-        //
-        if(_isPtr)
-        {
-            delete &_animatable;
-        }
     }
 
     void AnimatableObject::setAlpha(float alpha)
@@ -66,10 +55,11 @@ namespace zf
 
     void AnimatableObject::draw(sf::RenderWindow& window , sf::Time delta)
     {
-        if(_isPtr)
-        {
-            _animatable.draw(window, delta); 
-        }
+        _animatable.draw(window, delta); 
     }
-
+    
+    sf::Vector2f AnimatableObject::getPosition()
+    {
+        return _animatable.getPosition();
+    }
 }

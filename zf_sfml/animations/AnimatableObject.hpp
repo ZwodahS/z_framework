@@ -31,7 +31,6 @@ namespace zf
     class AnimatableObject : public AnimationObject
     {
         public:
-            AnimatableObject(iAnimatable* animatable);
             AnimatableObject(iAnimatable& animatable);
             ~AnimatableObject();
             void setAlpha(float alpha);
@@ -39,9 +38,9 @@ namespace zf
             void movePosition(sf::Vector2f position);
             void setColor(sf::Color color);
             void draw(sf::RenderWindow& window, sf::Time delta);
+            sf::Vector2f getPosition();
         private:
             iAnimatable& _animatable;
-            bool _isPtr;
     };
 }
 #endif

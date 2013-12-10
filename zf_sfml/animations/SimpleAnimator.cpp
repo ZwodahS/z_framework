@@ -157,13 +157,6 @@ namespace zf
         objects.push_back(obj);
     }
 
-    void SimpleAnimator::composite(iAnimatable* animatable, CompositeInstruction* instruction)
-    {
-        AnimatableObject* obj = new AnimatableObject(animatable);
-        obj->setInstruction(instruction);
-        objects.push_back(obj);
-    }
-
     void SimpleAnimator::compositeReference(iAnimatable& animatable, CompositeInstruction* instruction)
     {
         AnimatableObject* obj = new AnimatableObject(animatable);

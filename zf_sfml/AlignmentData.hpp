@@ -6,6 +6,7 @@ namespace zf
 {
     struct AlignmentData
     {
+        AlignmentData(AlignmentX x = zf::X_Center, AlignmentY y = zf::Y_Center, sf::Vector2f o = sf::Vector2f(0,0));
         AlignmentX alignmentX;
         AlignmentY alignmentY;
         sf::Vector2f offset;

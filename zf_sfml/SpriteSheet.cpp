@@ -61,7 +61,7 @@ void SpriteSheet::create(sf::Texture* texture, sf::IntRect bound, sf::IntRect sp
     _spriteSize = spriteSize;
 }
 
-TextureRegion SpriteSheet::createRegion(sf::Image image)
+TextureRegion SpriteSheet::createRegion(sf::Image image, sf::Color defaultColor)
 {
     if(_managed)
     {
@@ -82,29 +82,37 @@ TextureRegion SpriteSheet::createRegion(sf::Image image)
                 _currRow = 0; //just wrap it back. graphics error is better than runtime.
             }
         }
+        returnRegion.defaultColor = defaultColor;
         return returnRegion;
     }
     else
     {
-        return createRegion(image,0,0);
+        TextureRegion r = createRegion(image,0,0);
+        r.defaultColor = defaultColor;
+        return r;
     }
 }
 
-TextureRegion SpriteSheet::createRegion(sf::Image image, int x , int y)
+TextureRegion SpriteSheet::createRegion(sf::Image image, int x , int y, sf::Color defaultColor)
 {
     sf::Vector2u imgSize = image.getSize();
     TextureRegion returnRegion = internal_createRegion(image, sf::IntRect(x,y,imgSize.x,imgSize.y));
+    returnRegion.defaultColor = defaultColor;
     return returnRegion;
 }
 
-TextureRegion SpriteSheet::createRegion(int x, int y, int w, int h)
+TextureRegion SpriteSheet::createRegion(int x, int y, int w, int h, sf::Color defaultColor)
 {
-    return internal_createRegion(sf::IntRect(x,y,w,h));
+    TextureRegion r = internal_createRegion(sf::IntRect(x,y,w,h));
+    r.defaultColor = defaultColor;
+    return r;
 }
 
-TextureRegion SpriteSheet::createRegion(sf::IntRect region)
+TextureRegion SpriteSheet::createRegion(sf::IntRect region, sf::Color defaultColor)
 {
-    return internal_createRegion(region);
+    TextureRegion r = internal_createRegion(region);
+    r.defaultColor = defaultColor;
+    return r;
 }
 
 SpriteSheet SpriteSheet::createSubSheet(sf::IntRect bound)

@@ -66,7 +66,7 @@ namespace zf
         _state = _sprites.size() <= state ? _state : state < 0 ? _state : state;
     }
 
-    inline int Button::getState() const 
+    int Button::getState() const 
     {
         return _state;
     }
@@ -116,7 +116,17 @@ namespace zf
         _clickBound.top = y;
         updatePosition();
     }
-    
+
+    void Button::setString(std::string displayString)
+    {
+        // this is all i have now but in case i add a new type , i shall do a check.
+        if(_buttonType == TSB || _buttonType == TSTB || _buttonType == MSTB)
+        {
+            zf::setString(_texts[0], displayString);
+            updatePosition();
+        }
+    }
+
     void Button::updatePosition()
     {
         if(_buttonType == TSB || _buttonType == TSTB || _buttonType == MSTB)

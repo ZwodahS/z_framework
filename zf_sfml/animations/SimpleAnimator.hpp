@@ -65,8 +65,6 @@ namespace zf
             // sa.composite(sprite, sa.composite()->move(...)->fade(...));
             CompositeInstruction* composite(bool ordered = false); // use this to construct the instructionn for the method below.
             void composite(sf::Sprite sprite, CompositeInstruction* instruction);
-            // use this to delete the iAnimatable after the animation completes.
-            void composite(iAnimatable* animatable, CompositeInstruction* instruction);
             void compositeReference(sf::Sprite &sprite, CompositeInstruction* instruction);
             void compositeReference(iAnimatable& animatable, CompositeInstruction* Instruction);
             //TODO : make the same functions for text.

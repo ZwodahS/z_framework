@@ -40,6 +40,7 @@ namespace zf
         ColoredSpriteGroup(sf::Sprite sprite, std::vector<sf::Color> colors);
 
         void setState(int state);
+        int getState();
 
         ColoredSpriteGroup& operator=(const ColoredSpriteGroup& rhs);
 
@@ -49,6 +50,7 @@ namespace zf
         void setColor(sf::Color color);
         sf::Vector2f getPosition();
         void setSprite(sf::Sprite sprite);
+        bool contains(sf::Vector2f mousePos);
     private:
         int _state;
         std::vector<sf::Color> _colors;

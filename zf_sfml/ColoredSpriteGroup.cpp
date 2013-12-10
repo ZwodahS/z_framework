@@ -36,6 +36,10 @@ namespace zf
             setColor(_colors[s]);
         }
     }
+    int ColoredSpriteGroup::getState()
+    {
+        return _state;
+    }
 
     void ColoredSpriteGroup::setPosition(sf::Vector2f position) 
     {
@@ -86,5 +90,10 @@ namespace zf
         this->_bound = rhs._bound;
         this->_mainSprite = rhs._mainSprite;
         return *this;
+    }
+
+    bool ColoredSpriteGroup::contains(sf::Vector2f pos)
+    {
+        return _bound.contains(pos);
     }
 }

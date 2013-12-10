@@ -1,5 +1,4 @@
-/*
- *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
+/* *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
  *                   Version 2, December 2004
  * 
  * Copyright (C) 2013 ZwodahS(ericnjf@gmail.com) 
@@ -89,6 +88,10 @@ namespace zf
         void setPosition(sf::Vector2f position);
         void setPosition(float x, float y);
         /**
+         * Set the string value of the button
+         */
+        void setString(std::string displayString);
+        /**
          * Set the state for the button.
          * Probably does nothing except for MSTB.
          */
@@ -97,7 +100,7 @@ namespace zf
          * Get the state for this button.
          * The state will means nothing except for MSTB
          */
-        inline int getState() const; 
+        int getState() const; 
         /**
          * Return true if the bound of this object contains the mouse position.
          * Make sure that the position is relative to the view this button is in.

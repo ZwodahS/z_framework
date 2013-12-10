@@ -31,7 +31,7 @@ namespace zf
     {
         public:
             AnimationObject();
-            ~AnimationObject();
+            virtual ~AnimationObject();
             
             // return if this object is done animating
             bool done();
