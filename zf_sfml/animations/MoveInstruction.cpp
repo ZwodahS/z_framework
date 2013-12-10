@@ -21,30 +21,15 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "MoveInstruction.hpp"
-#include "AnimationObject.hpp"
+#include "iAnimatable.hpp"
 namespace zf
 {
     MoveInstruction::MoveInstruction(sf::Vector2f moveVector, float moveSecs)
-    {
-        this->_done = false;
-        this->_moveVector = moveVector;
-        this->_timeMax = moveSecs;
-        this->_timeCurrent = 0;
-    }
-
-    MoveInstruction::MoveInstruction(const MoveInstruction &mi)
-    {
-        this->_done = false;
-        this->_moveVector = mi._moveVector;
-        this->_timeMax = mi._timeMax;
-        this->_timeCurrent = 0;
-    }
-
-    MoveInstruction::~MoveInstruction()
+        : _moveVector(moveVector), _timeMax(moveSecs), _timeCurrent(0), _done(false) 
     {
     }
 
-    bool MoveInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    bool MoveInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
         if(!_done)
         {
@@ -55,12 +40,12 @@ namespace zf
                 moveTime -= (_timeCurrent - _timeMax);
                 _done = true;
             }
-            object.movePosition(moveTime * _moveVector);
+            object.move(moveTime * _moveVector);
         }
         return _done;
     }
 
-    bool MoveInstruction::isDone(AnimationObject& object)
+    bool MoveInstruction::isDone(iAnimatable& object)
     {
         return _done;
     }

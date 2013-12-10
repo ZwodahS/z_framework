@@ -2,25 +2,22 @@
 namespace zf
 {
     WaitInstruction::WaitInstruction(float waitTime)
-        :waitTimeLeft(waitTime)
-    {
-    }
-    WaitInstruction::~WaitInstruction()
+        : _waitTimeLeft(waitTime)
     {
     }
 
-    bool WaitInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    bool WaitInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
-        if(waitTimeLeft < 0)
+        if(_waitTimeLeft < 0)
         {
             return true;
         }
-        waitTimeLeft -= delta.asSeconds();
+        _waitTimeLeft -= delta.asSeconds();
         return false;
     }
 
-    bool WaitInstruction::isDone(AnimationObject& object)
+    bool WaitInstruction::isDone(iAnimatable& object)
     {
-        return waitTimeLeft < 0;
+        return _waitTimeLeft < 0;
     }
 }

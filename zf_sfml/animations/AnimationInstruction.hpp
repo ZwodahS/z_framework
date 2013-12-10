@@ -26,14 +26,14 @@
 #include <SFML/Graphics.hpp>
 namespace zf
 {
-    class AnimationObject;
+    class iAnimatable;
     class AnimationInstruction
     {
         public:
             AnimationInstruction();
             virtual ~AnimationInstruction();
-            virtual bool update(sf::RenderWindow& window, sf::Time delta,AnimationObject& object) = 0;
-            virtual bool isDone(AnimationObject& object) = 0;
+            virtual bool update(sf::RenderWindow& window, const sf::Time& delta,iAnimatable& animatable) = 0;
+            virtual bool isDone(iAnimatable& animatable) = 0;
     };
 }
 #endif

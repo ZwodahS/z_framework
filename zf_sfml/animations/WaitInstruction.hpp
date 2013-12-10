@@ -29,12 +29,11 @@ namespace zf
     {
         public:
             WaitInstruction(float waitTime);
-            ~WaitInstruction();
 
-            bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-            bool isDone(AnimationObject& object);
+            bool update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object);
+            bool isDone(iAnimatable& object);
         private:
-            float waitTimeLeft;
+            float _waitTimeLeft;
     };
 }
 #endif

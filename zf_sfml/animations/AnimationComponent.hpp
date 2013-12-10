@@ -23,34 +23,43 @@
 #ifndef _ZF_SFML_ANIMATIONS_SINGLEANIMATOR_H_
 #define _ZF_SFML_ANIMATIONS_SINGLEANIMATOR_H_
 #include <SFML/Graphics.hpp>
-#include "AnimatableObject.hpp"
 /**
- * This class is used to animate one single iAnimatable
- * Note that this is a very basic animator, only one instruction at one time.
+ * This class is one of the possible component in the framework. It allow an object to 
+ * animate without knowing how to do so.
+ *
+ * The class of concern just need to include this component and implement the iAnimatable interface.
+ * Afterwhich, just call any of the function here to create an instruction to animate.
+ *
+ * READ ME !!! 
+ *      It is extrememly important to override the copy constructor of anyone who has this component.
+ *      If it is not done, this component will end up with a freed object reference instead.
+ *
+ * 01:57 December 11, 2013
+ *      This is the first version of this component so expect limitation.
+ *      Right now, only one instruction is allowed, instruction sent while the object is still animating
+ *      will be ignored and a value of "false" will be returned.
  */
 namespace zf
 {
     class CompositeInstruction;
     class AnimationInstruction;
     class iAnimatable;
-    class SingleAnimator
+    class AnimationComponent
     {
     public:
-        SingleAnimator(iAnimatable& iAnimatable);
+        AnimationComponent(iAnimatable& iAnimatable);
 
         bool update(sf::RenderWindow& window, const sf::Time& delta);
         bool fade(int startingAlpha, int targetAlpha, float time);
-        bool moveTo(sf::Vector2f target, float time);
+        bool moveTo(sf::Vector2f source, sf::Vector2f target, float time);
         bool move(sf::Vector2f moveVec, float duration);
         CompositeInstruction* composite(bool ordered = false); // use this to construct the instructionn for the method below.
         bool composite(CompositeInstruction* instruction);
-        AnimatableObject object;
 
         bool isAnimating() const;
     private:
-        // instead of leting AnimationObject handles the instruction, i going to do
-        // it myself here instead.
         AnimationInstruction* _instruction;
+        iAnimatable& _animatable;
     };
 }
 #endif

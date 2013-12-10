@@ -20,7 +20,7 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "SingleAnimator.hpp"
+#include "AnimationComponent.hpp"
 #include "iAnimatable.hpp"
 #include "AnimationInstruction.hpp"
 #include "FadeInstruction.hpp"
@@ -30,17 +30,17 @@
 #include <iostream>
 namespace zf
 {
-    SingleAnimator::SingleAnimator(iAnimatable& animatable)
-        :object(animatable) , _instruction(0)
+    AnimationComponent::AnimationComponent(iAnimatable& animatable)
+        :_animatable(animatable) , _instruction(0)
     {
     }
 
-    bool SingleAnimator::update(sf::RenderWindow& window, const sf::Time& delta)
+    bool AnimationComponent::update(sf::RenderWindow& window, const sf::Time& delta)
     {
         if(_instruction != 0)
         {
-            _instruction->update(window, delta, object);
-            if(_instruction->isDone(object))
+            _instruction->update(window, delta, _animatable);
+            if(_instruction->isDone(_animatable))
             {
                 // free the instruction, we are done
                 delete _instruction;
@@ -51,7 +51,7 @@ namespace zf
         return false;
     }
 
-    bool SingleAnimator::fade(int startingAlpha, int targetAlpha, float time)
+    bool AnimationComponent::fade(int startingAlpha, int targetAlpha, float time)
     {
         if(_instruction != 0)
         {
@@ -61,17 +61,17 @@ namespace zf
         return true;
     }
 
-    bool SingleAnimator::moveTo(sf::Vector2f target, float time)
+    bool AnimationComponent::moveTo(sf::Vector2f source, sf::Vector2f target, float time)
     {
         if(_instruction != 0)
         {
             return false;
         }
-        _instruction = new MoveToInstruction(object.getPosition(), target, time);
+        _instruction = new MoveToInstruction(source, target, time);
         return true;
     }
 
-    bool SingleAnimator::move(sf::Vector2f moveVec, float duration)
+    bool AnimationComponent::move(sf::Vector2f moveVec, float duration)
     {
         if(_instruction != 0)
         {
@@ -80,11 +80,11 @@ namespace zf
         _instruction = new MoveInstruction(moveVec, duration);
         return true;
     }
-    CompositeInstruction* SingleAnimator::composite(bool ordered)
+    CompositeInstruction* AnimationComponent::composite(bool ordered)
     {
         return new CompositeInstruction(ordered);
     }
-    bool SingleAnimator::composite(CompositeInstruction* instruction)
+    bool AnimationComponent::composite(CompositeInstruction* instruction)
     {
         if(_instruction != 0)
         {
@@ -94,7 +94,7 @@ namespace zf
         return true;
     }
 
-    bool SingleAnimator::isAnimating() const
+    bool AnimationComponent::isAnimating() const
     {
         return _instruction != 0 ;
     }

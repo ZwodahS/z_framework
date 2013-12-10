@@ -20,27 +20,24 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_ANIMATIONS_ANIMATABLEOBJECT_H_
-#define _ZF_SFML_ANIMATIONS_ANIMATABLEOBJECT_H_
-
-#include "AnimationObject.hpp"
-#include "iAnimatable.hpp"
-#include <SFML/Graphics.hpp>
+#ifndef _ZF_SFML_ANIMATIONS_EFFECTMAKER_H_
+#define _ZF_SFML_ANIMATIONS_EFFECTMAKER_H_
+#include "CompositeInstruction.hpp"
 namespace zf
 {
-    class AnimatableObject : public AnimationObject
+    class EffectFactory
     {
-        public:
-            AnimatableObject(iAnimatable& animatable);
-            ~AnimatableObject();
-            void setAlpha(float alpha);
-            void setPosition(sf::Vector2f position);
-            void movePosition(sf::Vector2f position);
-            void setColor(sf::Color color);
-            void draw(sf::RenderWindow& window, sf::Time delta);
-            sf::Vector2f getPosition();
-        private:
-            iAnimatable& _animatable;
+    public:
+        static CompositeInstruction& createBounceEffect(float bounceDistance, float timePerBounce, int numberOfBounce)
+        {
+            CompositeInstruction* ci = new CompositeInstruction(true);
+            for(int i = 0 ; i < numberOfBounce ; i++)
+            {
+                ci->move(sf::Vector2f(0, -bounceDistance), timePerBounce/2);
+                ci->move(sf::Vector2f(0, bounceDistance), timePerBounce/2);
+            }
+            return *ci;
+        }
     };
-}
+};
 #endif

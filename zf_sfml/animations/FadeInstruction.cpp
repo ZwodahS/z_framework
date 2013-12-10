@@ -21,27 +21,19 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "FadeInstruction.hpp"
-#include "AnimationObject.hpp"
+#include "iAnimatable.hpp"
+#include "iAnimatable.hpp"
+#include "iAnimatable.hpp"
+#include "iAnimatable.hpp"
 #include <iostream>
 namespace zf
 {
     FadeInstruction::FadeInstruction(int startingAlpha, int endingAlpha, float time)
-        :_done(false), _currentAlpha(startingAlpha), _targetAlpha(endingAlpha), 
-        _changeAlpha((endingAlpha - startingAlpha)/ time), _direction( endingAlpha > startingAlpha ? 1 : -1)
+        : _targetAlpha(endingAlpha), _currentAlpha(startingAlpha), _changeAlpha((endingAlpha - startingAlpha)/ time)
+        , _direction( endingAlpha > startingAlpha ? 1 : - 1), _done(false)
     {
     }
-    FadeInstruction::FadeInstruction(const FadeInstruction &fi)
-    {
-        this->_done = fi._done;
-        this->_currentAlpha = fi._currentAlpha;
-        this->_targetAlpha = fi._targetAlpha;
-        this->_changeAlpha = fi._changeAlpha;
-        this->_direction = fi._direction;
-    }
-    FadeInstruction::~FadeInstruction()
-    {
-    }
-    bool FadeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    bool FadeInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
         if(!_done)
         {
@@ -67,7 +59,7 @@ namespace zf
         return _done;
     }
 
-    bool FadeInstruction::isDone(AnimationObject& object)
+    bool FadeInstruction::isDone(iAnimatable& object)
     {
         return _done;
     }

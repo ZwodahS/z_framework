@@ -29,11 +29,8 @@ namespace zf
     {
         public:
             MoveInstruction(sf::Vector2f moveVector, float moveSecs);
-            MoveInstruction(const MoveInstruction &mi);
-            ~MoveInstruction();
-
-            bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-            bool isDone(AnimationObject& object);
+            bool update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& animatable);
+            bool isDone(iAnimatable& animatable);
 
         private:
             sf::Vector2f _moveVector;

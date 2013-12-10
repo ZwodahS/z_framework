@@ -21,7 +21,10 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "CompositeInstruction.hpp"
-#include "AnimationObject.hpp"
+#include "FadeInstruction.hpp"
+#include "MoveToInstruction.hpp"
+#include "MoveInstruction.hpp"
+#include "WaitInstruction.hpp"
 namespace zf
 {
     CompositeInstruction::CompositeInstruction(bool ordered)
@@ -40,21 +43,7 @@ namespace zf
         }
     }
 
-    CompositeInstruction* CompositeInstruction::addInstruction(FadeInstruction fi)
-    {
-        FadeInstruction* f = new FadeInstruction(fi);
-        this->_instructions.push_back(f);
-        return this;
-    }
-
-    CompositeInstruction* CompositeInstruction::addInstruction(MoveToInstruction mi)
-    {
-        MoveToInstruction* m = new MoveToInstruction(mi);
-        this->_instructions.push_back(m);
-        return this;
-    }
-
-    bool CompositeInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    bool CompositeInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
         if(!_done)
         {
@@ -94,35 +83,35 @@ namespace zf
         return _done;
     }
 
-    bool CompositeInstruction::isDone(AnimationObject& object)
+    bool CompositeInstruction::isDone(iAnimatable& object)
     {
         return _done;
     }
 
-    CompositeInstruction* CompositeInstruction::fade(int startingAlpha, int endingAlpha, float time)
+    CompositeInstruction& CompositeInstruction::fade(int startingAlpha, int endingAlpha, float time)
     {
         FadeInstruction* fi = new FadeInstruction(startingAlpha, endingAlpha, time);
         this->_instructions.push_back(fi);
-        return this;
+        return *this;
     }
 
-    CompositeInstruction* CompositeInstruction::moveTo(sf::Vector2f source, sf::Vector2f target, float delta)
+    CompositeInstruction& CompositeInstruction::moveTo(sf::Vector2f source, sf::Vector2f target, float delta)
     {
         MoveToInstruction* mi = new MoveToInstruction(source,target,delta);
         this->_instructions.push_back(mi);
-        return this;
+        return *this;
     }
 
-    CompositeInstruction* CompositeInstruction::move(sf::Vector2f moveVec, float duration)
+    CompositeInstruction& CompositeInstruction::move(sf::Vector2f moveVec, float duration)
     {
         MoveInstruction* mi = new MoveInstruction(moveVec,duration);
         this->_instructions.push_back(mi);
-        return this;
+        return *this;
     }
 
-    CompositeInstruction* CompositeInstruction::wait(float waitTime)
+    CompositeInstruction& CompositeInstruction::wait(float waitTime)
     {
         this->_instructions.push_back(new WaitInstruction(waitTime));
-        return this;
+        return *this;
     }
 }

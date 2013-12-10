@@ -29,14 +29,12 @@ namespace zf
     {
         public:
             FadeInstruction(int startingAlpha, int endingAlpha , float time);
-            FadeInstruction(const FadeInstruction &fi);
-            ~FadeInstruction();
-            bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-            bool isDone(AnimationObject& object);
-            
+            bool update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object);
+            bool isDone(iAnimatable& object);
+        private:    
             float _targetAlpha;
-            float _changeAlpha; // per seconds
             float _currentAlpha;
+            float _changeAlpha; // per seconds
             float _direction;
             bool _done;
     };       

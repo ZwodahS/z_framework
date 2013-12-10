@@ -29,19 +29,16 @@ namespace zf
     {
         public:
             MoveToInstruction(sf::Vector2f source, sf::Vector2f target, float delta);
-            MoveToInstruction(const MoveToInstruction &mi);
-            ~MoveToInstruction();
-            bool update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object);
-            bool isDone(AnimationObject& object);
+            bool update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object);
+            bool isDone(iAnimatable& object);
         
         private:
             sf::Vector2f _position;
-            sf::Vector2f _move;
             sf::Vector2f _target;
-            float _runtime ; // to determine how long it has run.
             float _totalTime;
+            sf::Vector2f _move;
+            float _runtime ; // to determine how long it has run.
             bool _done;
-
             bool overShootDestination();
     };
 }

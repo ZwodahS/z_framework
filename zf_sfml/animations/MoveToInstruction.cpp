@@ -21,27 +21,16 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "MoveToInstruction.hpp"
-#include "AnimationObject.hpp"
+#include "iAnimatable.hpp"
 namespace zf
 {
     MoveToInstruction::MoveToInstruction(sf::Vector2f source, sf::Vector2f target, float delta)
-        :_done(false) , _position(source), _target(target), _move( (target - source)/ delta), _runtime(0), _totalTime(delta)
-    {
-    }
-    MoveToInstruction::MoveToInstruction(const MoveToInstruction &mi)
-        :_done(false), _position(mi._position), _move(mi._move), _target(mi._target), _runtime(mi._runtime), _totalTime(mi._totalTime)
-    {
-        this->_done = false;
-        this->_position = mi._position;
-        this->_move = mi._move;
-        this->_target = mi._target;
-    }
-
-    MoveToInstruction::~MoveToInstruction()
+        : _position(source), _target(target), _totalTime(delta)
+        , _move((target-source)/delta), _runtime(0), _done(false)
     {
     }
 
-    bool MoveToInstruction::update(sf::RenderWindow& window, sf::Time delta, AnimationObject& object)
+    bool MoveToInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
         if(!_done)
         {
@@ -59,7 +48,7 @@ namespace zf
         return _done;
     }
 
-    bool MoveToInstruction::isDone(AnimationObject& object)
+    bool MoveToInstruction::isDone(iAnimatable& object)
     {
         return _done;
     }
