@@ -25,6 +25,7 @@
 #include "MoveToInstruction.hpp"
 #include "MoveInstruction.hpp"
 #include "WaitInstruction.hpp"
+#include "ScaleInstruction.hpp"
 namespace zf
 {
     CompositeInstruction::CompositeInstruction(bool ordered)
@@ -112,6 +113,12 @@ namespace zf
     CompositeInstruction& CompositeInstruction::wait(float waitTime)
     {
         this->_instructions.push_back(new WaitInstruction(waitTime));
+        return *this;
+    }
+
+    CompositeInstruction& CompositeInstruction::scale(float startingScale, float endingScale, float time)
+    {
+        this->_instructions.push_back(new ScaleInstruction(startingScale, endingScale, time));
         return *this;
     }
 }

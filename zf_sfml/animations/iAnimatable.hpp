@@ -39,6 +39,7 @@ namespace zf
             virtual void setColor(sf::Color color) = 0;
             virtual sf::Vector2f getPosition() = 0;
             virtual void draw(sf::RenderWindow& window, const sf::Time& delta) = 0;
+            virtual void setScale(float x, float y) = 0;
     };
 }
 #endif

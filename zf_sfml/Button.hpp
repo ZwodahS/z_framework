@@ -131,12 +131,6 @@ namespace zf
          */
         sf::FloatRect _clickBound;
         /**
-         * Internally interpreted.
-         * (TSB) and (TSTB) stores the 2 sprites here, [0] for the unselected and [1] for the selected sprite
-         */
-        std::vector<sf::Sprite> _sprites;
-        int _state;
-        /**
          * Internall interpreted.
          * (TSTB) stores the text in the first position.
          */
@@ -145,6 +139,12 @@ namespace zf
          * This is only used when there is text involved.
          */
         AlignmentData _textPositionData;
+        /**
+         * Internally interpreted.
+         * (TSB) and (TSTB) stores the 2 sprites here, [0] for the unselected and [1] for the selected sprite
+         */
+        std::vector<sf::Sprite> _sprites;
+        int _state;
         /**
          * update all drawables based on the current position of the button defined by _clickBound.
          */

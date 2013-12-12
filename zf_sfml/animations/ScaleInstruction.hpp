@@ -20,31 +20,24 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "StaticTile.hpp"
-
-StaticTile::StaticTile()
+#ifndef _ZF_SFML_ANIMATIONS_SCALEINSTRUCTION_H_
+#define _ZF_SFML_ANIMATIONS_SCALEINSTRUCTION_H_
+#include "AnimationInstruction.hpp"
+namespace zf
 {
-}
-StaticTile::~StaticTile()
-{
-}
+    class ScaleInstruction : public AnimationInstruction
+    {
+    public:
+        ScaleInstruction(float startingScale, float endingScale, float time);
 
-
-void StaticTile::draw(sf::RenderWindow* window, sf::Time delta)
-{
-    window->draw(_drawSprite);
+        bool update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object);
+        bool isDone(iAnimatable& object);
+    private:
+        float _targetScale;
+        float _currentScale;
+        float _changeScale;
+        float _direction;
+        bool _done;
+    };
 }
-
-void StaticTile::positionUpdated()
-{
-}
-
-sf::FloatRect StaticTile::getCollisionBound(int gridSize)
-{
-    return zf::Rect::toFloatRect(_location,gridSize,0);
-}
-
-void StaticTile::setSprite(sf::Sprite sprite)
-{
-    this->_drawSprite = sprite;
-}
+#endif

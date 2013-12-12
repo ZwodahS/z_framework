@@ -51,10 +51,11 @@ namespace zf
         sf::Vector2f getPosition();
         void setSprite(sf::Sprite sprite);
         bool contains(sf::Vector2f mousePos);
+        void setScale(float scaleX, float scaleY);
     private:
         int _state;
-        std::vector<sf::Color> _colors;
         sf::FloatRect _bound;
+        std::vector<sf::Color> _colors;
         sf::Sprite _mainSprite;
 
     };

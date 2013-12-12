@@ -18,7 +18,7 @@ namespace zf
     }
     
     Route::Route(std::vector<zf::Grid> p)
-        :path(p), start(p.front()), end(p.back())
+        : start(p.front()), end(p.back()), path(p)
     {
     }
 

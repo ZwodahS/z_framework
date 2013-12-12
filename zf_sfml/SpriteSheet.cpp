@@ -23,17 +23,17 @@
 #include "SpriteSheet.hpp"
 #include <iostream>
 SpriteSheet::SpriteSheet()
-    :_managed(false), _currRow(0), _currCol(0), _maxRow(0), _maxCol(0), _texture(0), _bound(0,0,0,0), _spriteSize(0,0,0,0)
+    : _texture(0), _bound(0, 0, 0, 0), _managed(false), _spriteSize(0, 0, 0, 0), _currRow(0), _currCol(0), _maxRow(0), _maxCol(0)
 {
 }
 
 SpriteSheet::SpriteSheet(sf::Texture* texture, sf::IntRect bound)
-    :_managed(false), _currRow(0), _currCol(0), _maxRow(0), _maxCol(0), _texture(texture), _bound(bound), _spriteSize(0,0,0,0)
+    : _texture(texture), _bound(bound), _managed(false), _spriteSize(0, 0, 0, 0), _currRow(0), _currCol(0), _maxRow(0), _maxCol(0)
 {
 }
 
 SpriteSheet::SpriteSheet(sf::Texture* texture, sf::IntRect bound, sf::IntRect spriteSize, int row, int col)
-    :_managed(true), _currRow(0), _currCol(0), _maxRow(row), _maxCol(col), _texture(texture), _bound(bound), _spriteSize(spriteSize)
+    : _texture(texture), _bound(bound), _managed(true), _spriteSize(spriteSize), _currRow(0), _currCol(0), _maxRow(row), _maxCol(col)
 {
 }
 

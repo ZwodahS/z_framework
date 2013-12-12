@@ -54,12 +54,12 @@ namespace zf
         bool moveTo(sf::Vector2f source, sf::Vector2f target, float time);
         bool move(sf::Vector2f moveVec, float duration);
         CompositeInstruction* composite(bool ordered = false); // use this to construct the instructionn for the method below.
-        bool composite(CompositeInstruction* instruction);
+        bool composite(CompositeInstruction& instruction);
 
         bool isAnimating() const;
     private:
-        AnimationInstruction* _instruction;
         iAnimatable& _animatable;
+        AnimationInstruction* _instruction;
     };
 }
 #endif

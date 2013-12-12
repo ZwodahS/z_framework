@@ -27,14 +27,14 @@ namespace zf
 {
 
     SpriteGroup::SpriteGroup()
-        :state(_state), spriteGroups(_spriteGroups), bound(_bound),
-        _state(-1), _bound(0,0,0,0)
+        : state(_state), spriteGroups(_spriteGroups), bound(_bound)
+        , _state(-1), _bound(0,0,0,0)
     {
     }
     
     SpriteGroup::SpriteGroup(const SpriteGroup& copy)
-        :state(_state), spriteGroups(_spriteGroups), bound(_bound),
-        _state(copy.state), _bound(copy.bound), _spriteGroups(copy.spriteGroups)
+        : state(_state), spriteGroups(_spriteGroups), bound(_bound)
+        , _state(copy.state), _spriteGroups(copy.spriteGroups), _bound(copy.bound)
     {
 
     }

@@ -82,6 +82,11 @@ namespace zf
         _mainSprite = sprite;
         _mainSprite.setColor(_colors[_state]);
     }
+    
+    void ColoredSpriteGroup::setScale(float scaleX, float scaleY)
+    {
+        //TODO : Do nothing for now
+    }
 
     ColoredSpriteGroup& ColoredSpriteGroup::operator=(const ColoredSpriteGroup& rhs)
     {

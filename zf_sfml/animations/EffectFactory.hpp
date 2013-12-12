@@ -38,6 +38,15 @@ namespace zf
             }
             return *ci;
         }
+        
+        static CompositeInstruction& createPulseEffect(float startScale, float maxScale, float minScale, float timeToMax, float timeToMin, float timeToBasic)
+        {
+            CompositeInstruction* ci = new CompositeInstruction(true);
+            ci->scale(startScale, maxScale, timeToMax);
+            ci->scale(maxScale, minScale, timeToMin);
+            ci->scale(minScale, startScale, timeToBasic);
+            return *ci;
+        }
     };
 };
 #endif

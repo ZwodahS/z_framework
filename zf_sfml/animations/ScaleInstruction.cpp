@@ -20,43 +20,44 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "FadeInstruction.hpp"
+#include "ScaleInstruction.hpp"
 #include "iAnimatable.hpp"
-#include <iostream>
+
 namespace zf
 {
-    FadeInstruction::FadeInstruction(int startingAlpha, int endingAlpha, float time)
-        : _targetAlpha(endingAlpha), _currentAlpha(startingAlpha), _changeAlpha((endingAlpha - startingAlpha)/ time)
-        , _direction( endingAlpha > startingAlpha ? 1 : - 1), _done(false)
+    ScaleInstruction::ScaleInstruction(float startingScale, float endingScale, float time)
+        : _targetScale(endingScale), _currentScale(startingScale), _changeScale((endingScale - startingScale)/ time)
+        , _direction( endingScale > startingScale ? 1 : - 1), _done(false)
     {
     }
-    bool FadeInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
+
+    bool ScaleInstruction::update(sf::RenderWindow& window, const sf::Time& delta, iAnimatable& object)
     {
         if(!_done)
         {
-            _currentAlpha += _changeAlpha * delta.asSeconds();
+            _currentScale += _changeScale * delta.asSeconds();
             if(_direction > 0) // increasing alpha
             {
-                if(_currentAlpha >= _targetAlpha) 
+                if(_currentScale >= _targetScale) 
                 {
                     _done = true; 
-                    _currentAlpha = _targetAlpha;
+                    _currentScale = _targetScale;
                 }
             }
             else
             {
-                if(_currentAlpha <= _targetAlpha)
+                if(_currentScale <= _targetScale)
                 {
                     _done = true;
-                    _currentAlpha = _targetAlpha;
+                    _currentScale = _targetScale;
                 }
             }
-            object.setAlpha(_currentAlpha);
+            object.setScale(_currentScale, _currentScale);
         }
         return _done;
     }
 
-    bool FadeInstruction::isDone(iAnimatable& object)
+    bool ScaleInstruction::isDone(iAnimatable& object)
     {
         return _done;
     }

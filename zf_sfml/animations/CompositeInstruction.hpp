@@ -55,6 +55,8 @@ namespace zf
             CompositeInstruction& wait(float waitTime);
             // chanining of composite instruction. 
             CompositeInstruction& addCompositeInstruction(CompositeInstruction& compositeInstruction);
+            // scaling
+            CompositeInstruction& scale(float startingAlpha, float endingAlpha, float time);
         private:
             std::vector<AnimationInstruction*> _instructions;
             bool _ordered;

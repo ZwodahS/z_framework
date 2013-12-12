@@ -84,13 +84,13 @@ namespace zf
     {
         return new CompositeInstruction(ordered);
     }
-    bool AnimationComponent::composite(CompositeInstruction* instruction)
+    bool AnimationComponent::composite(CompositeInstruction& instruction)
     {
         if(_instruction != 0)
         {
             return false;
         }
-        _instruction = instruction;
+        _instruction = &instruction;
         return true;
     }
 

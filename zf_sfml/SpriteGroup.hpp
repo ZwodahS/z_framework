@@ -37,9 +37,10 @@ namespace zf
     class SpriteGroup : public iAnimatable
     {
     public:
-        const std::vector<sf::Sprite>& spriteGroups;
         const int &state;
+        const std::vector<sf::Sprite>& spriteGroups;
         const sf::FloatRect &bound;
+
         /**
          * Set the position for the group.
          */
