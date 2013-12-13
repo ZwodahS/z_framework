@@ -1,7 +1,4 @@
-#ifndef _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
-#define _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
-/*
- *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
+/* *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
  *                   Version 2, December 2004
  * 
  * Copyright (C) 2013 ZwodahS(ericnjf@gmail.com) 
@@ -22,43 +19,31 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-/**
- * The idea behind iAnimatable is to provide a way to move things that are not part of sfml.
- * When using iAnimatable, Simple Animator will not draw it.
- *
- */
+#ifndef _ZF_SFML_IBOUNDABLE_H_
+#define _ZF_SFML_IBOUNDABLE_H_
 #include <SFML/Graphics.hpp>
-namespace zf
+namespace
 {
-    class iAnimatable
+    class iBoundable
     {
     public:
 
         /**
-         * Set the TOP LEFT position of this iAnimatable
+         * Get the bounding box of this iBoundable
          */
-        virtual void setPosition(sf::Vector2f position) = 0;
+        virtual sf::FloatRect getBoundingBox() = 0;
 
         /**
-         * Set the alpha for the iAnimatable
-         */
-        virtual void setAlpha(float alpha) = 0;
-
-        /**
-         * Move this iAnimatable by this vector.
-         */
-        virtual void move(sf::Vector2f move) = 0;
-        
-        /**
-         * Get the position of this iAnimatable
+         * Get the top left position of this iBoundable
+         * This should be similar to sf::Vector2f(getBoundingBox().left , getBoundingBox().top)
          */
         virtual sf::Vector2f getPosition() = 0;
 
         /**
-         * Set the scale of the iAnimatable. 
-         * The origin of scale is up to the iAnimatable.
+         * Set the position of the iBoundable
+         * After setPosition(position) is called, getPosition() == position == sf::Vector2f(getBoundingBox().left, getBoundingBox().top)
          */
-        virtual void setScale(float x, float y) = 0;
+        virtual void setPosition(sf::Vector2f position) = 0;
     };
 }
 #endif

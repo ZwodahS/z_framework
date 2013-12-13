@@ -48,7 +48,7 @@ namespace zf
              */
             void moveTo(iAnimatable& animatable, sf::Vector2f source, sf::Vector2f target, float time);
             /**
-             * move an iAnimatable by a vector
+             * move an iAnimatable by a vector. 
              */
             void move(iAnimatable& animatable, sf::Vector2f moveVec, float time);
             /**

@@ -23,6 +23,7 @@
 #ifndef _ZF_SFML_FUNCTIONCOMMON_H_
 #define _ZF_SFML_FUNCTIONCOMMON_H_
 #include "AlignmentData.hpp"
+#include "iBoundable.hpp"
 #include "../zf_common/Grid.hpp"
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -202,6 +203,21 @@ namespace zf
     {
         return sf::Rect<T>(rect.left + moveVec.x, rect.top + moveVec.y, rect.width, rect.height); 
     }
+    
+    static sf::Vector2f getTopLeftPosition(sf::FloatRect boundingBox, sf::Vector2f centerPoint)
+    {
+        sf::Vector2f finalPosition = sf::Vector2f(
+                centerPoint.x - boundingBox.width / 2,
+                centerPoint.y - boundingBox.height / 2);
+        return finalPosition;
+    }
+
+    static void setCenterPosition(iBoundable& boundable, sf::Vector2f position)
+    {
+        sf::Vector2f finalPosition = getTopLeftPosition(boundable.getBoundingBox(), position);
+        boundable.setPosition(finalPosition);
+    }
 
 }
+
 #endif

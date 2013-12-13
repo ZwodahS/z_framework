@@ -52,8 +52,9 @@ namespace zf
         bool update(sf::RenderWindow& window, const sf::Time& delta);
         bool fade(int startingAlpha, int targetAlpha, float time);
         bool moveTo(sf::Vector2f source, sf::Vector2f target, float time);
-        bool move(sf::Vector2f moveVec, float duration);
-        CompositeInstruction* composite(bool ordered = false); // use this to construct the instructionn for the method below.
+        bool move(sf::Vector2f moveVecPerSec, float duration);
+        CompositeInstruction& composite(bool ordered = false); // use this to construct the instructionn for the method below.
+        // if composite returns false, outside MUST delete the instruction.
         bool composite(CompositeInstruction& instruction);
 
         bool isAnimating() const;

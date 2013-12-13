@@ -80,9 +80,9 @@ namespace zf
         _instruction = new MoveInstruction(moveVec, duration);
         return true;
     }
-    CompositeInstruction* AnimationComponent::composite(bool ordered)
+    CompositeInstruction& AnimationComponent::composite(bool ordered)
     {
-        return new CompositeInstruction(ordered);
+        return *(new CompositeInstruction(ordered));
     }
     bool AnimationComponent::composite(CompositeInstruction& instruction)
     {
