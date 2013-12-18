@@ -2,7 +2,11 @@ vpath %.cpp zf_common
 vpath %.cpp zf_sfml
 vpath %.cpp zf_sfml/animations
 
-CXX=clang++
+WARNING= -Wextra -Wno-switch -Wno-sign-compare -Wno-missing-braces -Wno-unused-parameter
+OPTIMIZE= -fno-exceptions
+
+CXX=clang++ ${WARNING}
+
 OBJDIR=obj
 
 common = $(shell (cd zf_common ; ls *.cpp ))

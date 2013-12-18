@@ -3,10 +3,6 @@ the main folder (z_framework) provides a few modules that can be used separately
 zf_common : provide stuffs that I commonly used.
 zf_sfml : provide the stuffs that make use of sfml.
     |_ animations : some simple animations code.
-zf_platformer : some platformer code.
-zf_network : some basic networking code for managing tcpsocket. (Might still be buggy)
-    |_ zf_gamesetup : some basic code for joining/hosting a game.
-        - This only provide a simple lobby system.
 
 The template folder (template) provides a starting point for most of my game. It provides the Makefile for compilation, the setup for screens and commonly input/event handling code.
 

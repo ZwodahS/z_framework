@@ -20,24 +20,38 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_TEXTUREREGION_H_
-#define _ZF_SFML_TEXTUREREGION_H_
-
+/**
+ * A button that uses VertexArray instead of sprite.
+ */
+#ifndef _ZF_SFML_VERTEXBUTTON_H_
+#define _ZF_SFML_VERTEXBUTTON_H_
+#include "Mouse.hpp"
 #include <SFML/Graphics.hpp>
-#include <iostream>
 namespace zf
 {
-    struct TextureRegion
+    class VertexButton
     {
-        sf::Texture* texture;
-        sf::IntRect srcClip;
-        sf::Color defaultColor;
-        float defaultScaleX;
-        float defaultScaleY;
-        TextureRegion(sf::Texture* t, sf::IntRect srcClip, sf::Color defaultColor = sf::Color::White);
-        TextureRegion();
-        
-        sf::Sprite createSprite();
+    public:
+        VertexButton();
+        ~VertexButton();
+        VertexButton(sf::Color borderColor, sf::Color backgroundColor, sf::FloatRect bound, sf::Text text);
+
+        void draw(sf::RenderWindow& window, const sf::Time& delta);
+        void update(sf::RenderWindow& window, const sf::Time& delta);
+        bool inputs(sf::RenderWindow& window, const sf::Time& delta, const zf::Mouse& mouse);
+
+        void setString(std::string string);
+    private:
+        sf::VertexArray _border;
+        sf::VertexArray _background;
+        sf::FloatRect _bound;
+        sf::Color _borderColor;
+        sf::Color _backgroundColor;
+        sf::Text _text;
+        bool _hovered;
+
+        void updatePosition();
+        void updateColor();
     };
 }
 #endif
