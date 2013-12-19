@@ -24,6 +24,12 @@ namespace zf
         boundingBox = bBox;
         updatePosition();
     }
+    
+    void ManagedText::setString(const sf::String& string)
+    {
+        text.setString(string);
+        updatePosition();
+    }
 
     void ManagedText::setPosition(sf::Vector2f position)
     {
@@ -35,5 +41,14 @@ namespace zf
     void ManagedText::updatePosition()
     {
         zf::alignText(text, boundingBox, alignmentData);
+    }
+
+    void ManagedText::draw(sf::RenderWindow& window, const sf::Time& delta)
+    {
+        window.draw(text);
+    }
+
+    void ManagedText::update(sf::RenderWindow& window, const sf::Time& delta)
+    {
     }
 }

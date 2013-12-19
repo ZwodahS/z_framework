@@ -37,9 +37,14 @@ namespace zf
          * This will shift the position of the top left corner of the bounding box and align the text to it.
          */
         void setPosition(sf::Vector2f position); 
+        
+        void setString(const sf::String& string);
         zf::AlignmentData alignmentData;
         sf::Text text;
         sf::FloatRect boundingBox;
+
+        void draw(sf::RenderWindow& window, const sf::Time& delta);
+        void update(sf::RenderWindow& window, const sf::Time& delta);
     private:
         void updatePosition();
 
