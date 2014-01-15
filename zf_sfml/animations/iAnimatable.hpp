@@ -37,17 +37,17 @@ namespace zf
         /**
          * Set the TOP LEFT position of this iAnimatable
          */
-        virtual void setPosition(sf::Vector2f position) = 0;
+        virtual void setPosition(const sf::Vector2f& position) = 0;
 
         /**
          * Set the alpha for the iAnimatable
          */
-        virtual void setAlpha(float alpha) = 0;
+        virtual void setAlpha(const float& alpha) = 0;
 
         /**
          * Move this iAnimatable by this vector.
          */
-        virtual void move(sf::Vector2f move) = 0;
+        virtual void move(const sf::Vector2f& move) = 0;
         
         /**
          * Get the position of this iAnimatable
@@ -58,7 +58,7 @@ namespace zf
          * Set the scale of the iAnimatable. 
          * The origin of scale is up to the iAnimatable.
          */
-        virtual void setScale(float x, float y) = 0;
+        virtual void setScale(const float& x, const float& y) = 0;
     };
 }
 #endif

@@ -35,23 +35,40 @@ namespace zf
         VertexButton();
         ~VertexButton();
         VertexButton(sf::Color borderColor, sf::Color backgroundColor, sf::FloatRect bound, sf::Text text);
-
+        VertexButton(const sf::Text& text, const float& width, const float& height, const sf::Color& borderColor, const sf::Color& baseColor, const sf::Color& hoveredColor, const sf::Color& selectedColor, const sf::Color& disabledColor);
         void draw(sf::RenderWindow& window, const sf::Time& delta);
         void update(sf::RenderWindow& window, const sf::Time& delta);
         bool inputs(sf::RenderWindow& window, const sf::Time& delta, const zf::Mouse& mouse);
 
+        bool contains(const sf::Vector2f& position);
         void setString(std::string string);
+        void setPosition(const sf::Vector2f& position);
+        void setBorderColor(const sf::Color& color);
+        void setBaseColor(const sf::Color& color);
+        void setHoveredColor(const sf::Color& color);
+        void setSelectedColor(const sf::Color& color);
+        void setDisabledColor(const sf::Color& color);
+        void setSelected(bool selection);
+        void setDisabled(bool disabled);
+        bool isSelected();
+        bool isDisabled();
     private:
         sf::VertexArray _border;
         sf::VertexArray _background;
         sf::FloatRect _bound;
         sf::Color _borderColor;
         sf::Color _backgroundColor;
+        sf::Color _hoveredColor;
+        sf::Color _selectedColor;
+        sf::Color _disabledColor;
         sf::Text _text;
-        bool _hovered;
+        bool _isHovered;
+        bool _isSelected;
+        bool _isDisabled;
 
         void updatePosition();
         void updateColor();
+        void setHovered(bool hovered);
     };
 }
 #endif

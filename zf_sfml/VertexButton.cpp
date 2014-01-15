@@ -36,48 +36,140 @@ namespace zf
     }
 
     VertexButton::VertexButton(sf::Color borderColor, sf::Color backgroundColor, sf::FloatRect bound, sf::Text text)
-        : _border(sf::LinesStrip, 5), _background(sf::Quads, 4), _bound(bound), _borderColor(borderColor), _backgroundColor(backgroundColor), _text(text), _hovered(false)
+        : _bound(bound), _borderColor(borderColor), _backgroundColor(backgroundColor), _text(text), _isHovered(false)
     {
-        updatePosition();
+        _border = zf::toVertexArrayLinesStrip(bound);
+        _background = zf::toVertexArrayQuads(bound);
         updateColor();
+    }
+
+    VertexButton::VertexButton(const sf::Text& text, const float& width, const float& height, const sf::Color& borderColor, const sf::Color& baseColor, const sf::Color& hoveredColor, const sf::Color& selectedColor, const sf::Color& disabledColor)
+        : _bound(0, 0, width, height), _borderColor(borderColor), _backgroundColor(baseColor), _hoveredColor(hoveredColor), _selectedColor(selectedColor), _disabledColor(disabledColor), _text(text)
+        , _isHovered(false), _isSelected(false), _isDisabled(false)
+    {
+        _border = zf::toVertexArrayLinesStrip(_bound);
+        _background = zf::toVertexArrayQuads(_bound);
+        updateColor();
+    }
+
+    void VertexButton::setPosition(const sf::Vector2f& position)
+    {
+        _bound.left = position.x;
+        _bound.top = position.y;
+        updatePosition();
     }
 
     void VertexButton::updatePosition()
     {
-        _border[0].position = sf::Vector2f(_bound.left, _bound.top);
-        _border[1].position = sf::Vector2f(_bound.left + _bound.width, _bound.top);
-        _border[2].position = sf::Vector2f(_bound.left + _bound.width, _bound.top + _bound.height);
-        _border[3].position = sf::Vector2f(_bound.left, _bound.top + _bound.height);
-        _border[4].position = sf::Vector2f(_bound.left, _bound.top);
-
-        _background[0].position = sf::Vector2f(_bound.left, _bound.top);
-        _background[1].position = sf::Vector2f(_bound.left + _bound.width, _bound.top);
-        _background[2].position = sf::Vector2f(_bound.left + _bound.width, _bound.top + _bound.height);
-        _background[3].position = sf::Vector2f(_bound.left, _bound.top + _bound.height);
-        
+        zf::moveVertexArray(_border, sf::Vector2f(_bound.left, _bound.top + 1)); 
+        zf::moveVertexArray(_background, sf::Vector2f(_bound.left, _bound.top));
         zf::alignText(_text, _bound, AlignmentData());
     }
-    
+
+    bool VertexButton::contains(const sf::Vector2f& position)
+    {
+        return _bound.contains(position);
+    }
+
     void VertexButton::updateColor()
     {
+        if(_isSelected)
+        {
+            zf::setColor(_background, _selectedColor);
+        }
+        else if(_isDisabled)
+        {
+            zf::setColor(_background, _disabledColor);
+        }
+        else if(_isHovered)
+        {
+            zf::setColor(_background, _hoveredColor);
+        }
+        else
+        {
+            zf::setColor(_background, _backgroundColor);
+        }
+    }
+
+    void VertexButton::setBorderColor(const sf::Color& color)
+    {
+        _borderColor = color;
         _border[0].color = _borderColor;
         _border[1].color = _borderColor;
         _border[2].color = _borderColor;
         _border[3].color = _borderColor;
         _border[4].color = _borderColor;
+    }
 
-        _background[0].color = _backgroundColor;
-        _background[1].color = _backgroundColor;
-        _background[2].color = _backgroundColor;
-        _background[3].color = _backgroundColor;
+    void VertexButton::setBaseColor(const sf::Color& color)
+    {
+        _backgroundColor = color;
+        if(!_isHovered && !_isSelected)
+        {
+            zf::setColor(_background, color);
+        }
+    }
+
+    void VertexButton::setHoveredColor(const sf::Color& color)
+    {
+        _hoveredColor = color;
+        if(_isHovered && !_isSelected)
+        {
+            zf::setColor(_background, color);
+        }
+    }
+
+    void VertexButton::setSelectedColor(const sf::Color& color)
+    {
+        _selectedColor = color;
+        if(_isSelected)
+        {
+            zf::setColor(_background, color);
+        }
+    }
+
+    void VertexButton::setDisabledColor(const sf::Color& color)
+    {
+        _disabledColor = color;
+        if(!_isSelected && _isDisabled)
+        {
+            zf::setColor(_background, color);
+        }
+    }
+
+    void VertexButton::setSelected(bool selection)
+    {
+        if(_isSelected == selection)
+        {
+            return;
+        }
+        _isSelected = selection;
+        updateColor();
+    }
+
+    void VertexButton::setDisabled(bool disabled)
+    {
+        if(_isDisabled == disabled)
+        {
+            return;
+        }
+        _isDisabled = disabled;
+        updateColor();
+    }
+
+    bool VertexButton::isSelected()
+    {
+        return _isSelected;
+    }
+
+    bool VertexButton::isDisabled()
+    {
+        return _isDisabled;
     }
 
     void VertexButton::draw(sf::RenderWindow& window, const sf::Time& delta)
     {
-        if(_hovered)
-        {
-            window.draw(_background);
-        }
+        window.draw(_background);
         window.draw(_border);
         window.draw(_text);
     }
@@ -89,8 +181,8 @@ namespace zf
     bool VertexButton::inputs(sf::RenderWindow& window, const sf::Time& delta, const zf::Mouse& mouse)
     {
         sf::Vector2f mousePos = mouse.getWorldPosition(window);
-        _hovered = _bound.contains(mousePos);
-        return _hovered;
+        setHovered(_bound.contains(mousePos));
+        return _isHovered;
     }
 
     void VertexButton::setString(std::string str)
@@ -98,4 +190,15 @@ namespace zf
         _text.setString(str);
         zf::alignText(_text, _bound, AlignmentData());
     }
+
+    void VertexButton::setHovered(bool hovered)
+    {
+        if(_isHovered == hovered)
+        {
+            return;
+        }
+        _isHovered = hovered;
+        updateColor();
+    }
+
 }

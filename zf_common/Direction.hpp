@@ -25,10 +25,12 @@
 /*
  * This is just a simple enum used by many code in the framework
  */
+#include "Grid.hpp"
 namespace zf
 {
     enum Direction
     {
+        None,
         North,
         East,
         South,
@@ -38,5 +40,9 @@ namespace zf
         SouthWest,
         NorthWest,
     };
+
+    zf::Direction oppositeOf(const zf::Direction& direction);
+
+    zf::Grid getModifier(const zf::Direction& direction);
 }
 #endif
