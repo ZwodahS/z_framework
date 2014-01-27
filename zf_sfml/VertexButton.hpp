@@ -36,20 +36,25 @@ namespace zf
         ~VertexButton();
         VertexButton(sf::Color borderColor, sf::Color backgroundColor, sf::FloatRect bound, sf::Text text);
         VertexButton(const sf::Text& text, const float& width, const float& height, const sf::Color& borderColor, const sf::Color& baseColor, const sf::Color& hoveredColor, const sf::Color& selectedColor, const sf::Color& disabledColor);
+        // deprecated
         void draw(sf::RenderWindow& window, const sf::Time& delta);
+        void draw(sf::RenderWindow& window);
         void update(sf::RenderWindow& window, const sf::Time& delta);
         bool inputs(sf::RenderWindow& window, const sf::Time& delta, const zf::Mouse& mouse);
 
         bool contains(const sf::Vector2f& position);
         void setString(std::string string);
         void setPosition(const sf::Vector2f& position);
+        void setPosition(const float& x, const float& y);
         void setBorderColor(const sf::Color& color);
         void setBaseColor(const sf::Color& color);
         void setHoveredColor(const sf::Color& color);
         void setSelectedColor(const sf::Color& color);
         void setDisabledColor(const sf::Color& color);
         void setSelected(bool selection);
+        void setHovered(bool hovered);
         void setDisabled(bool disabled);
+        bool isHovered();
         bool isSelected();
         bool isDisabled();
     private:
@@ -68,7 +73,6 @@ namespace zf
 
         void updatePosition();
         void updateColor();
-        void setHovered(bool hovered);
     };
 }
 #endif

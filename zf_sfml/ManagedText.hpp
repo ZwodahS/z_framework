@@ -29,20 +29,28 @@ namespace zf
     class ManagedText
     {
     public:
+        ManagedText();
         ManagedText(const sf::Text& text);
         ManagedText(const sf::String& string, const sf::Font& font, unsigned int characterSize, const sf::Color& color = sf::Color::Black);
         ~ManagedText();
+
+        void setText(const sf::Text& text);
         void setAlignment(const zf::AlignmentData& data, const sf::FloatRect& boundingBox);
         /**
          * This will shift the position of the top left corner of the bounding box and align the text to it.
          */
         void setPosition(sf::Vector2f position); 
+        void setPosition(float x, float y);
+        void setColor(const sf::Color& color);
+        void setAlpha(const sf::Uint8& alpha);
         
         void setString(const sf::String& string);
         zf::AlignmentData alignmentData;
         sf::Text text;
         sf::FloatRect boundingBox;
-
+    
+        void draw(sf::RenderWindow& window);
+        // Deprecated
         void draw(sf::RenderWindow& window, const sf::Time& delta);
         void update(sf::RenderWindow& window, const sf::Time& delta);
     private:

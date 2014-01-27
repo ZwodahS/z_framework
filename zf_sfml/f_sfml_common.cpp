@@ -15,24 +15,54 @@ namespace zf
         text.setColor(c);
     }
 
-    void setColor(sf::Sprite& sprite, const sf::Color& color)
+    void setColor(sf::Text& text, const sf::Color& color, const bool& changeAlpha)
     {
-        sf::Color c = sprite.getColor();
-        c.r = color.r;
-        c.g = color.g;
-        c.b = color.b;
-        sprite.setColor(c);
-    }
-
-    void setColor(sf::VertexArray& array, const sf::Color& color)
-    {
-        for(int i = 0 ; i < array.getVertexCount(); i++)
+        if(!changeAlpha)
         {
-            sf::Color c = array[i].color;
+            sf::Color c = text.getColor();
             c.r = color.r;
             c.g = color.g;
             c.b = color.b;
-            array[i].color = c;
+            text.setColor(c);
+        }
+        else
+        {
+            text.setColor(color);
+        }
+    }
+
+    void setColor(sf::Sprite& sprite, const sf::Color& color, const bool& changeAlpha)
+    {
+        if(!changeAlpha)
+        {
+            sf::Color c = sprite.getColor();
+            c.r = color.r;
+            c.g = color.g;
+            c.b = color.b;
+            sprite.setColor(c);
+        }
+        else
+        {
+            sprite.setColor(color);
+        }
+    }
+
+    void setColor(sf::VertexArray& array, const sf::Color& color, const bool& changeAlpha)
+    {
+        for(int i = 0 ; i < array.getVertexCount(); i++)
+        {
+            if(!changeAlpha)
+            {
+                sf::Color c = array[i].color;
+                c.r = color.r;
+                c.g = color.g;
+                c.b = color.b;
+                array[i].color = c;
+            }
+            else
+            {
+                array[i].color = color;
+            }
         }
     }
     /**
@@ -213,6 +243,15 @@ namespace zf
         }
         return array;
     }
+    void setPosition(sf::VertexArray& array, const sf::Vector2f& position)
+    {
+        sf::Vector2f origin = array[0].position;
+        for(int i = 0 ; i < array.getVertexCount() ; i++)
+        {
+            array[i].position = position + array[i].position - origin;
+        }
+    }
+
 
     void moveVertexArray(sf::VertexArray& vArray, const sf::Vector2f& position)
     {

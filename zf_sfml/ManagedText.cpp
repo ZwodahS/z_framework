@@ -2,6 +2,9 @@
 #include "f_common.hpp"
 namespace zf
 {
+    ManagedText::ManagedText()
+    {
+    }
     ManagedText::ManagedText(const sf::Text& t)
         : text(t)
     {
@@ -16,6 +19,12 @@ namespace zf
     ManagedText::~ManagedText()
     {
         text.setString(" ");
+    }
+
+    void ManagedText::setText(const sf::Text& t)
+    {
+        text = t;
+        updatePosition();
     }
 
     void ManagedText::setAlignment(const zf::AlignmentData& data, const sf::FloatRect& bBox)
@@ -38,11 +47,32 @@ namespace zf
         updatePosition();
     }
 
+    void ManagedText::setPosition(float x, float y)
+    {
+        boundingBox.left = x;
+        boundingBox.top = y;
+        updatePosition();
+    }
+
+    void ManagedText::setColor(const sf::Color& color)
+    {
+        text.setColor(color);
+    }
+
+    void ManagedText::setAlpha(const sf::Uint8& alpha)
+    {
+        zf::setAlpha(text, alpha);
+    }
+
     void ManagedText::updatePosition()
     {
         zf::alignText(text, boundingBox, alignmentData);
     }
 
+    void ManagedText::draw(sf::RenderWindow& window)
+    {
+        window.draw(text);
+    }
     void ManagedText::draw(sf::RenderWindow& window, const sf::Time& delta)
     {
         window.draw(text);

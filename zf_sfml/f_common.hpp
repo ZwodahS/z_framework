@@ -32,8 +32,9 @@ namespace zf
 {
     void setAlpha(sf::Sprite& sprite, const sf::Int32 alpha, sf::Uint8 max = 255, sf::Uint8 min = 0);
     void setAlpha(sf::Text& text, sf::Uint8 alpha);
-    void setColor(sf::Sprite& sprite, const sf::Color& color);
-    void setColor(sf::VertexArray& array, const sf::Color& color);
+    void setColor(sf::Text& text, const sf::Color& color, const bool& changeAlpha = false);
+    void setColor(sf::Sprite& sprite, const sf::Color& color, const bool& changeAlpha = false);
+    void setColor(sf::VertexArray& array, const sf::Color& color, const bool& changeAlpha = false);
     void setString(sf::Text& text, const std::string& value);
     void alignSpriteCenter(sf::Sprite& sprite, const sf::Vector2f& position);
     void alignText(sf::Text& text, const sf::Vector2f& position, const AlignmentData& alignmentData);
@@ -44,7 +45,7 @@ namespace zf
 
     // can't put this in the cpp
     template <typename T>
-    sf::Rect<T> calculateRectanglePosition(const sf::Rect<T>& rect, const sf::Vector2<T>& moveVec)
+    sf::Rect<T> moveRectanglePosition(const sf::Rect<T>& rect, const sf::Vector2<T>& moveVec)
     {
         return sf::Rect<T>(rect.left + moveVec.x, rect.top + moveVec.y, rect.width, rect.height); 
     }
@@ -58,6 +59,7 @@ namespace zf
      * and the rest of the position is set relative to the position.
      */
     sf::VertexArray calculateVertexArrayPosition(const sf::VertexArray& vArray, const sf::Vector2f& position);
+    void setPosition(sf::VertexArray& array, const sf::Vector2f& position);
     /**
      * Move the array to the position.
      */

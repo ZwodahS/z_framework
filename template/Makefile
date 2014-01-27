@@ -13,7 +13,7 @@ vpath %.o obj/
 WARNING= -Wextra -Wno-switch -Wno-sign-compare -Wno-missing-braces -Wno-unused-parameter
 OPTIMIZE= -fno-exceptions
 BIN=binaryname
-CXX=g++ #${WARNING}
+CXX=clang++ #${WARNING}
 SFML=-framework sfml-graphics -framework sfml-window -framework sfml-system -framework sfml-network
 OBJDIR=obj
 

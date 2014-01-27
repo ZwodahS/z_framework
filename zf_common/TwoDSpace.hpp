@@ -204,7 +204,7 @@ namespace zf
         TwoDSpace(const TwoDSpace& copy)
             :row(_row), col(_col), 
             _row(copy._row), _col(copy._col), 
-            _2dspace(copy._2dspace)
+            _2dspace(copy._2dspace), _defaultValue(copy._defaultValue)
         {
         }
 
@@ -372,6 +372,15 @@ namespace zf
         // public read only value.
         const int &row;
         const int &col;
+
+        TwoDSpace<T> operator=(const TwoDSpace& copy)
+        {
+            _2dspace = copy._2dspace;
+            _col = copy._col;
+            _row = copy._row;
+            _defaultValue = copy._defaultValue;
+            return *this;
+        }
     private:
         std::vector<std::vector<T> > _2dspace;
         T _defaultValue;

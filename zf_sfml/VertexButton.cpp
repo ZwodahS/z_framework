@@ -59,6 +59,13 @@ namespace zf
         updatePosition();
     }
 
+    void VertexButton::setPosition(const float& x, const float& y)
+    {
+        _bound.left = x;
+        _bound.top = y;
+        updatePosition();
+    }
+
     void VertexButton::updatePosition()
     {
         zf::moveVertexArray(_border, sf::Vector2f(_bound.left, _bound.top + 1)); 
@@ -167,7 +174,17 @@ namespace zf
         return _isDisabled;
     }
 
+    bool VertexButton::isHovered()
+    {
+        return _isHovered;
+    }
+    
     void VertexButton::draw(sf::RenderWindow& window, const sf::Time& delta)
+    {
+        draw(window);
+    }
+
+    void VertexButton::draw(sf::RenderWindow& window)
     {
         window.draw(_background);
         window.draw(_border);
