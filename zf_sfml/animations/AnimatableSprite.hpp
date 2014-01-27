@@ -74,6 +74,7 @@ namespace zf
         /************** draw/update ****************/
         void update(sf::RenderWindow& window, const sf::Time& delta);
         void draw(sf::RenderWindow& window, const sf::Time& delta);
+        void draw(sf::RenderWindow& window);
         /**
          * Do not use this unless necessary.
          */

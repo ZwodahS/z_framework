@@ -44,6 +44,7 @@ namespace zf
 
         bool contains(const sf::Vector2f& position);
         void setString(std::string string);
+        void setFontColor(const sf::Color& color, const bool& setAlpha = true);
         void setPosition(const sf::Vector2f& position);
         void setPosition(const float& x, const float& y);
         void setBorderColor(const sf::Color& color);

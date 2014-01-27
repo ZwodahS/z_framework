@@ -208,6 +208,11 @@ namespace zf
         zf::alignText(_text, _bound, AlignmentData());
     }
 
+    void VertexButton::setFontColor(const sf::Color& color, const bool& setAlpha)
+    {
+        zf::setColor(_text, color, setAlpha);
+    }
+
     void VertexButton::setHovered(bool hovered)
     {
         if(_isHovered == hovered)

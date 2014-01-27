@@ -85,6 +85,11 @@ namespace zf
         window.draw(_sprite);
     }
 
+    void AnimatableSprite::draw(sf::RenderWindow& window)
+    {
+        window.draw(_sprite);
+    }
+
     void AnimatableSprite::update(sf::RenderWindow& window, const sf::Time& delta)
     {
         _animator.update(window, delta);
