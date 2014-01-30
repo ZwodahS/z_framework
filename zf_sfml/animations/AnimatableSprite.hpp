@@ -3,7 +3,7 @@
  *                   Version 2, December 2004
  * 
  * Copyright (C) 2013 ZwodahS(ericnjf@gmail.com) 
- * zwodahs.wordpress.com
+ * zwodahs.github.io
  * 
  * Everyone is permitted to copy and distribute verbatim or modified
  * copies of this license document, and changing it is allowed as long
@@ -19,7 +19,7 @@
  * and/or modify it under the terms of the Do What The Fuck You Want
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
- */
+ */   
 /**
  * Right now , I haven't take into the setOrigin of the sprite.
  * I will need to handle it later.

@@ -1,11 +1,9 @@
-#ifndef _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
-#define _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
 /*
  *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
  *                   Version 2, December 2004
  * 
  * Copyright (C) 2013 ZwodahS(ericnjf@gmail.com) 
- * zwodahs.wordpress.com
+ * zwodahs.github.io
  * 
  * Everyone is permitted to copy and distribute verbatim or modified
  * copies of this license document, and changing it is allowed as long
@@ -22,6 +20,8 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
+#ifndef _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
+#define _Z_FRAMEWORK_ZFSFML_ANIMATIONS_ANIMATABLE_H_
 /**
  * The idea behind iAnimatable is to provide a way to move things that are not part of sfml.
  * When using iAnimatable, Simple Animator will not draw it.

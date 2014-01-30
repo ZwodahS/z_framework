@@ -1,63 +1,83 @@
+/*
+ *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
+ *                   Version 2, December 2004
+ * 
+ * Copyright (C) 2013 ZwodahS(ericnjf@gmail.com) 
+ * zwodahs.github.io
+ * 
+ * Everyone is permitted to copy and distribute verbatim or modified
+ * copies of this license document, and changing it is allowed as long
+ * as the name is changed.
+ * 
+ *           DO WHAT THE **** YOU WANT TO PUBLIC LICENSE
+ *   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+ * 
+ *  0. You just DO WHAT THE **** YOU WANT TO.
+ * 
+ * This program is free software. It comes without any warranty, to
+ * the extent permitted by applicable law. You can redistribute it
+ * and/or modify it under the terms of the Do What The Fuck You Want
+ * To Public License, Version 2, as published by Sam Hocevar. See
+ * http://sam.zoy.org/wtfpl/COPYING for more details. 
+ */
 #include "Route.hpp"
 
 namespace zf
 {
-    Route::Route()
-        :start(zf::Grid(0,0)), end(zf::Grid(0,0))
+    /**
+     * Create a default 1 grid route
+     */
+    Route::Route(const zf::Grid& s)
     {
-        path.push_back(start);
-    }
-    Route::Route(zf::Grid s, zf::Grid e)
-        :start(s), end(e)
-    {
-        path.insert(path.begin(), s);
-        if(start != end)
-        {
-            path.push_back(e);
-        }
+        path.push_back(s);
     }
     
-    Route::Route(std::vector<zf::Grid> p)
-        : start(p.front()), end(p.back()), path(p)
+    /**
+     * Creates a route following this path
+     */
+    Route::Route(const std::vector<zf::Grid>& p)
+        : path(p)
     {
     }
 
-
-    bool Route::isRouteFor(zf::Grid s, zf::Grid e)
-    {
-        return start == s && end == e;
-    }
-
-    bool Route::mergeRoute(zf::Route& route1, zf::Route& route2, zf::Route& newRoute)
-    {
-        if(route1.end != route2.start && route1.end == route2.end && route1.start == route2.start && route1.path.size() > 1 && route2.path.size() > 1)
-        {
-            return false;
-        }
-        newRoute.start = route1.start;
-        newRoute.end = route2.end;
-        newRoute.path.clear();
-        for(std::vector<zf::Grid>::iterator it = route1.path.begin() ; it != route1.path.end() ; ++it)
-        {
-            newRoute.path.push_back(*it); 
-        }
-        // iterate once, to skip the start of route2.
-        for(std::vector<zf::Grid>::iterator it = (++(route2.path.begin())) ; it != route2.path.end() ; ++it)
-        {
-            newRoute.path.push_back(*it); 
-        }
-        return true;
-    }
-    
-    bool constructRoute(std::vector<zf::Grid> path, zf::Route& route)
+    bool Route::isRouteFor(const zf::Grid& s, const zf::Grid& e) const
     {
         if(path.size() == 0)
         {
             return false;
         }
-        route.start = path[0];
-        route.end = path[path.size() - 1];
+        return path[0] == s && path[path.size() - 1] == e;
+    }
+
+    bool Route::mergeRoute(const zf::Route& route1, const zf::Route& route2, zf::Route& newRoute)
+    {
+        if(route1.path.size() == 0 || route2.path.size() == 0 || route1.getEndPoint() != route2.getStartPoint())
+        {
+            return false;
+        }
+        newRoute.path.clear();
+        newRoute.path.insert(newRoute.path.end(), route1.path.begin(), route1.path.end());
+        newRoute.path.insert(newRoute.path.end(), route2.path.begin() + 1, route2.path.end());
+        return true;
+    }
+    
+    bool Route::constructRoute(const std::vector<zf::Grid>& path, zf::Route& route)
+    {
+        if(path.size() == 0)
+        {
+            return false;
+        }
         route.path = path;
         return true;
+    }
+
+    zf::Grid Route::getStartPoint() const
+    {
+        return path.size() == 0 ? zf::Grid(0, 0) : path.front();
+    }
+
+    zf::Grid Route::getEndPoint() const
+    {
+        return path.size() == 0 ? zf::Grid(0, 0) : path.back();
     }
 }
