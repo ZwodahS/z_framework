@@ -211,7 +211,7 @@ namespace zf
          * If the row/col is in range, return value.
          * if out of range, return the default value.
          */
-        T& get(int row, int col)
+        T& get(const int& row, const int& col) 
         {
             if(inRange(row,col))
             {
@@ -226,7 +226,7 @@ namespace zf
          * Get the value at a grid.
          * same as get(grid.row, grid.col);
          */
-        T& get(Grid grid)
+        T& get(const Grid& grid) 
         {
             return get(grid.row,grid.col);
         }
@@ -235,7 +235,7 @@ namespace zf
          * If the row/col is in range, the old value is returned.
          * If the row/col is out of range, nothing is changed and the default value is returend.
          */ 
-        T set(int row, int col, T value)
+        T set(const int& row, const int& col, const T& value)
         {
             if(!inRange(row,col))
             {
@@ -252,21 +252,21 @@ namespace zf
          * Set the value at row and col
          * same as set(grid.row, grid.col, value)
          */
-        T set(Grid grid, T value)
+        T set(const Grid& grid, const T& value)
         {
             return set(grid.row, grid.col, value);
         }
         /*
          * set the value at row col to default value. return the old value at the position.
          */
-        T empty(int row, int col)
+        T empty(const int& row, const int& col)
         {
             return set(row,col,_defaultValue);
         }
         /**
          * set the value at grid. return the old value at the position.
          */
-        T empty(Grid grid)
+        T empty(const Grid& grid)
         {
             return empty(grid.row, grid.col);
         }
@@ -276,7 +276,7 @@ namespace zf
          * the minimum space is 1/1
          * POTENTIAL BUG : DO NOT USE NEGATIVE VALUE.
          */
-        TwoDSpace<T> subspace(Grid topLeft, Grid bottomRight)
+        TwoDSpace<T> subspace(const Grid& topLeft, const Grid& bottomRight)
         {
             TwoDSpace<T> collision = TwoDSpace<T>(bottomRight.row - topLeft.row  + 1 , bottomRight.col - topLeft.col + 1 , _defaultValue);
             for(int r = topLeft.row, rr = 0 ; r <= bottomRight.row ; r++ , rr++)
@@ -294,7 +294,7 @@ namespace zf
         /**
          * check if the row and col is in range.
          */
-        bool inRange(int row, int col)
+        bool inRange(const int& row, const int& col) const
         {
             if(row < 0 || row >= _2dspace.size() || col < 0 || col >= _2dspace[row].size())
             {
@@ -305,7 +305,7 @@ namespace zf
         /**
          * check if the row and col is in range.
          */
-        bool inRange(Grid grid)
+        bool inRange(const Grid& grid) const
         {
             return inRange(grid.row, grid.col);
         }
