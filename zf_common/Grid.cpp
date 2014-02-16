@@ -63,6 +63,40 @@ bool zf::Grid::operator!=(const zf::Grid& rhs) const
     return !operator==(rhs);
 }
 
+bool zf::Grid::operator<(const zf::Grid& rhs) const
+{
+    if(this->row > rhs.row)
+    {
+        return false;
+    }
+    else
+    {
+        return (this->row < rhs.row || this->col < rhs.col);
+    }
+}
+
+bool zf::Grid::operator>(const zf::Grid& rhs) const
+{
+    if(this->row < rhs.row)
+    {
+        return false;
+    }
+    else
+    {
+        return (this->row > rhs.row || this->col > rhs.col);
+    }
+}
+
+bool zf::Grid::operator<=(const zf::Grid& rhs) const
+{
+    return !(*this > rhs);
+}
+
+bool zf::Grid::operator>=(const zf::Grid& rhs) const
+{
+    return !(*this < rhs);
+}
+
 // bool operator==(const zf::Grid &lhs, const zf::Grid &rhs)
 // {
 //     return lhs.operator==(rhs);

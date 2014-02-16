@@ -54,7 +54,12 @@ namespace zf
         Grid& operator+=(const Grid &rhs);
         Grid& operator-=(const Grid &rhs);
         bool operator==(const Grid& rhs) const;
-        bool operator!=(const Grid& rhs) const;        
+        bool operator!=(const Grid& rhs) const;
+        bool operator<(const Grid& rhs) const;
+        bool operator<=(const Grid& rhs) const;
+        bool operator>(const Grid& rhs) const;
+        bool operator>=(const Grid& rhs) const;
+
         int distanceFrom(const Grid& rhs) const;
     };
     int distanceBetween(const Grid& lhs, const Grid& rhs);
