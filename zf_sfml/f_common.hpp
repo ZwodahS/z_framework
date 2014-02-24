@@ -24,6 +24,7 @@
 #define _ZF_SFML_FUNCTIONCOMMON_H_
 #include "AlignmentData.hpp"
 #include "iBoundable.hpp"
+#include "../zf_common/Direction.hpp"
 #include "../zf_common/Grid.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -64,5 +65,10 @@ namespace zf
      * Move the array to the position.
      */
     void moveVertexArray(sf::VertexArray& vArray, const sf::Vector2f& position);
+    /**
+     * Get the vector modifier for this direction.
+     * Similar to the one in Direction.hpp, except it return sf::Vector2i instead of grid.
+     */
+    sf::Vector2i getVectorModifier(const zf::Direction& direction);
 };
 #endif

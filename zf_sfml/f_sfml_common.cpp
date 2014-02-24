@@ -284,4 +284,22 @@ namespace zf
         }
     }
 
+    sf::Vector2i getVectorModifier(const zf::Direction& direction)
+    {
+        sf::Vector2i mod(0, 0);
+        switch(direction)
+        {
+            case None      : mod.y = 0  ; mod.x = 0  ; break ;
+            case North     : mod.y = -1 ; mod.x = 0  ; break ; 
+            case East      : mod.y = 0  ; mod.x = 1  ; break ; 
+            case South     : mod.y = 1  ; mod.x = 0  ; break ; 
+            case West      : mod.y = 0  ; mod.x = -1 ; break ; 
+            case NorthEast : mod.y = -1 ; mod.x = 1  ; break ; 
+            case SouthEast : mod.y = 1  ; mod.x = 1  ; break ; 
+            case SouthWest : mod.y = 1  ; mod.x = -1 ; break ; 
+            case NorthWest : mod.y = -1 ; mod.x = -1 ; break ; 
+            // default : none 
+        }
+        return mod;
+    }
 }
