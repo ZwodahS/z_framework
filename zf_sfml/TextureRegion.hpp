@@ -37,7 +37,7 @@ namespace zf
         TextureRegion(sf::Texture* t, sf::IntRect srcClip, sf::Color defaultColor = sf::Color::White);
         TextureRegion();
         
-        sf::Sprite createSprite();
+        sf::Sprite createSprite() const;
     };
 }
 #endif

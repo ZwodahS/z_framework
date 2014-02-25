@@ -34,7 +34,7 @@ namespace zf
         , defaultScaleX(1), defaultScaleY(1)
     {
     }
-    sf::Sprite TextureRegion::createSprite()
+    sf::Sprite TextureRegion::createSprite() const
     {
         if(texture == 0)
         {
