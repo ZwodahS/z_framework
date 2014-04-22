@@ -22,7 +22,6 @@
  */
 #ifndef _Z_FRAMEWORK_SFML_SELECTION_BOX_H_
 #define _Z_FRAMEWORK_SFML_SELECTION_BOX_H_
-#include "../zf_common/Grid.hpp"
 #include <SFML/Graphics.hpp>
 namespace zf
 {

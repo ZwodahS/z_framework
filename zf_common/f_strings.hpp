@@ -20,8 +20,8 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_COMMON_F_COMMON_H_
-#define _ZF_COMMON_F_COMMON_H_
+#ifndef _ZF_COMMON_F_STRINGS_H_
+#define _ZF_COMMON_F_STRINGS_H_
 #include <vector>
 #include <string>
 namespace zf

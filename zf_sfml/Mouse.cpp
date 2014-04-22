@@ -21,7 +21,7 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "Mouse.hpp"
-#include "../zf_common/f_inputs.hpp"
+#include "../zf_inputs/f_inputs.hpp"
 
 zf::Mouse::Mouse()
 {

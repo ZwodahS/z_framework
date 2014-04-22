@@ -23,7 +23,7 @@
 #ifndef _ZF_SFML_MOUSE_H_
 #define _ZF_SFML_MOUSE_H_
 
-#include "../zf_common/InputState.hpp"
+#include "../zf_inputs/InputState.hpp"
 
 #include <SFML/Graphics.hpp>
 namespace zf

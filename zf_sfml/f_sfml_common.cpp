@@ -201,26 +201,6 @@ namespace zf
      * order ==> 
      * top left, top right, bottom right, bottom left
      */
-    std::vector<sf::Vector2f> toVector2f(const zf::Grid& grid, const float& width, const float& height)
-    {
-        std::vector<sf::Vector2f> positions;
-        positions.push_back(sf::Vector2f(grid.col * width, grid.row * height));
-        positions.push_back(sf::Vector2f((grid.col + 1) * width , grid.row * height));
-        positions.push_back(sf::Vector2f((grid.col + 1) * width , (grid.row + 1) * height ));
-        positions.push_back(sf::Vector2f(grid.col * width, (grid.row + 1) * height ));
-        return positions;
-    }
-
-    sf::FloatRect toFloatRect(const zf::Grid& grid, const float& width, const float& height)
-    {
-        return sf::FloatRect(grid.col * width, grid.row * height, width, height);
-    }
-
-    sf::Vector2f centerOf(const zf::Grid grid, const float& width, const float& height)
-    {
-        return sf::Vector2f(grid.col * width + (width/2), grid.row * height + (height / 2));
-    }
-    
     sf::Vector2f getTopLeftPosition(const sf::FloatRect& boundingBox, const sf::Vector2f& centerPoint)
     {
         sf::Vector2f finalPosition = sf::Vector2f(

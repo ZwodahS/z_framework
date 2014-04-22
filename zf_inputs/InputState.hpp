@@ -20,18 +20,22 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_FUNCTIONS_DEBUG_H_
-#define _ZF_SFML_FUNCTIONS_DEBUG_H_
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#ifndef _ZF_INPUTS_INPUTSTATE_H_
+#define _ZF_INPUTS_INPUTSTATE_H_
 namespace zf
 {
-    void debug(std::string prefix, sf::FloatRect rect);
-    void debug(std::string prefix, sf::IntRect rect);
-
-    void debug(std::string prefix, sf::Vector2f vect);
-    void debug(std::string prefix, sf::Vector2i vect);
-    void debug(std::string prefix, sf::Vector2u vect);
-
+    struct InputState
+    {
+        bool thisDown; // bool representing if this key is down this frame.
+        bool lastDown; // bool representing if this key is down last frame.
+        bool thisPressed; // bool representing if this key is pressed this frame.
+        bool thisHeld; // bool representing if this key is pressed this frame and last frame.
+        bool thisReleased; // bool representing if this key is released this frame.
+        float timeHeld; // the time between thisDown and thisReleased. // if thisDown is false and lastDown is false then this will be 0
+        //thisPressed = Keystates[keycode]  && !lastDown
+        //thisHeld = Keystates[keycode] && lastDown
+        //thisReleased = !Keystates[keycode] && lastDown
+        InputState();
+    };
 }
 #endif

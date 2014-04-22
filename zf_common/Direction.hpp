@@ -22,10 +22,10 @@
  */
 #ifndef _ZF_COMMON_DIRECTION_H_
 #define _ZF_COMMON_DIRECTION_H_
+#include <SFML/System.hpp>
 /*
  * This is just a simple enum used by many code in the framework
  */
-#include "Grid.hpp"
 namespace zf
 {
     enum Direction
@@ -43,6 +43,6 @@ namespace zf
 
     zf::Direction oppositeOf(const zf::Direction& direction);
 
-    zf::Grid getModifier(const zf::Direction& direction);
+    sf::Vector2i getModifier(const zf::Direction& direction);
 }
 #endif

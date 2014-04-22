@@ -39,20 +39,20 @@ namespace zf
         }
     }
 
-    zf::Grid getModifier(const zf::Direction& direction)
+    sf::Vector2i getModifier(const zf::Direction& direction)
     {
-        zf::Grid grid(0, 0);
+        sf::Vector2i grid(0, 0);
         switch(direction)
         {
-            case None      : grid.row = 0  ; grid.col = 0  ; break ;
-            case North     : grid.row = -1 ; grid.col = 0  ; break ; 
-            case East      : grid.row = 0  ; grid.col = 1  ; break ; 
-            case South     : grid.row = 1  ; grid.col = 0  ; break ; 
-            case West      : grid.row = 0  ; grid.col = -1 ; break ; 
-            case NorthEast : grid.row = -1 ; grid.col = 1  ; break ; 
-            case SouthEast : grid.row = 1  ; grid.col = 1  ; break ; 
-            case SouthWest : grid.row = 1  ; grid.col = -1 ; break ; 
-            case NorthWest : grid.row = -1 ; grid.col = -1 ; break ; 
+            case None      : grid.y = 0  ; grid.x = 0  ; break ;
+            case North     : grid.y = -1 ; grid.x = 0  ; break ; 
+            case East      : grid.y = 0  ; grid.x = 1  ; break ; 
+            case South     : grid.y = 1  ; grid.x = 0  ; break ; 
+            case West      : grid.y = 0  ; grid.x = -1 ; break ; 
+            case NorthEast : grid.y = -1 ; grid.x = 1  ; break ; 
+            case SouthEast : grid.y = 1  ; grid.x = 1  ; break ; 
+            case SouthWest : grid.y = 1  ; grid.x = -1 ; break ; 
+            case NorthWest : grid.y = -1 ; grid.x = -1 ; break ; 
             // default : none 
         }
         return grid;

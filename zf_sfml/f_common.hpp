@@ -25,7 +25,6 @@
 #include "AlignmentData.hpp"
 #include "iBoundable.hpp"
 #include "../zf_common/Direction.hpp"
-#include "../zf_common/Grid.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -40,9 +39,6 @@ namespace zf
     void alignSpriteCenter(sf::Sprite& sprite, const sf::Vector2f& position);
     void alignText(sf::Text& text, const sf::Vector2f& position, const AlignmentData& alignmentData);
     void alignText(sf::Text& text, const sf::FloatRect& bound, const AlignmentData& alignmentData);
-    std::vector<sf::Vector2f> toVector2f(const zf::Grid& grid, const float& width, const float& height);
-    sf::FloatRect toFloatRect(const zf::Grid& grid, const float& width, const float& height);
-    sf::Vector2f centerOf(const zf::Grid grid, const float& width, const float& height);
 
     // can't put this in the cpp
     template <typename T>
