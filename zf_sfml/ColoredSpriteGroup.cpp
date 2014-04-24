@@ -21,7 +21,7 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "ColoredSpriteGroup.hpp"
-#include "f_common.hpp"
+#include "f_sfml.hpp"
 namespace zf
 {
     ColoredSpriteGroup::ColoredSpriteGroup()

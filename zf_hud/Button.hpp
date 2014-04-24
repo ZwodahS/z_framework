@@ -43,11 +43,11 @@
  * to remove them since that I have already split them up.
  *
  */
-#ifndef _ZF_SFML_BUTTON_H_
-#define _ZF_SFML_BUTTON_H_
-#include "AlignmentData.hpp"
+#ifndef _ZF_HUD_BUTTON_H_
+#define _ZF_HUD_BUTTON_H_
+#include "../zf_common/AlignmentData.hpp"
 #include "../zf_common/Alignment.hpp"
-#include "Mouse.hpp"
+#include "../zf_inputs/Mouse.hpp"
 #include <vector>
 #include <SFML/Graphics.hpp>
 namespace zf

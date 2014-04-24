@@ -32,7 +32,7 @@
 #include "iAnimationComponentWrapper.hpp"
 #include "../iCenterable.hpp"
 #include "../iBoundable.hpp"
-#include "../f_common.hpp"
+#include "../f_sfml.hpp"
 namespace zf
 {
     class AnimatableSprite : public iAnimatable, public iBoundable, public iCenterable, public iAnimationComponentWrapper

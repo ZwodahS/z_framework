@@ -20,10 +20,10 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_MANAGEDTEXT_H_
-#define _ZF_SFML_MANAGEDTEXT_H_
+#ifndef _ZF_HUD_MANAGEDTEXT_H_
+#define _ZF_HUD_MANAGEDTEXT_H_
 #include <SFML/Graphics.hpp>
-#include "AlignmentData.hpp"
+#include "../zf_common/AlignmentData.hpp"
 namespace zf
 {
     class ManagedText

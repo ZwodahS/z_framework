@@ -21,7 +21,8 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "VertexButton.hpp"
-#include "f_common.hpp"
+#include "../zf_sfml/f_sfml.hpp"
+#include "../zf_common/f_alignment.hpp"
 namespace zf
 {
     VertexButton::VertexButton()

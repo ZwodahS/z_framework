@@ -20,7 +20,7 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#include "f_common.hpp"
+#include "f_sfml.hpp"
 namespace zf
 {
     void setAlpha(sf::Sprite& sprite, const sf::Int32 alpha, sf::Uint8 max, sf::Uint8 min)
@@ -196,6 +196,40 @@ namespace zf
         }
         text.setPosition(finalPosition);
     }
+
+    /**
+     * Put a rectangle inside another rectangle bounded by the alignment specified.
+     * the inner bound left and top values are not considered.
+     */
+    sf::FloatRect alignRect(const sf::FloatRect& outerBound, sf::FloatRect innerBound, const AlignmentData& alignmentData)
+    {
+        if(alignmentData.alignmentX == X_Left)
+        {
+            innerBound.left = outerBound.left + alignmentData.offset.x;
+        }
+        else if(alignmentData.alignmentX == X_Center)
+        {
+            innerBound.left = outerBound.left + (outerBound.width/2) - (innerBound.width/2) + alignmentData.offset.x;
+        }
+        else //if(alignmentData.alignmentX == X_Right)
+        {
+            innerBound.left = outerBound.left + outerBound.width - innerBound.width - alignmentData.offset.x;
+        }
+        if(alignmentData.alignmentY == Y_Top)
+        {
+            innerBound.top = outerBound.top + alignmentData.offset.y;
+        }
+        else if(alignmentData.alignmentY == Y_Center)
+        {
+            innerBound.top = outerBound.top + (outerBound.height/2) + alignmentData.offset.y;
+        }
+        else //if(alignmentData.alignmentY == Y_Bottom)
+        {
+            innerBound.top = outerBound.top + outerBound.height - innerBound.height - alignmentData.offset.y;
+        }
+        return innerBound;
+    }
+
     /**
      * Return the bound of this grid.
      * order ==> 

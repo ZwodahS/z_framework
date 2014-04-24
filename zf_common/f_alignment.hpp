@@ -20,18 +20,19 @@
  * To Public License, Version 2, as published by Sam Hocevar. See
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
-#ifndef _ZF_SFML_ALIGNMENTDATA_H_
-#define _ZF_SFML_ALIGNMENTDATA_H_
-#include "../zf_common/Alignment.hpp"
-#include <SFML/System.hpp>
+#ifndef _ZF_COMMON_FUNCTIONALIGNMENT_H_
+#define _ZF_COMMON_FUNCTIONALIGNMENT_H_
 namespace zf
 {
-    struct AlignmentData
+    void alignSpriteCenter(sf::Sprite& sprite, const sf::Vector2f& position);
+    void alignText(sf::Text& text, const sf::Vector2f& position, const AlignmentData& alignmentData);
+    void alignText(sf::Text& text, const sf::FloatRect& bound, const AlignmentData& alignmentData);
+    sf::FloatRect alignRect(const sf::FloatRect& outerBound, sf::FloatRect innerBound, const AlignmentData& alignmentData);
+    // can't put this in the cpp
+    template <typename T>
+    sf::Rect<T> moveRectanglePosition(const sf::Rect<T>& rect, const sf::Vector2<T>& moveVec)
     {
-        AlignmentData(AlignmentX x = zf::X_Center, AlignmentY y = zf::Y_Center, sf::Vector2f o = sf::Vector2f(0,0));
-        AlignmentX alignmentX;
-        AlignmentY alignmentY;
-        sf::Vector2f offset;
-    };
+        return sf::Rect<T>(rect.left + moveVec.x, rect.top + moveVec.y, rect.width, rect.height); 
+    }
 }
 #endif

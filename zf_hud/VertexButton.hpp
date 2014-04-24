@@ -23,9 +23,9 @@
 /**
  * A button that uses VertexArray instead of sprite.
  */
-#ifndef _ZF_SFML_VERTEXBUTTON_H_
-#define _ZF_SFML_VERTEXBUTTON_H_
-#include "Mouse.hpp"
+#ifndef _ZF_HUD_VERTEXBUTTON_H_
+#define _ZF_HUD_VERTEXBUTTON_H_
+#include "../zf_inputs/Mouse.hpp"
 #include <SFML/Graphics.hpp>
 namespace zf
 {

@@ -21,7 +21,7 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "SpriteGroup.hpp"
-#include "f_common.hpp"
+#include "f_sfml.hpp"
 #include <iostream>
 namespace zf
 {

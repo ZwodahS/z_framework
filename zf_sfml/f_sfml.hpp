@@ -22,9 +22,9 @@
  */
 #ifndef _ZF_SFML_FUNCTIONCOMMON_H_
 #define _ZF_SFML_FUNCTIONCOMMON_H_
-#include "AlignmentData.hpp"
 #include "iBoundable.hpp"
 #include "../zf_common/Direction.hpp"
+#include "../zf_common/AlignmentData.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
@@ -36,16 +36,7 @@ namespace zf
     void setColor(sf::Sprite& sprite, const sf::Color& color, const bool& changeAlpha = false);
     void setColor(sf::VertexArray& array, const sf::Color& color, const bool& changeAlpha = false);
     void setString(sf::Text& text, const std::string& value);
-    void alignSpriteCenter(sf::Sprite& sprite, const sf::Vector2f& position);
-    void alignText(sf::Text& text, const sf::Vector2f& position, const AlignmentData& alignmentData);
-    void alignText(sf::Text& text, const sf::FloatRect& bound, const AlignmentData& alignmentData);
 
-    // can't put this in the cpp
-    template <typename T>
-    sf::Rect<T> moveRectanglePosition(const sf::Rect<T>& rect, const sf::Vector2<T>& moveVec)
-    {
-        return sf::Rect<T>(rect.left + moveVec.x, rect.top + moveVec.y, rect.width, rect.height); 
-    }
     sf::Vector2f getTopLeftPosition(const sf::FloatRect& boundingBox, const sf::Vector2f& centerPoint);
     void setCenterPosition(iBoundable& boundable, const sf::Vector2f& position);
     sf::VertexArray toVertexArrayLinesStrip(const sf::FloatRect& bound);

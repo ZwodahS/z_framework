@@ -23,10 +23,10 @@
 /**
  * ShiftButton is a type of button that shift its position if it is hovered. 
  */
-#ifndef _ZF_SFML_SHIFTBUTTON_H_
-#define _ZF_SFML_SHIFTBUTTON_H_
-#include "f_common.hpp"
-#include "animations/iAnimatable.hpp"
+#ifndef _ZF_HUD_SHIFTBUTTON_H_
+#define _ZF_HUD_SHIFTBUTTON_H_
+#include "../zf_sfml/f_sfml.hpp"
+#include "../zf_sfml/animations/iAnimatable.hpp"
 #include <SFML/Graphics.hpp>
 namespace zf
 {
