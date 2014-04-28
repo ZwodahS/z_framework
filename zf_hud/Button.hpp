@@ -92,6 +92,7 @@ namespace zf
          * Set the string value of the button
          */
         void setString(std::string displayString);
+        Button& setTextColor(const sf::Color& color);
         /**
          * Set the state for the button.
          * Probably does nothing except for MSTB.
@@ -118,7 +119,7 @@ namespace zf
         /**
          * Draw the button.
          */
-        void draw(sf::RenderWindow& window, const sf::Time& delta);
+        void draw(sf::RenderWindow& window);
     private:
         enum 
         {

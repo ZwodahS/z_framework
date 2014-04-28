@@ -114,7 +114,7 @@ namespace zf
         }
     }
 
-    void Button::draw(sf::RenderWindow& window, const sf::Time& delta)
+    void Button::draw(sf::RenderWindow& window)
     {
         if(_buttonType == TSB || _buttonType == TSTB || _buttonType == MSTB)
         {
@@ -143,11 +143,21 @@ namespace zf
     void Button::setString(std::string displayString)
     {
         // this is all i have now but in case i add a new type , i shall do a check.
-        if(_buttonType == TSB || _buttonType == TSTB || _buttonType == MSTB)
+        if(_buttonType == TSTB || _buttonType == MSTB)
         {
             zf::setString(_texts[0], displayString);
             updatePosition();
         }
+    }
+
+    Button& Button::setTextColor(const sf::Color& color)
+    {
+        // this is all i have now but in case i add a new type , i shall do a check.
+        if(_buttonType == TSTB || _buttonType == MSTB)
+        {
+            _texts[0].setColor(color);
+        }
+        return *this;
     }
 
     void Button::updatePosition()
