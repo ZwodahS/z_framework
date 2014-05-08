@@ -3,6 +3,7 @@ vpath %.cpp zf_inputs
 vpath %.cpp zf_hud
 vpath %.cpp zf_sfml
 vpath %.cpp zf_sfml/animations
+vpath %.cpp zf_utility
 
 WARNING= -Wextra -Wno-switch -Wno-sign-compare -Wno-missing-braces -Wno-unused-parameter
 OPTIMIZE= -fno-exceptions
@@ -25,6 +26,9 @@ inputsobjs = $(patsubst %, $(OBJDIR)/% , $(inputs:.cpp=.o))
 
 hud = $(shell cd zf_hud ; ls *.cpp )
 hudobjs = $(patsubst %, $(OBJDIR)/% , $(hud:.cpp=.o))
+	
+utility = $(shell cd zf_utility ; ls *.cpp )
+utilityobjs = $(patsubst %, $(OBJDIR)/% , $(utility:.cpp=.o))
 
 all: $(commonobjs) $(sfmlobjs) $(sfmlsubdirobjs) 
 

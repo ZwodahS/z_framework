@@ -23,6 +23,13 @@
 #include "f_conversion.hpp"
 namespace zf
 {
+    std::string toString(int i)
+    {
+        std::stringstream sstr;
+        sstr << i;
+        std::string str1 = sstr.str();
+        return str1;
+    }
     bool toInt(std::string str, int& value)
     {
         std::istringstream buffer(str);
@@ -46,13 +53,6 @@ namespace zf
         }
         value = temp;
         return true;
-    }
-    std::string toString(int i)
-    {
-        std::stringstream sstr;
-        sstr << i;
-        std::string str1 = sstr.str();
-        return str1;
     }
     std::string floatToString(float f)
     {

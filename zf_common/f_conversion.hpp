@@ -32,7 +32,10 @@ namespace zf
     bool toInt(std::string str, int &value);
     // convert string to unsigned short (mainly used for port)
     bool toUShort(std::string str, unsigned short& value);
-    // convert int to string.
+    /**
+     * Converts int to string, use this only if not C++11
+     * c++11 use std::to_string() instead
+     */
     std::string toString(int i);
     std::string floatToString(float f);
     // convert int to string with sign (automatically comes with a + or a -)
