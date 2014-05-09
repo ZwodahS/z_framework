@@ -27,5 +27,7 @@
 namespace zf
 {
     std::vector<std::string> splitString(std::string str, int maxChar);
+    std::vector<std::string> tokenize(std::string);
+    std::string createBlanks(int num);
 }
 #endif

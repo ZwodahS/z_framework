@@ -40,6 +40,6 @@ namespace zf
     std::string floatToString(float f);
     // convert int to string with sign (automatically comes with a + or a -)
     std::string toStringSigned(int i);
-    std::vector<std::string> tokenize(std::string);
 }
+
 #endif
