@@ -57,7 +57,6 @@ namespace zf
         {
         }
 
-        int randomRange(int rng);
     };
     /** 
      * Randomly get a number from the range.
