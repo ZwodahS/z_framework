@@ -26,6 +26,10 @@ namespace zf
 {
     int randomRange(int rng, Range<int> range)
     {
+        if(range.min == range.max)
+        {
+            return range.min;
+        }
         return randomRange(rng, range.min, range.max, range.minInclusive, range.maxInclusive);
     }
     

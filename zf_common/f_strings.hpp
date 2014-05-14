@@ -29,5 +29,11 @@ namespace zf
     std::vector<std::string> splitString(std::string str, int maxChar);
     std::vector<std::string> tokenize(std::string);
     std::string createBlanks(int num);
+
+    /**
+     * search the original search for "searchString", and replace all instances with "replaceString"
+     * set multiple replace to false if you only want to replace the first instances.
+     */
+    std::string& replaceString(std::string& original, const std::string& searchString, const std::string& replaceString, const bool& multipleReplace = true);
 }
 #endif
