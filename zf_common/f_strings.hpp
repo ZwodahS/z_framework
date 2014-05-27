@@ -35,5 +35,6 @@ namespace zf
      * set multiple replace to false if you only want to replace the first instances.
      */
     std::string& replaceString(std::string& original, const std::string& searchString, const std::string& replaceString, const bool& multipleReplace = true);
+    std::string& replaceString(std::string& original, const std::string& searchString, const int& replaceInt, const bool& multipleReplace = true);
 }
 #endif

@@ -107,5 +107,10 @@ namespace zf
         }
         return newString;
     }
+
+    std::string& replaceString(std::string& original, const std::string& searchString, const int& replaceInt, const bool& multipleReplace)
+    {
+        return replaceString(original, searchString, std::to_string(replaceInt), multipleReplace);
+    }
 }
 
