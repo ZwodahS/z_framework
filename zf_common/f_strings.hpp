@@ -26,7 +26,6 @@
 #include <string>
 namespace zf
 {
-    std::vector<std::string> splitString(std::string str, int maxChar);
     std::vector<std::string> tokenize(std::string);
     std::string createBlanks(int num);
 
@@ -36,5 +35,17 @@ namespace zf
      */
     std::string& replaceString(std::string& original, const std::string& searchString, const std::string& replaceString, const bool& multipleReplace = true);
     std::string& replaceString(std::string& original, const std::string& searchString, const int& replaceInt, const bool& multipleReplace = true);
+
+    /**
+     * Split a single strings into multiple strings, 
+     * each string in the return list have a maximum characters of "maxChar"
+     */
+    std::vector<std::string> splitString(const std::string& str, const int& maxChar);
+    /**
+     * Search the searchString from the originalString, and split them from the originalString.
+     * the list of strings are in proper order.
+     * No "space" are required.
+     */
+    std::vector<std::string> splitString(const std::string& originalString, const std::string& searchString);
 }
 #endif

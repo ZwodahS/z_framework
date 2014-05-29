@@ -24,7 +24,7 @@
 #include "f_conversion.hpp"
 namespace zf
 {
-    std::vector<std::string> splitString(std::string str, int maxChar)
+    std::vector<std::string> splitString(const std::string& str, const int& maxChar)
     {
         std::vector<std::string> strings;
         std::vector<std::string> tokens = zf::tokenize(str);
@@ -63,6 +63,42 @@ namespace zf
         }
         return strings;
     }
+
+    std::vector<std::string> splitString(const std::string& originalString, const std::string& searchString)
+    {
+        std::vector<std::string> ss; 
+        size_t lastFound = 0;
+        size_t index = originalString.find(searchString);
+        while(index != std::string::npos)
+        {
+            // if something is found, there 2 possibility
+            // originalString = [Found][Rest]
+            // originalString = [Rest][Found][Rest]
+            if(lastFound == index) // this is the first case.
+            {
+                // add the search string
+                ss.push_back(searchString);
+            }
+            else
+            {
+                // add the string before the search string.
+                // // if index == lastFound , this will be 0, so it will pointless.
+                ss.push_back(originalString.substr(lastFound, index - lastFound));
+                // add the search string
+                ss.push_back(searchString);
+            }
+            lastFound = index + searchString.size();
+            // start searching from the end of the replaceString, such that the replaceString will never be part of the search
+            index = originalString.find(searchString, lastFound);
+        }
+
+        if(lastFound != originalString.size()) // to add the rest of the string to the list
+        {
+            ss.push_back(originalString.substr(lastFound, originalString.size() - lastFound));
+        }
+        return ss;
+    }
+
     std::vector<std::string> tokenize(std::string str)
     {
         std::vector<std::string> strings;
