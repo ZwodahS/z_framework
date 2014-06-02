@@ -22,6 +22,7 @@
  */
 #ifndef _ZF_COMMON_RANGE_H_
 #define _ZF_COMMON_RANGE_H_
+#include <string>
 /**
  * Defines a min max.
  */
@@ -85,5 +86,7 @@ namespace zf
      *      newmin = minInclusive ? min + 1 : min 
      */    
     int randomRange(int rng , int min, int max, bool minInclusive = true, bool maxInclusive = false);
+
+    bool toRange(const std::string& line, zf::Range<int>& out);
 }
 #endif

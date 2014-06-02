@@ -21,6 +21,8 @@
  * http://sam.zoy.org/wtfpl/COPYING for more details. 
  */
 #include "Range.hpp"
+#include "f_strings.hpp"
+#include "f_conversion.hpp"
 #include <iostream>
 namespace zf
 {
@@ -41,4 +43,23 @@ namespace zf
         v += min;
         return v;
     }
+
+    bool toRange(const std::string& line, zf::Range<int>& out) 
+    {
+        auto splitStrings = zf::split(line, '-');
+        if(splitStrings.size() != 2)
+        {
+            return false;
+        }
+        if(!zf::toInt(splitStrings[0], out.min))
+        {
+            return false;
+        }
+        if(!zf::toInt(splitStrings[1], out.max))
+        {
+            return false;
+        }
+        return true;
+    }
+
 }

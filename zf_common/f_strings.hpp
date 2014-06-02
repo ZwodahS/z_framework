@@ -47,5 +47,10 @@ namespace zf
      * No "space" are required.
      */
     std::vector<std::string> splitString(const std::string& originalString, const std::string& searchString);
+
+    inline bool startsWith(const std::string& longStrings, const std::string& startString);
+
+    std::vector<std::string>& split(const std::string &s, char delim, std::vector<std::string> &elems) ;
+    std::vector<std::string> split(const std::string &s, char delim);
 }
 #endif
