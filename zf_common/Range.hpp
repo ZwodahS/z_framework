@@ -88,5 +88,7 @@ namespace zf
     int randomRange(int rng , int min, int max, bool minInclusive = true, bool maxInclusive = false);
 
     bool toRange(const std::string& line, zf::Range<int>& out);
+
+    std::string toString(const zf::Range<int>& range);
 }
 #endif

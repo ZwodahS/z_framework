@@ -61,5 +61,9 @@ namespace zf
         }
         return true;
     }
-
+    
+    std::string toString(const zf::Range<int>& range)
+    {
+        return std::to_string(range.min) + "-" + std::to_string(range.max);
+    }
 }
