@@ -177,6 +177,16 @@ namespace zf
         split(s, delim, elems);
         return elems;
     }
+
+    int maxLength(const std::vector<std::string>& strings)
+    {
+        int l = 0;
+        for(auto s : strings)
+        {
+            l = s.size() >= l ? s.size() : l;
+        }
+        return l;
+    }
 }
 
 
