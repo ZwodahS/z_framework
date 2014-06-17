@@ -7,9 +7,15 @@ namespace zf
      * min inclusive, max exclusive
      */
     template<class T>
-    bool inRange(T value, T min, T max)
+    bool inRange(const T& value, const T& min, const T& max)
     {
         return value >= min && value < max;
     }
+
+    /**
+     * short cut function to bound a value within 2 values
+     * min inclusive, max inclusive
+     */
+    int bound(const int& value, const int& min, const int& max);
 };
 #endif
